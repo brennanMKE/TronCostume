@@ -28,32 +28,72 @@
 #if DEVICE_ROLE == ROLE_DISC
   #define DEVICE_NAME "Disc"
   #define PEER_NAME   "Cloak"
-  #define NUM_LEDS    30
+  // One strip chain: the inner C first, then the outer ring (docs/disc-build.md;
+  // 60 LEDs/m counts, change for the strip you buy).
+  #define MAIN_LEDS   33      // inner C: always on, solid color
+  #define RING_LEDS   41      // outer ring: on/off and effects
 #elif DEVICE_ROLE == ROLE_CLOAK
   #define DEVICE_NAME "Cloak"
   #define PEER_NAME   "Disc"
-  #define NUM_LEDS    30
+  #define MAIN_LEDS   30
+  #define RING_LEDS   0
 #else
   #error "DEVICE_ROLE must be ROLE_DISC or ROLE_CLOAK"
 #endif
 
 #define PEER_ROLE (DEVICE_ROLE == ROLE_DISC ? ROLE_CLOAK : ROLE_DISC)
+#define NUM_LEDS  (MAIN_LEDS + RING_LEDS)
 
 // ---- LEDs ----
-#define LED_PIN        10      // through 330 ohm, see docs/esp32c3-18650-led-power.md
+#define LED_PIN        4       // through 330 ohm; beside 3V3/5V/GND on the C3 Super Mini
 #define LED_MAX_MA     800     // FastLED power cap for the 18650 + MT3608 budget
 #define LED_BRIGHTNESS 128
+#define FRAME_MS       20      // disc redraw rate for the outer ring effects (50 fps)
 
-// ---- Buttons (disc only; the cloak has none) ----
-// One button per color, each wired from the GPIO to GND (internal pull-ups).
-// Order matches the colors: white, blue, red, green. All four are on GPIO0-4
-// on purpose: only GPIO0-5 can wake the C3 from deep sleep, so any color
-// button can become the wake button later. Avoid GPIO2/8/9 (strapping) and
-// GPIO10 (LED data).
-#define BUTTON_PINS    { 0, 1, 3, 4 }
-#define BUTTON_COUNT   4
+// Outer ring effects (disc)
+#define RING_IGNITE_MS      400   // sweep around when the ring comes on
+#define RING_MOTION_MS      1000  // motion effect: one turn of the bright head
+#define RING_MOTION_FLOOR   50    // motion effect: base level behind the tail (0-255)
+
+// ---- Buttons ----
+// Wired from the GPIO to GND (internal pull-ups). Only GPIO 0-5 can wake the
+// C3 from deep sleep, so each board's wake button is on GPIO 5.
+//
+// Disc: four buttons lined up on one side of the C3 Super Mini, in order
+// black, white, blue, green. GPIO 8 (onboard LED, strapping) and 9 (BOOT,
+// strapping) are skipped. Black is the outer ring button and the wake button.
+// Gestures are in docs/controls.md.
+//
+// Cloak: one button, wake only (planned, docs/deep-sleep.md). It never
+// lights the cloak by itself: it wakes the cloak, which then waits dark for
+// the disc to say what to show. Holding it asks the disc to turn the costume
+// off, so the pair stays in sync.
+#define WAKE_PIN       5
+#if DEVICE_ROLE == ROLE_DISC
+  #define BUTTON_PINS  { 5, 6, 7, 10 }   // black, white, blue, green
+  #define BUTTON_COUNT 4
+#else
+  #define BUTTON_PINS  { 5 }
+  #define BUTTON_COUNT 1
+#endif
 #define DEBOUNCE_MS    30
-#define LONG_HOLD_MS   3000    // hold any button this long: all lights off
+#define TAP_GAP_MS     350     // a further tap must start within this of the last release
+#define SHORT_HOLD_MS  1000    // color button held: send the color to both costumes
+#define LONG_HOLD_MS   3000    // black button held: this costume off
+
+// Disc saves its color to flash (NVS) once it has held this long, so a burst
+// of taps is one write. Power-on and wake restore it.
+#define COLOR_SAVE_MS  2000
+
+// ---- Waking up and linking (planned, docs/deep-sleep.md) ----
+// The disc lights in its saved color at once. The cloak stays dark until the
+// disc tells it what to show.
+#define CLOAK_HELLO_MS      200      // awake, unlinked cloak announces itself this often
+#define CLOAK_LINK_WAIT_MS  300000   // dark cloak gives up waiting and sleeps after 5 min
+
+// Strip power switch (planned P-channel MOSFET, docs/deep-sleep.md). HIGH =
+// strip powered. Harmless before the MOSFET is fitted.
+#define LED_POWER_PIN  20
 
 // ---- ESP-NOW ----
 // Both boards must be on the same channel. With no WiFi connection the
@@ -78,5 +118,6 @@
 
 // Toggled on every scheduled apply. Put a scope or logic analyzer on this
 // pin on both boards to measure how far apart the changes really are.
-// -1 = off. GPIO 5 is free on the disc and the cloak.
+// -1 = off. GPIO 0 is free on the disc and the cloak (bench use only).
+// GPIO 3 is reserved for the disc's dock sensor.
 #define SYNC_DEBUG_PIN     -1

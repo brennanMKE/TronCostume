@@ -1,40 +1,53 @@
 # Tron Identity Disc
 
-Tron cloak and Identity Disc lights for two costumes. In each costume the cloak and the disc each have an ESP32-C3 driving its own addressable LED strip, and the two boards talk over **ESP-NOW**. Buttons on the disc set the color, and the cloak changes at the same moment.
+Tron cloak and Identity Disc lights for two costumes, worn as a couple. In each costume the cloak and the disc each have an ESP32-C3 driving its own addressable LED strip, and the boards talk over **ESP-NOW**. Buttons on the disc set the color, and the cloak changes at the same moment.
 
-The disc has four buttons: **white, blue, red, green**. Hold any one for 3 seconds to turn off both the disc and the cloak; press any button to turn them back on in that color.
+Each disc has four buttons: **black, white, blue, green**. Six colors come in pairs: white/yellow, blue/red, green/orange.
+
+- **Tap** white, blue or green: your disc and cloak change to that color.
+- **Double tap**: the paired color (yellow, red, orange).
+- **Hold 1 s**, or **tap then hold 1 s** (both costumes planned): the same, for both costumes at once.
+- **Black**: tap turns the outer ring on or off, a double tap gives an erratic flicker, a triple tap gives motion. Hold 3 s turns your costume off.
+
+See [docs/controls.md](docs/controls.md) for the full controls.
 
 ![Single-gap C-shaped light window](Single-gap%20C-shaped%20light%20window.png)
 
 ## Features
 
-- **Disc controls the cloak**: One button per color on the disc. The cloak has no buttons and follows the disc.
-- **Hold to turn off**: Hold any button for 3 s and both strips go dark together. Press any button to come back on.
+- **Disc controls the cloak**: Three color buttons on the disc, each with a primary and a secondary color. The cloak follows the disc.
+- **Outer ring effects**: The inner C is always a solid color; the outer ring can be off, steady, flickering or circling, set with the black button.
+- **Hold to turn off**: Hold black for 3 s and your disc and cloak go dark together. Tap any button to come back on.
+- **Change together or separately** (both planned): A tap changes your own costume; the same gesture held for 1 s changes both costumes at once. See [docs/controls.md](docs/controls.md).
 - **Simultaneous change**: The disc schedules each change 50 ms ahead and tells the cloak exactly how long is left, corrected for measured radio latency, so both strips switch together.
-- **Two costumes, no crosstalk**: Each costume has its own `COSTUME_ID`, so costume 1's disc only controls costume 1's cloak, even side by side.
+- **Two costumes, no crosstalk**: Each costume has its own `COSTUME_ID`, so a single tap on costume 1's disc only controls costume 1's cloak, even side by side.
 - **Self-healing sync**: The disc sends a heartbeat every second carrying its color. If a press is lost in the air, or the cloak reboots, the cloak catches up.
 - **One code base**: All four boards build from the same source, keyed on `COSTUME_ID` and `DEVICE_ROLE`. No WiFi network, router or MAC addresses to configure.
-- **Battery powered** (planned): A single 18650 cell with USB-C charging on each board. See [docs/esp32c3-18650-led-power.md](docs/esp32c3-18650-led-power.md).
-- **Deep sleep** (after Halloween): "Off" today only darkens the LEDs; the boards stay awake. A real low-power mode is planned. See [docs/single-button-deep-sleep.md](docs/single-button-deep-sleep.md).
+- **Battery powered** (planned): The disc runs from a single 18650 cell with USB-C charging; the cloak from a USB battery pack. See [docs/esp32c3-18650-led-power.md](docs/esp32c3-18650-led-power.md).
+- **Deep sleep** (after Halloween): "Off" today only darkens the LEDs; the boards stay awake. A real low-power mode is planned. See [docs/deep-sleep.md](docs/deep-sleep.md).
 
 ## Hardware Platform
 
 Each board (cloak and disc):
 
 - **Microcontroller**: ESP32-C3
-- **LEDs**: WS2812B (addressable), under 30 LEDs, on GPIO 10 through a 330 ohm resistor.
-- **Power**: 18650 + TP4056 charger + MT3608 boost to 5V.
+- **LEDs**: WS2812B (addressable), on GPIO 4 through a 330 ohm resistor. GPIO 4 sits next to 3.3V, 5V and GND on the C3 Super Mini.
+- **Power**: disc: 18650 + TP4056 charger + MT3608 boost to 5V. Cloak: a USB battery pack straight to 5V.
 
 Disc only, four momentary buttons on a protoboard. Each one goes from its GPIO to GND; no resistors needed (the firmware enables the internal pull-ups).
 
 | Button | GPIO |
 |---|---|
-| White | 0 |
-| Blue | 1 |
-| Red | 3 |
-| Green | 4 |
+| Black | 5 |
+| White | 6 |
+| Blue | 7 |
+| Green | 10 |
 
-These are all on GPIO 0-5 on purpose: only those pins can wake the C3 from deep sleep, so any button can become a wake button later without rewiring. Avoid GPIO 2, 8 and 9 (strapping pins, they affect boot) and GPIO 10 (LED data).
+All four are lined up on one side of the Super Mini in that order, skipping GPIO 8 (onboard LED, strapping pin) and 9 (BOOT, strapping pin). GPIO 0 and 1 are free for later additions.
+
+Black is on GPIO 5 on purpose: only GPIO 0-5 can wake the C3 from deep sleep, so black doubles as the wake button for the future low-power mode, with no extra wiring.
+
+The disc's LED chain is the inner C (`MAIN_LEDS`) followed by the outer ring (`RING_LEDS`). See [docs/disc-build.md](docs/disc-build.md).
 
 Pins, LED limits and timing live in [include/config.h](include/config.h).
 
@@ -69,6 +82,7 @@ ESP-NOW is Espressif's connectionless radio protocol. Boards send small packets 
 | `PING` | disc → cloak, every 1 s | Heartbeat with the disc's target color; starts a latency measurement |
 | `PONG` | cloak → disc | Echoes the `PING` so the disc can time the round trip |
 | `SET_COLOR` | disc → cloak, on press | Scheduled color change |
+| `SET_COLOR_GROUP` (planned) | disc → all four boards, on double tap | Scheduled color change for both costumes |
 
 ### Changing color at the same time (latency handling)
 
@@ -95,7 +109,7 @@ This is serial-only for now. It is the hook for a visible indicator later, such 
 
 ## Testing with Two Boards
 
-Before the protoboard is built, a jumper wire from GPIO 0, 1, 3 or 4 to GND acts as a button. An LED strip on GPIO 10 is optional.
+Before the protoboard is built, a jumper wire from GPIO 5, 6, 7 or 10 to GND acts as a button. An LED strip on GPIO 4 is optional. [../ButtonsAndColors](../ButtonsAndColors) is a breadboard practice project with the same pins.
 
 1. Plug in both boards and find their ports:
    ```bash
@@ -123,10 +137,16 @@ Peer Cloak found: 7C:DF:A1:AB:CD:EF
 
 | Test | Expected |
 |---|---|
-| Press the red button on the disc | Disc logs `Color -> red (button)`, cloak logs `Color -> red (disc button)`, strips change together |
-| Hold any button 3 s | Disc logs `Hold: lights off`, both log `Color -> off` |
-| Press any button while off | Both come back on in that button's color |
-| Power-cycle the cloak while off | Cloak comes up, then goes dark within a second (`disc sync`) |
+| Tap blue on the disc | After about 0.4 s, disc logs `Color -> blue (button)`, cloak logs `Color -> blue (disc button)`, strips change together |
+| Double tap blue | Both change to red |
+| Hold green 1 s | Disc logs `Both costumes -> green (group message not built yet ...)` and both change to green |
+| Tap black | Disc logs `Outer ring off`; the ring part of the disc strip goes dark, the C stays lit |
+| Double tap black, then triple tap black | `Outer ring on (flicker)`, then `(motion)` |
+| Hold black 3 s | Disc logs `Hold: lights off`, both log `Color -> off` |
+| Tap black while off | Both come back on in the saved color |
+| Power-cycle the cloak | Cloak comes up dark, then lights in the disc's color within a second (`disc sync`) |
+| Pick red, wait 2 s (`Saved red`), power-cycle the disc | Disc logs `Restored red` and lights red at once |
+| Power on the disc while holding black | Comes back in the saved color; the ring isn't toggled |
 | Unplug the cloak | Disc logs `Peer LOST` within about 3.5 s |
 | Plug the cloak back in | Cloak logs `Color -> ... (disc sync)` from the next heartbeat |
 | Move the boards apart | `lost` climbs and `latency` rises as range runs out |
@@ -164,13 +184,18 @@ docs/                     Hardware and design notes
 
 ## Open Items
 
-- **Verify sync on hardware**: measure the real offset with `SYNC_DEBUG_PIN` (GPIO 5) on a scope, or with a 240 fps phone video of both strips. Record the result in [docs/latency-handling.md](docs/latency-handling.md); add a fixed correction only if the offset is consistent and visible.
-- **GPIO 3 conflict**: the power doc puts battery voltage sense on GPIO 3, and the white/blue/red/green buttons take GPIO 0, 1, 3 and 4. Battery sense isn't needed for the prototype; it needs a new pin before it's added.
-- **Low-power off** (after Halloween): "off" only blanks the LEDs. The ESP32-C3 with its radio kept awake (about 80-100 mA) plus the idle WS2812s (about 1 mA each) still draw roughly 100+ mA. That's maybe 20 hours on a 2500 mAh 18650, so use the power switch for real storage. A sleeping board also can't receive ESP-NOW, so the cloak will need its own way to wake. [docs/single-button-deep-sleep.md](docs/single-button-deep-sleep.md) was written for one button and three colors and needs updating for the four-button layout.
+- **Change both costumes**: the 1 s hold gestures are built but only change your own costume until `GROUP_ID` and `SET_COLOR_GROUP` are added. See [docs/controls.md](docs/controls.md).
+- **Dock sensor**: a Hall sensor on GPIO 3 so the outer ring stays off while the disc is on your back. See [docs/disc-build.md](docs/disc-build.md).
+- **Verify sync on hardware**: measure the real offset with `SYNC_DEBUG_PIN` (a free pin such as GPIO 0) on a scope, or with a 240 fps phone video of both strips. Record the result in [docs/latency-handling.md](docs/latency-handling.md); add a fixed correction only if the offset is consistent and visible.
+- **Power doc pin map is out of date**: [docs/esp32c3-18650-led-power.md](docs/esp32c3-18650-led-power.md) has LED data on GPIO 10, charge status on 6/7 and USB detect on 4. With LED data now on 4, buttons on 5/6/7/10 and the dock sensor on 3: battery sense could use GPIO 0 or 1 (ADC1). Charge status would need GPIO 20/21, but 20 is reserved for the MOSFET, so probably skip it (the TP4056's own LEDs show charging). None of this is needed for the prototype.
+- **Low-power off** (after Halloween): planned in [docs/deep-sleep.md](docs/deep-sleep.md). Black (GPIO 5) wakes the disc; the cloak gets one wake button on GPIO 5 and runs from a USB battery pack. The disc saves its color to flash and lights in it at power-on or wake; the cloak stays dark until the disc tells it what to show. A P-channel MOSFET on GPIO 20 can cut strip power; reserve protoboard space for it now. A 2-3A power switch can go on the disc's button protoboard, which now has room for it.
 - Battery monitoring and low-battery cutoff from the power doc.
 
 ## Docs
 
+- [docs/disc-build.md](docs/disc-build.md): Disc build plan: black face with inlaid white C, 9 mm white outer ring, laminated plywood frame, two sideways LED channels, three inner-rim bays, magnetic back dock, and a render brief for an exploded view.
+- [docs/controls.md](docs/controls.md): Single tap, double tap and hold: what each changes, messages, implementation plan.
 - [docs/latency-handling.md](docs/latency-handling.md): Latency handling, how disc and cloak change color at the same moment: latency measurement, scheduling, loss handling, accuracy, verification.
 - [docs/esp32c3-18650-led-power.md](docs/esp32c3-18650-led-power.md): 18650 power build, pin map, current budget.
-- [docs/single-button-deep-sleep.md](docs/single-button-deep-sleep.md): Single-button on/off and color control with deep sleep.
+- [docs/deep-sleep.md](docs/deep-sleep.md): Deep sleep plan, battery budget, MOSFET strip power switch, power switch on the button board, cloak wake.
+- [docs/single-button-deep-sleep.md](docs/single-button-deep-sleep.md): Earlier one-button deep sleep spec, superseded by deep-sleep.md.

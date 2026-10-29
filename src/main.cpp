@@ -5,10 +5,23 @@
 // differences. COSTUME_ID pairs a disc with its cloak: packets from other
 // costumes are dropped, so two costumes side by side stay independent.
 //
-// The disc owns the color. It has four buttons, one each for white, blue,
-// red and green. Holding any button for LONG_HOLD_MS turns both boards' lights
-// off; any press turns them back on in that button's color. The cloak has no
-// buttons and shows whatever the disc tells it.
+// The disc owns the color. It has four buttons (docs/controls.md):
+//
+//   white, blue, green   tap: that color; double tap: its pair (yellow, red,
+//                        orange); hold 1 s / tap then hold 1 s: the same for
+//                        both costumes
+//   black                tap: outer ring on/off; double tap: flicker; triple
+//                        tap: motion; hold 3 s: this costume off
+//
+// The disc and its cloak always show the same color. The cloak has no color
+// buttons and shows whatever the disc tells it. The disc's strip is two
+// parts: the inner C (solid) and the outer ring (on/off and effects, disc
+// only).
+//
+// The disc keeps its last lit color in flash (NVS) and lights in it straight
+// away at power-on. A button already held at boot (the black button waking
+// the disc) is ignored until released. The cloak stores nothing: it starts
+// dark and lights from the disc's first heartbeat.
 //
 // Simultaneous change
 // -------------------
@@ -37,6 +50,7 @@
 #include <esp_timer.h>
 #include <esp_log.h>
 #include <FastLED.h>
+#include <Preferences.h>
 
 #include "config.h"
 #include "every_n_millis.h"
@@ -46,9 +60,20 @@ static const char* TAG = "disc";
 // ---- Colors ----
 // COLOR_OFF travels like any other color so "lights off" is scheduled and
 // synced exactly the same way as a color change.
-enum DiscColor : uint8_t { COLOR_WHITE, COLOR_BLUE, COLOR_RED, COLOR_GREEN, COLOR_OFF, COLOR_COUNT };
-static const CRGB kColors[COLOR_COUNT] = { CRGB::White, CRGB::Blue, CRGB::Red, CRGB::Green, CRGB::Black };
-static const char* kColorNames[COLOR_COUNT] = { "white", "blue", "red", "green", "off" };
+enum DiscColor : uint8_t {
+  COLOR_WHITE, COLOR_GREEN, COLOR_BLUE, COLOR_RED, COLOR_YELLOW, COLOR_ORANGE,
+  COLOR_OFF, COLOR_COUNT
+};
+static const CRGB kColors[COLOR_COUNT] = {
+  CRGB(0xE6FFFF),  // white
+  CRGB(0x39FF14),  // green
+  CRGB(0x6FC3DF),  // blue
+  CRGB(0xFF2A2A),  // red
+  CRGB(0xFFE64D),  // yellow
+  CRGB(0xDF740C),  // orange
+  CRGB::Black,
+};
+static const char* kColorNames[COLOR_COUNT] = { "white", "green", "blue", "red", "yellow", "orange", "off" };
 
 // ---- Wire format ----
 static const uint32_t MSG_MAGIC = 0x44495343;  // "DISC"
@@ -84,7 +109,7 @@ static inline int64_t nowUs() { return esp_timer_get_time(); }
 
 // ---- State ----
 CRGB leds[NUM_LEDS];
-static uint8_t  currentColor = COLOR_BLUE;
+static uint8_t  currentColor = COLOR_OFF;  // dark until the disc restores or the cloak hears a color
 static uint32_t txSeq = 0;
 
 // A scheduled color change, on either board.
@@ -133,15 +158,101 @@ static void send(DiscMsg& m) {
   }
 }
 
-static void showColor() {
-  fill_solid(leds, NUM_LEDS, kColors[currentColor]);
+// ---- Drawing ----
+// The first MAIN_LEDS are the solid part: the disc's inner C, or the cloak's
+// strip. On the disc the next RING_LEDS are the outer ring, which can be off
+// and has effects.
+enum RingMode : uint8_t { RING_SOLID, RING_FLICKER, RING_MOTION };
+static const char* kRingNames[] = { "solid", "flicker", "motion" };
+static bool     ringOn = true;
+static uint8_t  ringMode = RING_SOLID;
+static uint32_t ringLitMs = 0;   // start of the ignition sweep
+
+#if RING_LEDS > 0
+// Erratic flicker: the whole ring holds a level for a random time, mostly
+// full, sometimes dipping, with the odd LED dropping out.
+static uint8_t ringFlickerLevel(uint32_t now) {
+  static uint8_t  level = 255;
+  static uint32_t at = 0, holdMs = 0;
+  if (now - at >= holdMs) {
+    at = now;
+    if (random8() < 80) { level = random8(20, 170); holdMs = random8(20, 90); }
+    else                { level = 255;              holdMs = random16(60, 450); }
+  }
+  return level;
+}
+
+static void drawRing(uint32_t now) {
+  CRGB* ring = leds + MAIN_LEDS;
+  if (!ringOn || currentColor == COLOR_OFF) {
+    fill_solid(ring, RING_LEDS, CRGB::Black);
+    return;
+  }
+  // Ignition: the ring lights around from its first LED.
+  uint32_t since = now - ringLitMs;
+  uint16_t lit = since >= RING_IGNITE_MS ? RING_LEDS : (uint32_t)RING_LEDS * since / RING_IGNITE_MS;
+  uint8_t flicker = ringMode == RING_FLICKER ? ringFlickerLevel(now) : 255;
+  // Motion: a bright head travels round once per RING_MOTION_MS with a
+  // fading tail, over a dim base.
+  uint16_t head = (uint32_t)(now % RING_MOTION_MS) * RING_LEDS / RING_MOTION_MS;
+  const uint16_t tail = RING_LEDS / 3;
+  for (uint16_t i = 0; i < RING_LEDS; i++) {
+    uint8_t level = 255;
+    if (ringMode == RING_MOTION) {
+      uint16_t behind = (head + RING_LEDS - i) % RING_LEDS;
+      level = behind < tail ? 255 - (uint32_t)behind * (255 - RING_MOTION_FLOOR) / tail : RING_MOTION_FLOOR;
+    } else if (ringMode == RING_FLICKER) {
+      level = random8() < 6 ? flicker / 4 : flicker;
+    }
+    CRGB c = i < lit ? kColors[currentColor] : CRGB::Black;
+    c.nscale8_video(level);
+    ring[i] = c;
+  }
+}
+#endif
+
+static void render() {
+  fill_solid(leds, MAIN_LEDS, kColors[currentColor]);
+#if RING_LEDS > 0
+  drawRing(millis());
+#endif
   FastLED.show();
 }
 
+#if DEVICE_ROLE == ROLE_DISC
+// ---- Disc: saved color ----
+// Off is never saved, so power-on and wake always come back lit in the last
+// color. A write waits until the color has held for COLOR_SAVE_MS, so a run
+// of taps costs one flash write.
+static Preferences prefs;
+static uint8_t  savedColor = COLOR_OFF;
+static uint32_t colorChangedMs = 0;
+
+static uint8_t loadColor() {
+  prefs.begin("disc", false);
+  uint8_t c = prefs.getUChar("color", COLOR_BLUE);
+  if (c >= COLOR_OFF) c = COLOR_BLUE;
+  savedColor = c;
+  return c;
+}
+
+static void runSave() {
+  if (currentColor == COLOR_OFF || currentColor == savedColor) return;
+  if (millis() - colorChangedMs < COLOR_SAVE_MS) return;
+  prefs.putUChar("color", currentColor);
+  savedColor = currentColor;
+  Serial.printf("Saved %s\n", kColorNames[currentColor]);
+}
+#endif
+
 static void applyColor(uint8_t color, const char* why) {
   if (color == currentColor) return;
+  if (currentColor == COLOR_OFF) ringLitMs = millis();  // coming on: ignite the ring
   currentColor = color;
-  showColor();
+#if DEVICE_ROLE == ROLE_DISC
+  colorChangedMs = millis();
+#endif
+  render();
 #if SYNC_DEBUG_PIN >= 0
   digitalWrite(SYNC_DEBUG_PIN, !digitalRead(SYNC_DEBUG_PIN));  // scope this on both boards
 #endif
@@ -212,19 +323,127 @@ static void requestColor(uint8_t color) {
   nextRepeatUs = nowUs() + SET_COLOR_REPEAT_MS * 1000LL;
 }
 
+// ---- Disc: both costumes ----
+// Needs SET_COLOR_GROUP (docs/controls.md), which isn't built yet. Until then
+// it changes this costume only.
+static void requestBoth(uint8_t color) {
+  Serial.printf("Both costumes -> %s (group message not built yet: this costume only)\n",
+                kColorNames[color]);
+  requestColor(color);
+}
+
 // ---- Disc: buttons ----
-// Button i selects color i the moment it is pressed, so a tap feels instant.
-// If the same press is then held for LONG_HOLD_MS, everything goes off. The
-// color change on the way to "off" is harmless, and it means taps never wait
-// to find out whether they will become holds.
+// Two layers: debounce each button into press/release events, then a small
+// state machine turns those into gestures: 1-3 taps, or a hold after 1-2
+// taps. Taps wait TAP_GAP_MS after release in case another is coming, except
+// the last tap a button understands, which fires on release.
+//
+//   IDLE --press--> DOWN --release--> GAP --TAP_GAP_MS--> taps(n)
+//                    |  ^               |
+//                 held  +--press same---+   (n + 1)
+//                    v
+//                  HELD --> hold(n)
 static const uint8_t kButtonPins[BUTTON_COUNT] = BUTTON_PINS;
+
+// Button order matches BUTTON_PINS: black, white, blue, green.
+static const uint8_t BTN_BLACK = 0;
+static const uint8_t kPrimary[BUTTON_COUNT]   = { COLOR_OFF, COLOR_WHITE,  COLOR_BLUE, COLOR_GREEN };
+static const uint8_t kSecondary[BUTTON_COUNT] = { COLOR_OFF, COLOR_YELLOW, COLOR_RED,  COLOR_ORANGE };
+
+static uint8_t maxTaps(uint8_t b) { return b == BTN_BLACK ? 3 : 2; }
+
+// 0 = no hold gesture for this button and tap count.
+static uint32_t holdMs(uint8_t b, uint8_t taps) {
+  if (b == BTN_BLACK) return taps == 1 ? LONG_HOLD_MS : 0;
+  return SHORT_HOLD_MS;
+}
+
+static void ringSet(bool on, uint8_t mode) {
+  if (on && !ringOn) ringLitMs = millis();
+  ringOn = on;
+  ringMode = mode;
+  Serial.printf("Outer ring %s (%s)\n", on ? "on" : "off", kRingNames[mode]);
+}
+
+static void onTaps(uint8_t b, uint8_t taps) {
+  if (b != BTN_BLACK) {
+    requestColor(taps == 1 ? kPrimary[b] : kSecondary[b]);
+    return;
+  }
+  if (targetColor() == COLOR_OFF) {   // black brings a dark costume back on
+    requestColor(savedColor);
+    return;
+  }
+  // Double and triple tap pick an effect; repeating it goes back to solid.
+  switch (taps) {
+    case 1: ringSet(!ringOn, ringMode); break;
+    case 2: ringSet(true, ringMode == RING_FLICKER ? RING_SOLID : RING_FLICKER); break;
+    case 3: ringSet(true, ringMode == RING_MOTION ? RING_SOLID : RING_MOTION); break;
+  }
+}
+
+static void onHold(uint8_t b, uint8_t taps) {
+  if (b == BTN_BLACK) {
+    Serial.println("Hold: lights off");
+    requestColor(COLOR_OFF);
+    return;
+  }
+  requestBoth(taps == 1 ? kPrimary[b] : kSecondary[b]);
+}
+
+enum SeqState : uint8_t { SEQ_IDLE, SEQ_DOWN, SEQ_GAP, SEQ_HELD };
+static SeqState seqState = SEQ_IDLE;
+static uint8_t  seqButton = 0;
+static uint8_t  seqTaps = 0;
+static uint32_t seqAt = 0;   // press time in DOWN, release time in GAP
+
+static void onPress(uint8_t b, uint32_t now) {
+  if (seqState == SEQ_GAP && b == seqButton) {
+    seqTaps++;
+  } else if (seqState == SEQ_IDLE || seqState == SEQ_GAP) {
+    if (seqState == SEQ_GAP) onTaps(seqButton, seqTaps);  // another button ends the last sequence
+    seqButton = b;
+    seqTaps = 1;
+  } else {
+    return;  // a second button pressed mid-press: ignored
+  }
+  seqState = SEQ_DOWN;
+  seqAt = now;
+}
+
+static void onRelease(uint8_t b, uint32_t now) {
+  if (b != seqButton) return;
+  if (seqState == SEQ_HELD) {
+    seqState = SEQ_IDLE;
+  } else if (seqState == SEQ_DOWN) {
+    if (seqTaps >= maxTaps(b)) {
+      seqState = SEQ_IDLE;
+      onTaps(b, seqTaps);
+    } else {
+      seqState = SEQ_GAP;
+      seqAt = now;
+    }
+  }
+}
+
+static void runSequence(uint32_t now) {
+  if (seqState == SEQ_DOWN) {
+    uint32_t h = holdMs(seqButton, seqTaps);
+    if (h && now - seqAt >= h) {
+      seqState = SEQ_HELD;
+      onHold(seqButton, seqTaps);
+    }
+  } else if (seqState == SEQ_GAP && now - seqAt >= TAP_GAP_MS) {
+    seqState = SEQ_IDLE;
+    onTaps(seqButton, seqTaps);
+  }
+}
 
 struct Button {
   bool     stable = HIGH;
   bool     lastRead = HIGH;
   uint32_t changedAt = 0;
-  uint32_t pressedAt = 0;
-  bool     holdFired = false;
+  bool     ignore = false;   // held since boot: no events until released
 };
 static Button buttons[BUTTON_COUNT];
 
@@ -239,18 +458,16 @@ static void pollButtons() {
     }
     if (r != b.stable && now - b.changedAt >= DEBOUNCE_MS) {
       b.stable = r;
-      if (b.stable == LOW) {
-        b.pressedAt = now;
-        b.holdFired = false;
-        requestColor(i);
+      if (b.ignore) {
+        if (b.stable == HIGH) b.ignore = false;
+      } else if (b.stable == LOW) {
+        onPress(i, now);
+      } else {
+        onRelease(i, now);
       }
     }
-    if (b.stable == LOW && !b.holdFired && now - b.pressedAt >= LONG_HOLD_MS) {
-      b.holdFired = true;
-      Serial.println("Hold: lights off");
-      requestColor(COLOR_OFF);
-    }
   }
+  runSequence(now);
 }
 #endif
 
@@ -321,7 +538,17 @@ void setup() {
   delay(500);  // let USB CDC enumerate so the first lines aren't lost
 
 #if DEVICE_ROLE == ROLE_DISC
-  for (uint8_t i = 0; i < BUTTON_COUNT; i++) pinMode(kButtonPins[i], INPUT_PULLUP);
+  for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
+    pinMode(kButtonPins[i], INPUT_PULLUP);
+    // Still held from the press that powered on or woke the disc: ignore
+    // it until released, so it is neither a tap nor a hold.
+    if (digitalRead(kButtonPins[i]) == LOW) {
+      buttons[i].stable = buttons[i].lastRead = LOW;
+      buttons[i].ignore = true;
+    }
+  }
+  currentColor = loadColor();
+  Serial.printf("Restored %s\n", kColorNames[currentColor]);
 #endif
 #if SYNC_DEBUG_PIN >= 0
   pinMode(SYNC_DEBUG_PIN, OUTPUT);
@@ -330,7 +557,8 @@ void setup() {
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setMaxPowerInVoltsAndMilliamps(5, LED_MAX_MA);
   FastLED.setBrightness(LED_BRIGHTNESS);
-  showColor();
+  ringLitMs = millis();
+  render();
 
   rxQueue = xQueueCreate(16, sizeof(RxPacket));
 
@@ -370,6 +598,10 @@ void loop() {
 #if DEVICE_ROLE == ROLE_DISC
   pollButtons();
   runRepeats();
+  runSave();
+
+  static uint32_t tFrame = 0;
+  if (everyMillis(tFrame, FRAME_MS)) render();  // outer ring animation
 
   static uint32_t tPing = 0;
   if (everyMillis(tPing, HEARTBEAT_MS)) {

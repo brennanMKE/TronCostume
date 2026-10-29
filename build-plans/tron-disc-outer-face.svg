@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="260mm" height="260mm" viewBox="0 0 260 260">
+<title>Tron disc outer face — 260 mm OD, 120 mm ID</title>
+<desc>Actual size in millimetres. White diffuser: OD 260, ID 120. Black mask: OD 252, ID 120; C aperture radii 69 and 73, 4 mm wide, 340 degree arc with one 20 degree gap centered at 12 o'clock. Outer white border 4 mm radially. Center hole transparent. No fastener holes included.</desc>
+<g id="white-diffuser"><path fill="#ffffff" fill-rule="evenodd" d="M 0,130 a 130,130 0 1,0 260,0 a 130,130 0 1,0 -260,0 Z M 70,130 a 60,60 0 1,0 120,0 a 60,60 0 1,0 -120,0 Z"/></g>
+<g id="black-face-mask"><path fill="#000000" fill-rule="evenodd" d="M 4,130 a 126,126 0 1,0 252,0 a 126,126 0 1,0 -252,0 Z M 70,130 a 60,60 0 1,0 120,0 a 60,60 0 1,0 -120,0 Z M 142.676317,58.109034 A 73,73 0 1,1 117.323683,58.109034 L 118.018276,62.048265 A 69,69 0 1,0 141.981724,62.048265 Z"/></g>
+</svg>

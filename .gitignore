@@ -9,3 +9,6 @@
 
 # Local credentials — never commit
 .env
+
+# Reference videos: large and not ours to redistribute
+references/

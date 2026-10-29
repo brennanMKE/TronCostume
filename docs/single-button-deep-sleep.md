@@ -1,5 +1,7 @@
 # Single-Button Power and Color Control with Deep Sleep (ESP32-C3)
 
+> **Superseded** by [deep-sleep.md](deep-sleep.md) for the four-button disc. Kept for its detailed acceptance criteria and pitfalls.
+
 ## Goal
 
 Battery-powered ESP32-C3 LED device controlled by one momentary button:
