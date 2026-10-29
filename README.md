@@ -70,7 +70,7 @@ ESP-NOW is Espressif's connectionless radio protocol. Boards send small packets 
 | `PONG` | cloak → disc | Echoes the `PING` so the disc can time the round trip |
 | `SET_COLOR` | disc → cloak, on press | Scheduled color change |
 
-### Changing color at the same time
+### Changing color at the same time (latency handling)
 
 No library covers this for Arduino. Espressif's ESP-NOW time sync module is ESP-IDF only and needs their full ESP-NOW stack. So the firmware does a small version itself, without syncing clocks:
 
@@ -80,6 +80,8 @@ No library covers this for Arduino. Espressif's ESP-NOW time sync module is ESP-
 4. **Survive loss.** Broadcasts aren't acknowledged, so `SET_COLOR` goes out 3 times, 12 ms apart, inside the 50 ms window. Each copy carries its own remaining time. The cloak acts on the first copy that arrives.
 
 Only a short interval (under 50 ms) crosses the air, so crystal drift between the boards (tens of parts per million, well under a microsecond here) doesn't matter. The remaining error is any difference between send and receive latency, which should be well under a millisecond and far below what a person can see. `APPLY_DELAY_MS` can go anywhere up to 250 ms; 50 ms already reads as instant.
+
+Full details, a worked example and the tunables are in [docs/latency-handling.md](docs/latency-handling.md).
 
 Measure the real offset by setting `SYNC_DEBUG_PIN` in `config.h` to a free GPIO on both boards. It toggles on every color change; put a scope or logic analyzer on both pins.
 
@@ -162,12 +164,13 @@ docs/                     Hardware and design notes
 
 ## Open Items
 
-- **Verify sync on hardware**: measure the real offset with `SYNC_DEBUG_PIN`, or with a slow-motion phone video of both strips.
+- **Verify sync on hardware**: measure the real offset with `SYNC_DEBUG_PIN` (GPIO 5) on a scope, or with a 240 fps phone video of both strips. Record the result in [docs/latency-handling.md](docs/latency-handling.md); add a fixed correction only if the offset is consistent and visible.
 - **GPIO 3 conflict**: the power doc puts battery voltage sense on GPIO 3, and the white/blue/red/green buttons take GPIO 0, 1, 3 and 4. Battery sense isn't needed for the prototype; it needs a new pin before it's added.
 - **Low-power off** (after Halloween): "off" only blanks the LEDs. The ESP32-C3 with its radio kept awake (about 80-100 mA) plus the idle WS2812s (about 1 mA each) still draw roughly 100+ mA. That's maybe 20 hours on a 2500 mAh 18650, so use the power switch for real storage. A sleeping board also can't receive ESP-NOW, so the cloak will need its own way to wake. [docs/single-button-deep-sleep.md](docs/single-button-deep-sleep.md) was written for one button and three colors and needs updating for the four-button layout.
 - Battery monitoring and low-battery cutoff from the power doc.
 
 ## Docs
 
+- [docs/latency-handling.md](docs/latency-handling.md): Latency handling, how disc and cloak change color at the same moment: latency measurement, scheduling, loss handling, accuracy, verification.
 - [docs/esp32c3-18650-led-power.md](docs/esp32c3-18650-led-power.md): 18650 power build, pin map, current budget.
 - [docs/single-button-deep-sleep.md](docs/single-button-deep-sleep.md): Single-button on/off and color control with deep sleep.
