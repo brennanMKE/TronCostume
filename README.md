@@ -1,4 +1,4 @@
-# TronIdentityDisc
+# Tron Identity Disc
 
 Tron cloak and Identity Disc lights for two costumes. In each costume the cloak and the disc each have an ESP32-C3 driving its own addressable LED strip, and the two boards talk over **ESP-NOW**. Buttons on the disc set the color, and the cloak changes at the same moment.
 
