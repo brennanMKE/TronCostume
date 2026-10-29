@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260mm" height="260mm" viewBox="0 0 260 260">
+<title>1-face-black-3mm.svg</title><desc>Black 3 mm. OD 252, ID 120, C slot R82-88 340 deg (gap at 12), 3 x 4.5 holes at R102 (countersink by hand to 8.4). Cut inner shapes first.</desc>
+<path d="M 127.75,28 a 2.25,2.25 0 1,0 4.5,0 a 2.25,2.25 0 1,0 -4.5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 216.085,181 a 2.25,2.25 0 1,0 4.5,0 a 2.25,2.25 0 1,0 -4.5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 39.415,181 a 2.25,2.25 0 1,0 4.5,0 a 2.25,2.25 0 1,0 -4.5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 145.281,43.337 A 88,88 0 1,1 114.719,43.337 L 115.761,49.246 A 82,82 0 1,0 144.239,49.246 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 70,130 a 60,60 0 1,0 120,0 a 60,60 0 1,0 -120,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 4,130 a 126,126 0 1,0 252,0 a 126,126 0 1,0 -252,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+</svg>

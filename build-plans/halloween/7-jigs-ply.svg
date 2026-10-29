@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260mm" height="260mm" viewBox="0 0 260 260">
+<title>7-jigs-ply.svg</title><desc>Scrap ply. Plug 119.6 (cut the small circle as its own piece) and ring jig 235.6 with 120.4 hole.</desc>
+<path d="M 70.2,130 a 59.8,59.8 0 1,0 119.6,0 a 59.8,59.8 0 1,0 -119.6,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 12.2,130 a 117.8,117.8 0 1,0 235.6,0 a 117.8,117.8 0 1,0 -235.6,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 69.8,130 a 60.2,60.2 0 1,0 120.4,0 a 60.2,60.2 0 1,0 -120.4,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+</svg>

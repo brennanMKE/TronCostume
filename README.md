@@ -193,6 +193,8 @@ docs/                     Hardware and design notes
 
 ## Docs
 
+- [docs/frame.md](docs/frame.md): The plywood frame: three bays, access covers and their insert blocks, and the front and back insert positions. The reference for every other part.
+- [docs/front-face.md](docs/front-face.md): Step 1 of the build: the front face (3 mm black, white C inlay, 10 mm white outer ring), light separation, frame layout and face screw positions.
 - [docs/disc-build.md](docs/disc-build.md): Disc build plan: black face with inlaid white C, 9 mm white outer ring, laminated plywood frame, two sideways LED channels, three inner-rim bays, magnetic back dock, and a render brief for an exploded view.
 - [docs/controls.md](docs/controls.md): Single tap, double tap and hold: what each changes, messages, implementation plan.
 - [docs/latency-handling.md](docs/latency-handling.md): Latency handling, how disc and cloak change color at the same moment: latency measurement, scheduling, loss handling, accuracy, verification.

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260mm" height="260mm" viewBox="0 0 260 260">
+<title>5-floor-black-3mm.svg</title><desc>Black 3 mm. OD 260, ID 120. Screw holes R102, wire holes R86 @15/345 and R114 @0.</desc>
+<path d="M 127.75,28 a 2.25,2.25 0 1,0 4.5,0 a 2.25,2.25 0 1,0 -4.5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 216.085,181 a 2.25,2.25 0 1,0 4.5,0 a 2.25,2.25 0 1,0 -4.5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 39.415,181 a 2.25,2.25 0 1,0 4.5,0 a 2.25,2.25 0 1,0 -4.5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 149.758,46.93 a 2.5,2.5 0 1,0 5,0 a 2.5,2.5 0 1,0 -5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 105.242,46.93 a 2.5,2.5 0 1,0 5,0 a 2.5,2.5 0 1,0 -5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 127.5,16 a 2.5,2.5 0 1,0 5,0 a 2.5,2.5 0 1,0 -5,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 70,130 a 60,60 0 1,0 120,0 a 60,60 0 1,0 -120,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 0,130 a 130,130 0 1,0 260,0 a 130,130 0 1,0 -260,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260mm" height="260mm" viewBox="0 0 260 260">
+<title>3-outer-ring-white-10mm.svg</title><desc>White 10 mm. OD 260, ID 236.</desc>
+<path d="M 12,130 a 118,118 0 1,0 236,0 a 118,118 0 1,0 -236,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+<path d="M 0,130 a 130,130 0 1,0 260,0 a 130,130 0 1,0 -260,0 Z" fill="none" stroke="#000" stroke-width="0.1"/>
+</svg>

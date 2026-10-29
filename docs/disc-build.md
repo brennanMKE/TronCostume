@@ -1,8 +1,8 @@
 # Disc Build: Look, Layers, Lighting and Back Mount
 
-The build plan for the Tron Identity Disc: a black acrylic face with an inlaid white C, a 9 mm white acrylic outer ring, a laminated plywood frame, three electronics bays behind removable inner-rim covers, and a magnetic mount for wearing it on the back.
+The build plan for the Tron Identity Disc: a black acrylic face with an inlaid white C, a 9 mm white acrylic outer ring, a laminated plywood frame, three electronics bays behind removable inner-rim covers, and a keyed magnetic back mount: a bar magnet in the disc meets one in a small black mount that fits a rectangular socket in the disc's back.
 
-This doc is written so it can be handed to an image model (ChatGPT) to render an exploded view. All the geometry is spelled out in numbers. The [Render Brief](#render-brief-for-chatgpt) at the end is the prompt to paste.
+This doc is written so it can be handed to an image model (ChatGPT) to render an exploded view. All the geometry is spelled out in numbers. The [Render Brief](#render-brief-for-chatgpt) at the end has four separate prompts (exploded view, buttons close-up, assembled and worn, cross-section) and a list of mistakes from the first render to correct.
 
 **Status: plan, not yet test-fitted.** Measure the real sheets, inserts and boards (see [Measure Before Cutting](#measure-before-cutting)) before making the cut files.
 
@@ -41,7 +41,7 @@ Outer-ring effects, all in the current color:
 
 Both rings use the same color, picked with the three color buttons. The black button controls the outer ring: tap for on/off, double tap for flicker, triple tap for motion ([controls.md](controls.md)). The cloak follows the color as before.
 
-**Docking detection**: a small Hall-effect sensor in the disc senses a magnet in the back mount. See [Back Mount](#back-mount-magnetic-dock).
+**Docking detection**: a small Hall-effect sensor in the disc senses a small magnet in one of the mount's pegs. See [Back Mount](#back-mount-keyed-magnet).
 
 ## Layer Stack
 
@@ -74,7 +74,7 @@ Both rings use the same color, picked with the three color buttons. The black bu
      │ (inner │  (between the 3 bridges)                 │ rim      │
      │  edge) │                                          │          │
  36  ├────────┴──────────────────────────────────────────┴──────────┤
-     │ back cover, black 6 (steel targets recessed in the outside)  │
+     │ back cover, black 6 (magnet socket cut through at 6 o'clock) │
  42  └──────────────────────────────────────────────────────────────┘
 
  ▒ = white acrylic   ◀▌ = LED strip standing on edge, LEDs facing sideways (arrow = light)
@@ -84,7 +84,7 @@ Both rings use the same color, picked with the three color buttons. The black bu
 
 ### 1. Face: black acrylic, 6 mm
 
-- **Shape**: OD 252 (R126), center hole Ø120 (R60).
+- **Shape**: OD 252 (R126), center hole Ø120 (R60). **One solid piece; the outer edge is an unbroken circle.**
 - **C slot**, cut through: from R82 to R88 (6 mm wide), 340° long, from 10° clockwise to 350°. The **20° black bridge** centered at 12 o'clock keeps the face one piece.
 - **Six countersunk holes** for M4 flat-head screws at R70 and R102, at 0°, 120° and 240° (the bridge angles).
 - **Eight tick slots** (optional) at R114–R122, 2 mm wide, at the tick angles above, for thin white inlays. Or skip the slots and paint the ticks with a white paint pen.
@@ -140,23 +140,51 @@ Paint the channel walls and the divider's floor in the channels gloss white. Pai
 | Bays | Three open bays between the bridges, centered at **60°, 180°, 300°**, from the module cover to the outer rim |
 | Cover notches | Where each bay meets the hand hole: a flat notch for a removable inner-rim cover, with a wood **end block** at each end to take the cover's M4 inserts |
 
-- Inserts for the back cover screws: at the bridges (R70 and R102) and in the outer rim at R122 (60°, 180°, 300°).
+- Inserts for the back cover screws: at the bridges (R70 and R102) and in the outer rim at R122 (60°, 155°, 205°, 300°).
+- **Magnet block**: at 6 o'clock the battery bay stops at R100 between 150° and 210°, leaving solid wood from R100 to the outer edge. The disc's bar magnet sits in a pocket in this block (see [Back Mount](#back-mount-keyed-magnet)).
 - Inserts for the face screws: driven from the top of the upper frame at R70 and R102 on the bridge angles. The 10 mm insert passes through the upper frame into the divider; the bridge below backs it up.
 - Seal all wood (shellac or sanding sealer). Paint the outside edge and the hand-hole wall satin black, or wrap them in black silicone tape.
 
 ### 7. Back cover: black acrylic, 6 mm (z 36–42)
 
 - OD 260, ID 120. No light, no windows.
-- **Nine countersunk M4 holes**:
+- **Ten countersunk M4 holes**:
   - 6 at R70 and R102, at 0°, 120° and 240°.
-  - 3 at R122, at 60°, 180° and 300°.
-- **Three steel target discs**, Ø20 × 2, recessed 2 mm into the **outside** face at R90, at 60°, 180° and 300°. Cement or epoxy them in, painted black.
-- **Locating socket**: a blind hole Ø6.5, 4 mm deep, on the outside face at R86, 0°. It makes the disc dock in only one orientation.
+  - 4 at R122, at 60°, 155°, 205° and 300°. The usual 180° screw moves to either side of the socket.
+- **Magnet socket**: a **65 × 15 mm rectangular window cut through** the back cover at 6 o'clock, long side running left-right. Its inner edge is at R104 and its outer edge at R119, so it's centered at R111.5. The disc's bar magnet sits flush in the wood at the bottom of this 6 mm deep socket, and the mount's key fits into it. See [Back Mount](#back-mount-keyed-magnet).
 - **Battery relief**: a 1 mm deep pocket on the **inside** face under the battery (engraved), since the cell is 18.5 mm and the bay is 18.
 
 ### 8. Inner-rim modules (three bays)
 
-Each bay is closed toward the hand hole by a **flat black acrylic cover**, 6 mm thick and 17 mm tall (z 18.5–35.5). It is held by two black countersunk M4 screws into M4 inserts in the end blocks, with the insert axes pointing at the disc center. Its front face sits 1 mm behind the hand-hole circle at the middle. From inside the hole it reads as a flat black panel set into the curved wall, the way the module concept images show.
+**Where the covers are: on the hand-hole wall, inside the hole.** The covers are **not** on the outside edge of the disc. Each one stands upright in the wall of the 120 mm hand hole, with its outer face looking at the disc's center. You reach them with your fingers inside the hole, where you'd grip the disc. The outside edge of the disc has no covers, no holes and no openings at all.
+
+Each cover is a **flat black acrylic plate**, 6 mm thick and 17 mm tall (z 18.5–35.5). Its 6 mm thickness runs radially, and its height runs front-to-back, the same direction as the disc's thickness. It spans a straight chord of the hand-hole wall and sits in a notch cut into the lower frame's inner edge, with its middle 1 mm behind the hole's circle. Two black countersunk M4 screws go through it **radially, pointing away from the center**, into M4 inserts in wood end blocks either side of the notch. Take the screws out and the cover comes off **into the hand hole**, exposing the bay behind it.
+
+```
+ One bay, seen from the front (face removed). The hand hole is at the bottom.
+
+            outer rim R110–R130 (solid wood, no openings)
+   ┌──────┬──────────────────────────────────┬──────┐
+   │      │                                  │      │
+   │bridge│        bay: boards / switches    │bridge│
+   │ 24 mm│        / battery                 │ 24 mm│
+   │      ├───┬──────────────────────────┬───┤      │
+   │      │end│   COVER (black, 6 thick) │end│      │ ← stands upright in the
+   └──────┴blk┴──────────────────────────┴blk┴──────┘   hand-hole wall
+                 ◀── hand hole, Ø120 ──▶
+                 (fingers reach the cover from here)
+```
+
+```
+ Buttons bay, cut through its middle. The disc center is to the left.
+
+  disc       hand hole       │cover│ protoboard (vertical)      outer rim
+  center ◀── (air) ────── ●──┤ 6   ├─[switch]──┤                 │
+                       button│     │           │                 │
+                       tip   │     │           │                 │
+              the button tips poke through the cover TOWARD the disc
+              center, so you press them from inside the hand hole
+```
 
 | Bay | Center | Contents | Cover |
 |---|---|---|---|
@@ -201,37 +229,117 @@ All are **black M4 countersunk (flat head, 90°)**, sitting flush in countersink
 | Where | Count | Into |
 |---|---|---|
 | Face | 6 (R70 and R102 at 0°, 120°, 240°) | Inserts in the upper frame, backed by the bridges |
-| Back cover | 9 (R70 and R102 at 0°, 120°, 240°; R122 at 60°, 180°, 300°) | Inserts in the lower frame |
+| Back cover | 10 (R70 and R102 at 0°, 120°, 240°; R122 at 60°, 155°, 205°, 300°) | Inserts in the lower frame |
 | Module covers | 6 (2 per cover) | Inserts in the end blocks, axes pointing at the center |
-| Dock plate magnets | 3 | Inserts in the dock plate |
+| Mount face to base | 4 | Inserts in the mount's plywood base |
+| Mount pegs | 2 | Through each peg into an insert in the base |
 
 - **Edge clearance**: keep at least 4 mm of wood around each insert. That's why the middle band is 16 mm wide and the bridges are 24 mm.
 - **Countersinking acrylic**: use a 90° countersink at slow speed and stop when the head sits flush. Tighten until just snug, because acrylic cracks around overtightened countersunk heads.
 - The face and back inserts at the same angle and radius don't collide: the face ones sit at z 6-16 and the back ones at z 26-36.
 - The outer ring has **no screws**. It's cemented to the face and clamped between the face and the divider. A screw through it would cast a shadow in the glow.
 
-## Back Mount (Magnetic Dock)
+## Back Mount: Keyed Magnet
 
-A **dock plate** worn on your back. The disc's hole fits over a round boss on the plate, and magnets hold it on. You pull it straight off.
+A small black **mount** worn on your back holds the disc. It has a raised rectangular **key** with a bar magnet in it. The key drops into a matching rectangular **socket** in the disc's back cover, where a second bar magnet waits. The key lines the two magnets up exactly and holds the disc square, so it can't twist or slide. Two **pegs** sit inside the disc's hand hole near the top and take some of the weight.
+
+### Magnets
+
+- **Two bar magnets, 60 × 10 × 5 mm**, the ones you have: one in the disc, one in the mount.
+- **Polarity**: let the two magnets snap together and mark the faces that touch. Glue each magnet with its **marked face outward**. Then they attract when docked, and the disc can't go on the wrong way.
+- **Glue with epoxy**, not just double-sided tape. Magnets this strong pulling against each other will slowly creep off tape. A dot of tape to position them, then epoxy, is fine.
+- **Pull force**: a matched pair of these at a 0.5 mm gap is very strong, probably more than 10 kg straight off. That's too much to pull off easily, but you don't pull it straight off; see [Taking it off](#taking-it-off). If it's still too strong, set the mount's magnet 1-2 mm deeper. Every millimetre of gap weakens it noticeably.
+
+### Disc side (socket)
 
 ```
-   side view (wearer's back on the left)
+ Back of the disc, seen from behind (from the wearer), 6 o'clock at the bottom
 
-   back │ harness │ dock plate 9 ply │ boss Ø114 ×10 ──┐  disc
-        │ straps  │ ● magnets        │   fits the      │  ┌──────────┐
-        │         │   (flush)        │   Ø120 hole     │  │ steel ●  │ back cover
-        │         │                  │                 │  │          │
+                    ╭──────── hand hole Ø120 ────────╮
+                    │                                │
+                    ╰────────────────────────────────╯
+              ┌────────────── 65 ──────────────┐
+              │ ┌──────────── 60 ────────────┐ │  15   ← socket, cut through
+              │ │ disc magnet, flush in wood │ │        the 6 mm back cover
+              │ └────────────────────────────┘ │
+              └────────────────────────────────┘
+                     R104 (top edge) – R119 (bottom edge)
 ```
 
-- **Dock plate**: 9 mm plywood, **Ø220**, painted black. Four slots for 25 mm webbing (two shoulder straps that cross on the chest, like a backpack frame).
-- **Boss**: Ø114 × 10, glued to the plate's center (a plywood disc, or stacked rings to save weight). It goes into the disc's 120 mm hole with 3 mm clearance. **The boss carries the disc's weight**, so the magnets only have to hold it against the plate.
-- **Magnets**: 3 countersunk **pot (cup) magnets, Ø20, M4**, screwed flush into M4 inserts in the plate at R90, 60°/180°/300°, matching the steel targets on the disc.
-  - Each holds roughly 2-3 kg through 2 mm of steel, paint and fabric, about 6-9 kg in total.
-  - That's enough for a 1.3 kg disc when you bend over, and still easy to pull off by tipping one edge first.
-  - Test, and add a fourth magnet if needed.
-- **Locating pin**: Ø6 × 4 on the plate at R86, 0°, into the disc's back socket, so the C's gap always docks at the top.
-- **Docking sensor**: a small Ø10 × 3 magnet in the plate at R90, 330°. A digital Hall sensor (DRV5032 or similar, 3.3 V) sits inside the electronics bay, against the back cover, at the same spot. It tells the firmware the disc is on your back, so the outer ring goes dark.
-- **With the cloak**: wear the plate **under** the cloak and dock the disc **over** it. Magnets hold through thin fabric, and the boss pushes the fabric into the hole. Test with the actual cloak fabric. If it's thick, mount the plate on the outside of the cloak instead.
+| Item | Size | Where |
+|---|---|---|
+| Socket in the back cover | 65 × 15, cut through the 6 mm acrylic | 6 o'clock, R104–R119, long side horizontal |
+| Magnet pocket in the wood | 60.5 × 10.5, 5.5 deep (magnet + glue) | Centered in the socket, in the lower frame's magnet block (R100–R130, 150°–210°) |
+| Disc magnet | 60 × 10 × 5 | In the pocket, marked face out, flush with the wood |
+
+The socket is 6 mm deep: the back cover's thickness, with the wood and magnet as its floor. Paint the wood floor black.
+
+**Fit check**: the socket's corners reach R123.4, inside the R130 edge, and the battery's ends reach R92.8, clear of the R100 block. The back cover's 180° screw moves to 155° and 205° to make room.
+
+### Mount
+
+Made from your 6 mm maple plywood and black acrylic, all cut on the xTool:
+
+```
+ Mount, seen from the front of the disc (as if the disc were transparent)
+
+              ┌───────────────────────┐  ← top, y = +62
+              │        (●) (●)        │  ← two pegs, inside the hand hole
+              │                       │
+              │      ( hand hole )    │     90 wide
+              │                       │
+              │                       │
+              │   ═══════════════     │  ← webbing slots (2)
+              │                       │
+              │  ┌─────────────────┐  │
+              │  │ key + magnet    │  │  ← y = −111.5, fits the disc's socket
+              │  └─────────────────┘  │
+              │   ═══════════════     │  ← webbing slots (2)
+              └───────────────────────┘  ← bottom, y = −126
+
+ Side view (the disc docks from the right)
+
+   wearer │ base: 2 × 6 maple ply │ black acrylic face 6 │ key 6 │ ← disc back cover
+          │ (webbing slots)       │                      │magnet │
+          │                       │ peg Ø12 × 30 ────────────────────▶ into the hand hole
+```
+
+| Part | Material | Size |
+|---|---|---|
+| **Base** | 2 layers of 6 mm maple plywood, glued (12 mm) | 90 × 188 rounded rectangle, corner R10. Four 27 × 4 webbing slots |
+| **Face** | 6 mm black acrylic | Same outline as the base. Screwed to the base with 4 flush countersunk M4 screws into inserts |
+| **Key** | 6 mm black acrylic, cemented to the face | **64.4 × 14.4**: 0.3 mm smaller each side than the 65 × 15 socket. A 60.5 × 10.5 window cut through it for the magnet. Centered at y = −111.5 |
+| **Mount magnet** | 60 × 10 × 5 | In the key's window, epoxied to the face, marked face out. Its face sits about 0.5 mm below the key's top |
+| **Pegs** | Five 6 mm maple discs, Ø12, glued into a 30 mm stack, or a Ø12 dowel | At x = ±9.2, y = +52.2 (R53 from the disc center, 10° either side of 12 o'clock), so both sit under the 12 o'clock bridge's wood. Each held by an M4 screw from the back of the base into an insert in the peg. Round over the tips |
+
+Coordinates are in mm from the disc's center when docked, with y up.
+
+- **Pegs**: they sit inside the hand hole, 1 mm below its top edge. When you're upright, the disc hangs on the key; if anything flexes, the hole's top edge settles onto the pegs. They also stop the top of the disc from swinging out when you bend over. At 30 mm long they stay inside the 42 mm hole and don't show from the front.
+- **Through the hand hole**, the mount's black acrylic face shows. That's fine, since it matches the disc.
+- **Fit**: laser kerf changes sizes by a few tenths of a millimetre. Before cutting the disc's back cover, cut a **test socket and key** from scrap acrylic. Adjust the key size until it drops in with a slight wiggle and no force.
+
+### Wearing it
+
+- **Harness**: two lengths of 25 mm webbing through the mount's slots. They form shoulder straps that cross on the chest, like a backpack.
+- **The mount goes on the outside of the cloak.** Fabric can't go between the key and the socket: it's a 0.3 mm fit. Options:
+  - Sew or bolt the mount to the cloak, with the harness underneath and the straps coming through two small slits in the cloak.
+  - Wear the harness over the cloak, with straps in black webbing.
+- Since the mount is hidden behind the disc, it can stay on all evening.
+
+### Taking it off
+
+1. **Tip the bottom of the disc away from your back.** This peels the magnets apart from one end instead of pulling them straight off, which takes much less force. The key slides out of the socket as you tip it.
+2. **Lift the disc up and off the pegs.**
+
+To put it back, hang the hole's top edge over the pegs, then swing the bottom in. The key finds the socket, and the magnets snap it home.
+
+### Docking sensor
+
+- **The disc can't use a Hall sensor near its own bar magnet**, because the sensor would always read "docked".
+- Instead, a small **Ø6 × 3 magnet** goes in the top of the **peg at 350°** (seen from the front; it's the right-hand peg seen from behind), facing the hand-hole wall.
+- A digital Hall sensor (DRV5032 or similar, 3.3 V, on **GPIO 3**) sits in a small pocket drilled into the 12 o'clock bridge from the electronics bay side, behind 1-2 mm of wood at the hand-hole wall, at 350°. That's about 3 mm from the peg magnet. Its wires run through the pocket into the electronics bay.
+- The disc's bar magnet is about 165 mm away, too far to trigger it.
+- **Docked**: the inner C stays lit and the outer ring goes dark. **Pulled off**: the outer ring ignites.
 
 ## Structural Checks
 
@@ -243,7 +351,9 @@ A **dock plate** worn on your back. The disc's hole fits over a round boss on th
 | Face held at the inner edge | 3 screws at R70; the C slot only leaves the 20° bridge, so the fin cement and the screws together hold the inner piece | Yes |
 | Electronics bay reach | furthest corner ~R102 < R110 | Yes |
 | Battery in bay | 18.5 cell in 18 bay + 1 mm back pocket | Just |
-| Battery chord ends | R92 < R110 | Yes |
+| Battery chord ends | R92.8 < R100 (magnet block) | Yes |
+| Socket corners | R123.4 < R130 | Yes |
+| Disc's weight | Carried by the key in the 6 mm socket; the pegs catch the top | Yes |
 | Divider | Full annulus ties the upper frame, lower frame and ring into a box | Yes |
 | Ring support | Sits on the divider R118–R130, cemented to the face R118–R126 | Yes |
 
@@ -260,7 +370,7 @@ Rough estimate:
 | Outer ring, white 9 | 100 |
 | Plywood (upper, divider, lower) | 460 |
 | Battery, boards, strips, wire | 100 |
-| Screws, inserts, covers, steel | 70 |
+| Screws, inserts, covers, magnet | 80 |
 | **Total** | **about 1.3 kg** |
 
 That's heavy for something worn on the back and thrown around. Options:
@@ -299,46 +409,95 @@ That's heavy for something worn on the back and thrown around. Options:
 | Frame | One 24 mm routed core, open sectors | **Upper 9 + divider 3 + lower 18** laminated, closed box |
 | Buttons | 4 (white, red, green, brightness) | **4: black (outer ring, off, wake), white, blue, green**; six colors as tap/double-tap pairs |
 | Modules | Electronics + buttons on the inner rim | **Electronics, buttons and battery**: three inner-rim bays at 10, 2 and 6 o'clock |
-| Back | Twist-lock idea, undecided | **Magnetic dock** with a boss, steel targets and a docking sensor |
+| Back | Twist-lock idea, undecided | **Keyed magnet**: a 60 × 10 × 5 bar magnet on each side, the mount's key seated in a 65 × 15 socket in the disc's back, two pegs in the hand hole, and a docking sensor |
 | Screws | Socket heads | **Black countersunk M4 × 14**, flush |
 | SVG cut files | `build-plans/*.svg` | **Out of date** (C radius, face holes). Redraw after the render is approved |
 
 ## Render Brief for ChatGPT
 
-Attach this document and the two module images (`concepts/Inner-rim electronics module.png`, `concepts/Exploded vertical four-button plywood module.png`) as style references, then paste the brief below as the prompt.
+### How to use it
 
----
+Image models get much more right when each image shows **one thing**. Send these as **four separate requests**, one image each, in order. After each one, check it against the checklist for that request, and reply with only the items it got wrong.
 
-**Render a photoreal exploded view of a DIY Tron Identity Disc, plus three detail insets. Follow the dimensions in the document exactly; don't invent parts.**
+Attach this document to every request. For request 2, also attach `concepts/Exploded vertical four-button plywood module.png` and `concepts/Inner-rim electronics module.png`. Those show the right *idea*: a flat black cover set into the hand-hole wall. They have only 4 buttons and the wrong colors; follow this document for those.
 
-**Main view**: an exploded assembly along the disc's axis, seen from a 3/4 angle above the front. Front face up, about 35 mm of space between layers, thin dashed lines showing the screw axes. Dark grey studio background. Label each part with a thin leader line. From top (front) to bottom:
+### What the first render got wrong
 
-1. **Black acrylic face**, gloss, 6 mm thick, OD 252, hole Ø120. A 6 mm wide C-shaped slot at R82–R88 running 340°, with a single 20° black bridge at **12 o'clock**. Six flush countersunk holes (R70 and R102 at 12, 4 and 8 o'clock). Eight tiny white ticks near the rim.
-2. **White C stack**: four thin white acrylic C pieces (3 mm each) cemented into one 12 mm C, the same shape as the slot. Shown just below the face, lined up with the slot.
-3. **White translucent outer ring**, 9 mm thick, OD 260, ID 236, glowing softly.
-4. **Upper plywood frame**, 9 mm: a C-shaped open channel (R80–R94) with a thin **5 mm LED strip standing on edge on its outer wall, LEDs facing inward**; a solid wood bridge under the C gap at 12 o'clock; an outer band whose outside wall (R110) carries a second **5 mm LED strip standing on edge, LEDs facing outward**. The channel walls are painted white.
-5. **Plywood divider**, 3 mm, a full flat annulus with small wire holes near 12 o'clock.
-6. **Lower plywood frame**, 18 mm: an outer rim, three 24 mm radial bridges at 12, 4 and 8 o'clock, and three bays between them:
-   - At **10 o'clock**: the ESP32-C3 Super Mini, USB-C charger and MT3608 boost lying flat on a clear acrylic carrier, USB-C ports facing the hand hole.
-   - At **2 o'clock**: a vertical protoboard with four small tactile switches facing the hand hole, plus a small slide switch.
-   - At **6 o'clock**: one 18650 cell in a wood cradle.
-   - Each bay has a flat black acrylic cover (6 mm thick, 17 mm tall) set into a notch in the hand-hole wall, held by two black countersunk M4 screws into brass inserts in wood end blocks. The button cover has four small round holes with actuator tips in black, white, blue and green (left to right), plus a slot for the slide switch.
-   - Brass M4 wood inserts are visible at the bridges and the outer rim.
-7. **Black acrylic back cover**, 6 mm, OD 260, ID 120. Nine flush countersunk holes. Three small round steel discs recessed flush in the outside face at 2, 6 and 10 o'clock. A small locating hole at 12 o'clock.
-8. **Dock plate** (furthest down, slightly apart): a black-painted 9 mm plywood disc, Ø220, with a raised Ø114 × 10 mm round boss that fits the disc's hole. Three flush round pot magnets matching the steel discs, a small locating pin at 12 o'clock, and four webbing slots with black straps leaving the frame.
+Paste this list with every request:
 
-**Inset 1, assembled front view** (dark room): black disc; the **inner C glowing solid blue (#6FC3DF)** with its gap at 12 o'clock; the **outer edge and the 4 mm outer border glowing blue**; flush black screw heads barely visible; white ticks.
+1. **Covers in the wrong place.** The three black inner-rim covers were drawn on the **outside edge** of the ring, covering nothing. They belong **in the hand-hole wall, inside the 120 mm hole**, facing the center, each closing one bay.
+2. **Buttons buried.** The four buttons were drawn on a board lying flat inside a bay, facing up toward the face, where nobody can reach them. They are on a **vertical** protoboard directly behind the buttons cover, **pointing toward the disc center**, with their tips poking **through the cover's four holes into the hand hole**.
+3. **Inner edge drawn as a continuous wooden ring.** In the 18 mm lower frame, the hand-hole wall is only wood at the three bridges and end blocks. At each bay it is **an opening closed by its black cover**.
+4. **Face cut through at 12 o'clock.** The black face is **one solid piece** with an **unbroken outer edge**. The only opening besides the center hole is the thin C slot, whose single small gap is at 12 o'clock. Nothing else is cut at 12 o'clock, and there's no notch or tab on the outer edge.
+5. **C far too wide.** The C is a **thin line**: 6 mm wide on a 260 mm disc, about 1/43 of the diameter, the same width as the face's thickness. It was drawn as a wide band.
+6. **Back mount changed.** There is no round dock plate, boss or steel discs any more. The mount is a small black rectangular paddle with a raised rectangular key holding a bar magnet, which fits a rectangular socket in the disc's back at 6 o'clock, plus two pegs.
+7. **Cross-section geometry wrong.** The layers are flat sheets stacked on top of each other, with no steps. Only the outer white ring reaches out to R130 above the divider.
 
-**Inset 2, cross-section** through the C and the outer ring, at 2 o'clock, labeled as in the document's section drawing: face, C inlay plus fin, C strip on edge shining sideways into the fin, middle band, outer strip on edge shining sideways into the 9 mm white ring, divider, button bay with its cover, back cover. Show light arrows.
+### Request 1: exploded view
 
-**Inset 3, worn**: the back of a person in a black hooded cloak. The dock plate is strapped on under the cloak; the disc sits on the outside of the cloak, held through the fabric by the plate's boss and magnets. Only the C is lit; the outer ring is dark.
+> Photoreal exploded assembly of the DIY Tron Identity Disc in the attached document. One image, no insets. Dark grey studio background. Viewed at a 3/4 angle from above the front, with the front face up and the parts spread along the disc's central axis, about 35 mm apart. Thin leader-line labels. Parts from top to bottom:
+>
+> 1. **Black acrylic face**: one solid gloss-black annulus, 6 mm thick, Ø252, hole Ø120. **Its outer edge is an unbroken circle.** One thin C-shaped slot, 6 mm wide, centered 85 mm from the center, running 340° with a single 20° solid black gap at 12 o'clock. Six small flush countersunk holes. Eight tiny white tick marks near the rim.
+> 2. **White C**: a thin white acrylic C, 6 mm wide and 12 mm tall, exactly the shape of the slot, with the same single 20° gap at 12 o'clock.
+> 3. **White outer ring**: translucent white acrylic, 9 mm thick, Ø260 outside, Ø236 inside: a narrow 12 mm band.
+> 4. **Upper plywood frame**, 9 mm: a flat plywood annulus with two narrow open channels. The inner channel is C-shaped and about 85 mm out, with a thin 5 mm LED strip standing upright on its outer wall. The outer channel is round, at the frame's outer edge, with a thin 5 mm LED strip standing upright on the frame's outside wall, LEDs facing outward. Solid wood under the C's gap at 12 o'clock.
+> 5. **Plywood divider**: a flat 3 mm plywood annulus, Ø260, hole Ø120, with a few small wire holes.
+> 6. **Lower plywood frame**, 18 mm: a solid outer rim, and three 24 mm radial bridges at 12, 4 and 8 o'clock running from the outer rim to the hand hole. Three open bays between them:
+>    - **10 o'clock**: three small boards lying flat (ESP32-C3 Super Mini, a USB-C charger board, an MT3608 boost board) on a clear acrylic carrier, their USB-C ports at the hand-hole side.
+>    - **2 o'clock**: a vertical strip of protoboard standing just behind the hand-hole wall, with four tactile switches pointing toward the disc center.
+>    - **6 o'clock**: one blue 18650 cell lying as a straight chord.
+>
+>    **At each bay, the hand-hole wall is an opening.** It is closed by a flat black acrylic cover (90-100 long × 17 tall × 6 thick) standing upright in that opening. In this exploded view, show each cover **pulled about 30 mm inward into the hand hole**, along its two dashed screw axes, which point radially toward the center. Show brass M4 inserts in the wood end blocks either side of each opening. The **buttons cover** has four small round holes, and the four switch tips (black, white, blue, green, left to right) line up with them. **The outside edge of the lower frame is solid wood with no covers.**
+> 7. **Black acrylic back cover**: 6 mm, Ø260, hole Ø120, ten flush countersunk holes. At 6 o'clock, a **65 × 15 mm rectangular window cut through it**, long side horizontal, about 111 mm from the center. Through it you see a 60 × 10 mm bar magnet set flush in the wood of the lower frame.
+> 8. **Back mount**, apart at the bottom: a small black rectangular paddle, 90 × 188 mm, made of 12 mm maple plywood with a 6 mm black acrylic face. On its face: a raised black acrylic **key**, 64 × 14 × 6 mm, holding a matching bar magnet, lined up under the disc's rectangular window. Two round pegs, Ø12 × 30 mm, near the paddle's top, which sit just inside the top of the disc's hand hole. Four webbing slots with black straps. The paddle spans from inside the hand hole down to the 6 o'clock socket.
+>
+> Don't: put covers or openings on the outside edge; make the C wide; cut the face anywhere at 12 o'clock except the C's gap; draw any LED strip lying flat; show raised or socket-head screws; light anything on the back.
 
-**Don't**:
+**Check**:
+- Covers in the hole, facing center.
+- Buttons visible through the buttons cover, pointing at the center.
+- Face one piece, with an unbroken outer edge.
+- C thin, one gap at 12 o'clock.
+- A rectangular socket at 6 o'clock in the back cover, and a rectangular paddle mount with a key and two pegs (no round plate).
 
-- Don't light the back.
-- Don't show socket-head or raised screw heads anywhere: every screw is a black countersunk head flush with the acrylic.
-- Don't put a slot through the face at 12 o'clock other than the 20° gap in the C.
-- Don't draw strips lying flat around a circle.
-- Don't use a full-size ESP32 dev board.
-- Don't use more than one gap in the C.
-- Don't show lit ticks.
+### Request 2: buttons module close-up
+
+> Photoreal close-up in the style of the attached module images, looking **from inside the hand hole** at the hand-hole wall at 2 o'clock, front face up. The wall is laminated plywood (9 + 3 + 18 mm) under the 6 mm black face. In the lower 18 mm, a flat black acrylic cover (90 × 17 × 6 mm) sits in a notch in the wall, held by two flush black countersunk M4 screws at its ends. Four small round holes in the cover, evenly spaced, with tactile switch tips flush with the cover face, colored black, white, blue and green from left to right, plus a small slide switch at the right end. A second view, exploded toward the viewer, shows the cover pulled out: the vertical protoboard behind it, the four switches pointing straight at the viewer through where the holes were, and brass inserts in the end blocks.
+
+**Check**:
+- The cover is in the hand-hole wall.
+- The buttons point at the viewer (toward the center).
+- 4 buttons in the right colors.
+- Flush countersunk screws.
+
+### Request 3: assembled and worn
+
+> Two side-by-side photoreal images of the finished disc, at night:
+>
+> - **Left**, front view: a gloss-black disc, Ø260, with a Ø120 hole. A **thin** C line glows solid blue (#6FC3DF), 6 mm wide, about 85 mm from the center, with **one small gap at 12 o'clock**. The 9 mm outer edge and a 4 mm white border around the face glow blue. Eight small unlit white ticks. The face's outer edge is a perfect unbroken circle. The screws are invisible, or barely visible as flush black heads.
+> - **Right**, worn: a person seen from behind, in a black hooded cloak, with the disc on their upper back, on the outside of the cloak, held square. Only the thin C is lit; the outer edge is dark. The mount is hidden behind the disc; only a little black shows through the hand hole.
+
+**Check**:
+- C thin, with one gap at the top.
+- No notch or tab on the outer edge.
+- Outer edge dark in the worn view.
+
+### Request 4: cross-section
+
+> A clean technical cutaway illustration (not photoreal) through the disc at 2 o'clock, the cut face shown flat. The disc center is to the left. Draw **flat layers stacked from the top**, exactly as in the document's "Cross-section through the C and the outer ring" diagram:
+>
+> - Black face, 6 mm.
+> - White C, 12 mm tall: 6 mm inside the face's slot and 6 mm hanging below it as a fin.
+> - Upper plywood frame, 9 mm, containing the C channel and the outer air gap.
+> - The 5 mm C LED strip, upright on the C channel's outer wall, shining **sideways** into the fin.
+> - The 5 mm outer LED strip, upright on the frame's outside wall, shining **sideways** across an 8 mm gap into the 9 mm white outer ring, which is the outermost part.
+> - Divider, 3 mm.
+> - Lower frame, 18 mm, with the buttons cover at the hand-hole (left) end and a switch poking through it to the left.
+> - Back cover, 6 mm.
+>
+> Label each layer with its thickness, and draw arrows for the light.
+
+**Check**:
+- No steps in the layers.
+- Strips upright, shining sideways.
+- The buttons cover is at the left (hand-hole) end, with the switch tip poking out to the left.
