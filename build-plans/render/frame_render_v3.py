@@ -16,16 +16,16 @@ BUSH, BIT = 5 / 16 * 25.4, 1 / 8 * 25.4
 TOFF, RCORNER = (BUSH - BIT) / 2, BIT / 2
 
 BAYS = [
-    dict(name="BUTTONS", A=60.0, notch=33.0, cover=33.0, ear=29.0,
-         pocket=[(25.0, 64.0, 84.0)],
-         buttons=[-18.0, -6.0, 6.0, 18.0], switch=None),
-    dict(name="ELECTRONICS", A=300.0, notch=38.0, cover=38.0, ear=34.0,
-         pocket=[(30.0, 64.0, 87.0), (20.0, 87.0, 92.0)],
-         buttons=[], switch=24.0),
+    dict(name="BUTTONS", A=60.0, notch=35.0, cover=35.0, ear=28.0,
+         pocket=[(21.0, 64.0, 84.0)],
+         buttons=[-16.5, -5.5, 5.5, 16.5], switch=None),
+    dict(name="ELECTRONICS", A=300.0, notch=38.0, cover=38.0, ear=31.0,
+         pocket=[(24.0, 64.0, 87.0), (20.0, 87.0, 92.0)],
+         buttons=[], switch=None),
 ]
 BOARDS = [  # bay index, label, x0, x1, y0, y1, has USB-C at y0
-    (0, "BUTTON BOARD 46×20 on edge", -23.0, 23.0, 68.5, 70.3, False),
-    (1, "ESP32-C3", -22.0, -4.0, 64.0, 86.5, True),
+    (0, "BUTTON BOARD 38×20 on edge", -19.0, 19.0, 68.5, 70.3, False),
+    (1, "ESP32-C3", -21.0, -3.0, 64.0, 86.5, True),
     (1, "TP4056", 1.0, 18.0, 64.0, 92.0, True),
 ]
 BAT_A, BAT_HALF, BAT_Y0, BAT_Y1 = 180.0, 41.0, 69.0, 92.0
@@ -164,7 +164,7 @@ def zoom(sh, uid, bx0, by0, bx1, by1, A, xr, y0, y1, title, sub, pad=14.0):
 
 
 def main():
-    sh = Sheet(880, 700)
+    sh = Sheet(880, 742)
     sh.add('<rect x="0" y="0" width="880" height="44" fill="#15202b"/>')
     sh.text(26, 21, "TRON IDENTITY DISC — LOWER FRAME, REV 3", 11.0, "#fff", anchor="start", weight="700", ls="2.0")
     sh.text(26, 32, "FLAT covers · component-sized pockets · routed to a laser-cut acrylic template "
@@ -193,27 +193,27 @@ def main():
 
     at = zoom(sh, "B", 430, 92, 858, 302, 60.0, 42.0, 58.0, 88.0,
               "DETAIL — BUTTONS BAY   (flat cover)",
-              "cover 66 × 23.5 × 3 flat, seats on a shoulder at y = 64 · 4 buttons at 12 mm pitch · pocket |x| ≤ 25")
-    for bx in (-18, -6, 6, 18):
-        x, y = at(bx, 54); sh.text(x, y, f"{bx:+.0f}", 3.6, BLUE, weight="700")
-    x, y = at(0, 50); sh.text(x, y, "tips 1.3–3.8 mm behind the hole edge", 3.4, BLUE, weight="700")
-    x, y = at(0, 76); sh.text(x, y, "BOARD 46 × 20 on edge", 3.5, "#444", weight="700")
-    x, y = at(0, 87); sh.text(x, y, "pocket |x| ≤ 25, y 64–84, corner R87.6", 3.1, "#666")
+              "cover 70 × 23.5 × 3 flat, seats on a 14 mm shoulder at y = 64 · 4 buttons at 11 mm pitch · pocket |x| ≤ 21")
+    for bx in (-16.5, -5.5, 5.5, 16.5):
+        x, y = at(bx, 54); sh.text(x, y, f"{bx:+.1f}", 3.4, BLUE, weight="700")
+    x, y = at(0, 50); sh.text(x, y, "tips 1.25–3.32 mm behind the hole edge", 3.4, BLUE, weight="700")
+    x, y = at(0, 76); sh.text(x, y, "BOARD 38 × 20 on edge", 3.5, "#444", weight="700")
+    x, y = at(0, 87); sh.text(x, y, "pocket |x| ≤ 21, y 64–84, corner R86.6", 3.1, "#666")
     for s in (-1, 1):
-        x, y = at(s * 36, 70); sh.text(x, y, "M4 insert", 3.3, GREEN, weight="700")
-        x, y = at(s * 36, 74); sh.text(x, y, "8 mm ear", 2.9, GREEN)
+        x, y = at(s * 40, 70); sh.text(x, y, "M4 Ø6 insert", 3.3, GREEN, weight="700")
+        x, y = at(s * 40, 74); sh.text(x, y, "14 mm shoulder", 2.9, GREEN)
 
     at = zoom(sh, "E", 430, 352, 858, 572, 300.0, 46.0, 58.0, 102.0,
               "DETAIL — ELECTRONICS BAY   (flat cover)",
-              "cover 76 × 23.5 × 3 flat, seats on a shoulder at y = 64 · both USB-C mouths square to the cover")
+              "cover 76 × 23.5 × 3 flat, seats on a 14 mm shoulder at y = 64 · both USB-C mouths square to the cover")
     for lbl, xm, yl in (("ESP32-C3", -13.0, 76.0), ("TP4056", 9.5, 86.0)):
         x, y = at(xm, yl); sh.text(x, y, lbl, 3.6, RED, weight="700")
         x, y = at(xm, 54); sh.text(x, y, "USB-C", 3.3, RED, weight="700")
-    x, y = at(24, 54); sh.text(x, y, "slide switch", 3.3, BLUE, weight="700")
+    x, y = at(0, 58); sh.text(x, y, "slide switch moved out of this cover", 3.1, RED, weight="700")
     x, y = at(-6, 97); sh.text(x, y, "MT3608 stacks on standoffs over the TP4056", 3.3, "#7a5c2e", weight="700")
     x, y = at(-6, 101); sh.text(x, y, "z: 5 + 8 standoff + 8 = 21 of 24 mm", 3.0, "#777")
     for s in (-1, 1):
-        x, y = at(s * 42, 72); sh.text(x, y, "M4 insert", 3.3, GREEN, weight="700")
+        x, y = at(s * 44, 72); sh.text(x, y, "M4 Ø6 insert", 3.3, GREEN, weight="700")
 
     ly = 596
     sh.text(26, ly, "KEY", 4.8, INK, anchor="start", weight="700", ls="1.4")
@@ -241,13 +241,21 @@ def main():
          "steps in — 6.41 mm of bearing each side after the R1.5875 fillet. Inserts drill into that shoulder face."),
         ("What the flat cover costs.", RED,
          "The 80 mm protoboard is out; a flat notch that wide puts its ends 25.8 mm back. Button board is now",
-         "46 × 20 with the four switches at 12 mm pitch. And the MT3608 no longer fits beside the other two boards,",
+         "38 × 20 with the four switches at 11 mm pitch. And the MT3608 no longer fits beside the other two boards,",
          "so it stacks on standoffs over the TP4056 — 21 mm of the 24 mm bay height. Both need your OK."),
         ("Router-ready.", MAG,
          "Magenta is the acrylic template: every aperture grown by 2.3813 for the 5/16\" bushing. Inside corners",
          "finish at R1.5875 by design. No blocks anywhere, so nothing to chisel and nothing to glue — the cover",
-         "screws go into M4 inserts drilled radially into the solid ears at x = ±29 and ±34."),
+         "screws go into Ø6 M4 inserts drilled radially into the 14 mm shoulders at x = ±28 and ±31."),
+        ("Two defects found by auditing, not by eye.", RED,
+         "(a) The cover inserts did not fit. An 8 mm shoulder leaves 0–1 mm of wood round a Ø6–Ø8 bore.",
+         "Shoulders are now 14 mm: buttons pocket |x| ≤ 21 with the pitch tightened to 11 mm, electronics",
+         "pocket |x| ≤ 24 with the slide switch moved out of the cover. Ø6 inserts, 4 mm of wood each side.",
+         "(b) A 1/8in bit cannot reach 24 mm of ply plus the template — it needs 27–30 mm of stickout and",
+         "will snap. The template can only establish the top of the wall; the depth has to be finished with",
+         "a bearing-guided flush-trim bit, which also changes the finished corner radius. See note below."),
         ("Still unanswered.", RED,
+         "WHICH FLUSH-TRIM BIT? 1/4in gives R3.175 corners, 1/2in gives R6.350 — not the R1.5875 drawn here.",
          "One routed 24 mm sheet or four glued 6 mm layers? Bays through-cut or blind? MOSFET board dimensions.",
          "Battery pocket corners reach R100.7 — a rigid cell has to be a chord, so it is the one thing outside R95."),
     ]
@@ -258,8 +266,8 @@ def main():
             sh.text(nx, y, ln, 3.3, "#444", anchor="start"); y += 3.9
         y += 2.2
 
-    sh.add('<rect x="0" y="690" width="880" height="10" fill="#15202b"/>')
-    sh.text(26, 696.6, "build-plans/render/frame_render_v3.py  ·  python3 frame_render_v3.py && "
+    sh.add('<rect x="0" y="732" width="880" height="10" fill="#15202b"/>')
+    sh.text(26, 738.6, "build-plans/render/frame_render_v3.py  ·  python3 frame_render_v3.py && "
             "rsvg-convert -w 2600 frame-plan-v3.svg -o frame-plan-v3.png", 3.3, "#8fb6d6", anchor="start")
     open("frame-plan-v3.svg", "w").write(sh.svg())
     print("wrote frame-plan-v3.svg")

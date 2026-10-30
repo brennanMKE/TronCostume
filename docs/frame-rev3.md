@@ -59,7 +59,7 @@ and `frame-pockets-finished.svg` (reference).
 | | |
 |---|---|
 | Template offset | **2.38125** — every aperture is that much larger than the finished pocket |
-| Finished inside corner | **R1.5875** (bit radius), by design, everywhere |
+| Finished inside corner | **R1.5875** if the 1/8" bit cuts the full wall — **but see below** |
 | Minimum template aperture | **7.9375** (bushing OD) |
 | Minimum finished pocket | **3.175** (bit) |
 
@@ -72,7 +72,16 @@ Registration: the template has a **Ø119.6 centre bore** for the existing jig pl
 (`build-plans/halloween/7-jigs-ply.svg`) plus a **Ø6 pin at R80 / 180°**, which lands inside
 the battery pocket and is routed away.
 
-> **Open:** are the pockets through-cuts or blind? A 1/8" bit 24 mm deep is a lot of stickout.
+> **The 1/8" bit cannot cut the full depth.** 24 mm of ply plus a 3–6 mm template needs 27–30 mm
+> of cutting length; common 1/8" bits give 12–25 mm and will deflect or snap long before that. So
+> the template and bushing can only establish the top of the wall, and the depth has to be finished
+> with a **bearing-guided flush-trim bit** riding the wall the template just cut.
+>
+> That changes the corner radius, because the flush-trim bit sets it: **1/4" → R3.175**,
+> **1/2" → R6.350**, against the R1.5875 drawn here. **Which flush-trim bit do you have?**
+> Every inside corner on the drawings and in the cut file has to be redrawn to match it.
+
+> **Open:** are the pockets through-cuts or blind?
 
 ## Covered Bays
 
@@ -81,12 +90,12 @@ slide), screwed with M4 × 12 countersunk into inserts in the shoulder.
 
 | | Buttons (60°) | Electronics (300°) |
 |---|---|---|
-| Notch, hole → y = 64 | \|x\| ≤ **33** | \|x\| ≤ **38** |
-| Cover | **66** × 23.5 × 3 | **76** × 23.5 × 3 |
-| Pocket behind | \|x\| ≤ **25**, y 64–84 | \|x\| ≤ **30**, y 64–87, then \|x\| ≤ **20**, y 87–92 |
-| Shoulder (cover seat) | \|x\| 25–33 at y = 64 | \|x\| 30–38 at y = 64 |
-| M4 inserts, axis radial | x = **±29**, into the shoulder face | x = **±34**, into the shoulder face |
-| Pocket corner | R87.64 | R92.03 / R94.15 |
+| Notch, hole → y = 64 | \|x\| ≤ **35** | \|x\| ≤ **38** |
+| Cover | **70** × 23.5 × 3 | **76** × 23.5 × 3 |
+| Pocket behind | \|x\| ≤ **21**, y 64–84 | \|x\| ≤ **24**, y 64–87, then \|x\| ≤ **20**, y 87–92 |
+| Shoulder (cover seat) | \|x\| 21–35 at y = 64, **14 wide** | \|x\| 24–38 at y = 64, **14 wide** |
+| M4 inserts, axis radial | **Ø6** at x = **±28** | **Ø6** at x = **±31** |
+| Pocket corner | R86.64 | R90.60 / R94.15 |
 
 ### Setback behind the hand-hole edge
 
@@ -94,20 +103,19 @@ Measured at each feature's own x, against the R60 arc. This is the number rev 1 
 
 | Feature | Behind the edge |
 |---|---|
-| Buttons at x = ±6 | 1.30 |
+| Buttons at x = ±5.5 | 1.25 |
 | TP4056 USB-C | 1.68 |
 | ESP32-C3 USB-C | 2.43 |
-| Buttons at x = ±18 | 3.76 |
-| Slide switch | 6.01 |
-| Notch ends | 6.46 (buttons) / 9.04 (electronics) |
+| Buttons at x = ±16.5 | 3.32 |
 
-The cover **ends** sit 10.9 and 14.6 back, but they are the screw ears with solid wood
-behind them — nothing is reached there.
+| Notch ends | 12.26 (buttons) / 14.57 (electronics) |
+
+The notch ends are the screw ears, with solid wood behind them — nothing is reached there.
 
 ### Buttons bay contents
 
-- **Board 46 × 20**, standing on edge, four 6×6×9.5 tactile switches at **12 mm pitch**,
-  x = −18, −6, +6, +18, tips through the cover.
+- **Board 38 × 20**, standing on edge, four 6×6×9.5 tactile switches at **11 mm pitch**,
+  x = −16.5, −5.5, +5.5, +16.5, tips through the cover.
 - The 80 × 20 protoboard of rev 1 **does not fit**: a flat notch wide enough for it puts
   its ends 25.8 mm behind the hand hole.
 
@@ -117,10 +125,10 @@ Boards lie flat on the carrier, USB-C against the cover at y = 64.
 
 | Board | Size | Place (bay x) |
 |---|---|---|
-| ESP32-C3 Super Mini | 18 × 22.5 | x = −22 … −4, USB-C at y = 64 |
+| ESP32-C3 Super Mini | 18 × 22.5 | x = −21 … −3, USB-C at y = 64 |
 | USB-C charger (TP4056) | 17 × 28 | x = +1 … +18, USB-C at y = 64 |
 | MT3608 boost | 17 × 36 | **Stacked on standoffs over the TP4056** |
-| Slide switch | 10 × 4 slot | x = +24, on the cover |
+| Slide switch | 10 × 4 slot | **Moved out of this cover** — the shoulder needs the width. Location TBD |
 
 **The MT3608 does not fit alongside** the other two in a 60-wide pocket. Stacking it costs
 5 + 8 + 8 = **21 mm of the 24 mm** bay height.
@@ -149,7 +157,11 @@ corners in to about R97.
 |---|---|---|---|---|
 | **Front** | R102 at 0°, 120°, 240° | 3 | Into the front surface (z = 0) | Face screws |
 | **Back** | R80 at 0°, 120°, 240° | 3 | Into the back surface (z = 24) | Carrier and back cover |
-| **Covers** | Shoulder face at y = 64, bay x = ±29 / ±34 | 4 | Radially, toward the hand hole | Cover screws |
+| **Covers** | Shoulder face at y = 64, bay x = ±28 / ±31 | 4 | Radially, toward the hand hole | Cover screws |
+
+The cover inserts need a **14 mm shoulder**: a Ø6 bore in the 8 mm shoulder of the first rev 3
+draft left 1 mm of wood each side. 14 mm gives 4 mm each side, which is why the pockets are
+narrower than the component sizes alone would suggest and why the slide switch left the cover.
 
 Front and back are at different radii, so their screw tips can never meet: 22 mm apart
 radially, and z 0–10 against z 14–24.
@@ -190,11 +202,11 @@ them into the electronics pocket. The C-strip leads drop at R86, already inside 
 |---|---|
 | Frame | Ø260 / Ø120, 24 thick |
 | Outer rim | R114 – R130 |
-| Buttons | notch \|x\| ≤ 33, pocket \|x\| ≤ 25 y 64–84, cover 66 |
-| Electronics | notch \|x\| ≤ 38, pocket \|x\| ≤ 30 y 64–87 + \|x\| ≤ 20 y 87–92, cover 76 |
+| Buttons | notch \|x\| ≤ 35, pocket \|x\| ≤ 21 y 64–84, cover 70 |
+| Electronics | notch \|x\| ≤ 38, pocket \|x\| ≤ 24 y 64–87 + \|x\| ≤ 20 y 87–92, cover 76 |
 | Battery | \|x\| ≤ 41, y 69–92 |
 | Front inserts | R102 @ 0°, 120°, 240° |
 | Back inserts | R80 @ 0°, 120°, 240° |
-| Cover inserts | bay x = ±29 (buttons), ±34 (electronics), at y = 64 |
+| Cover inserts | Ø6 at bay x = ±28 (buttons), ±31 (electronics), y = 64, in a 14 mm shoulder |
 | Wire groove | R70, 3.175 wide, 6 deep, back face, 360° |
 | Template offset | 2.38125 · corner R1.5875 |
