@@ -1,0 +1,279 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880mm" height="700mm" viewBox="0 0 880 700">
+<rect width="880" height="700" fill="#fff"/>
+<defs>
+<mask id="wF"><path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z" fill="#fff"/><path d="M 155.000,312.000 a 60.0,60.0 0 1,0 120.0,0 a 60.0,60.0 0 1,0 -120.0,0 Z" fill="#000"/><path d="M 198.500,283.421 L 253.926,251.421 L 286.926,308.579 L 231.500,340.579 Z" fill="#000"/><path d="M 257.926,258.349 L 275.246,248.349 L 300.246,291.651 L 282.926,301.651 Z" fill="#000"/><path d="M 196.000,344.909 L 140.574,312.909 L 178.574,247.091 L 234.000,279.091 Z" fill="#000"/><path d="M 144.574,305.981 L 124.656,294.481 L 154.656,242.519 L 174.574,254.019 Z" fill="#000"/><path d="M 129.656,285.821 L 125.326,283.321 L 145.326,248.679 L 149.656,251.179 Z" fill="#000"/><path d="M 256.000,381.000 L 256.000,404.000 L 174.000,404.000 L 174.000,381.000 Z" fill="#000"/></mask>
+<clipPath id="tF"><path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z M 156.000,312.000 a 59.0,59.0 0 1,0 118.0,0 a 59.0,59.0 0 1,0 -118.0,0 Z" clip-rule="evenodd"/></clipPath>
+<clipPath id="cB"><rect x="430" y="92" width="428" height="210" rx="2"/></clipPath>
+<mask id="wB"><path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z" fill="#fff"/><path d="M 155.000,312.000 a 60.0,60.0 0 1,0 120.0,0 a 60.0,60.0 0 1,0 -120.0,0 Z" fill="#000"/><path d="M 198.500,283.421 L 253.926,251.421 L 286.926,308.579 L 231.500,340.579 Z" fill="#000"/><path d="M 257.926,258.349 L 275.246,248.349 L 300.246,291.651 L 282.926,301.651 Z" fill="#000"/><path d="M 196.000,344.909 L 140.574,312.909 L 178.574,247.091 L 234.000,279.091 Z" fill="#000"/><path d="M 144.574,305.981 L 124.656,294.481 L 154.656,242.519 L 174.574,254.019 Z" fill="#000"/><path d="M 129.656,285.821 L 125.326,283.321 L 145.326,248.679 L 149.656,251.179 Z" fill="#000"/><path d="M 256.000,381.000 L 256.000,404.000 L 174.000,404.000 L 174.000,381.000 Z" fill="#000"/></mask>
+<clipPath id="tB"><path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z M 156.000,312.000 a 59.0,59.0 0 1,0 118.0,0 a 59.0,59.0 0 1,0 -118.0,0 Z" clip-rule="evenodd"/></clipPath>
+<clipPath id="cE"><rect x="430" y="352" width="428" height="220" rx="2"/></clipPath>
+<mask id="wE"><path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z" fill="#fff"/><path d="M 155.000,312.000 a 60.0,60.0 0 1,0 120.0,0 a 60.0,60.0 0 1,0 -120.0,0 Z" fill="#000"/><path d="M 198.500,283.421 L 253.926,251.421 L 286.926,308.579 L 231.500,340.579 Z" fill="#000"/><path d="M 257.926,258.349 L 275.246,248.349 L 300.246,291.651 L 282.926,301.651 Z" fill="#000"/><path d="M 196.000,344.909 L 140.574,312.909 L 178.574,247.091 L 234.000,279.091 Z" fill="#000"/><path d="M 144.574,305.981 L 124.656,294.481 L 154.656,242.519 L 174.574,254.019 Z" fill="#000"/><path d="M 129.656,285.821 L 125.326,283.321 L 145.326,248.679 L 149.656,251.179 Z" fill="#000"/><path d="M 256.000,381.000 L 256.000,404.000 L 174.000,404.000 L 174.000,381.000 Z" fill="#000"/></mask>
+<clipPath id="tE"><path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z M 156.000,312.000 a 59.0,59.0 0 1,0 118.0,0 a 59.0,59.0 0 1,0 -118.0,0 Z" clip-rule="evenodd"/></clipPath>
+</defs>
+<rect x="0" y="0" width="880" height="44" fill="#15202b"/>
+<text x="26.00" y="21.00" font-size="11.0" fill="#fff" text-anchor="start" font-weight="700" letter-spacing="2.0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">TRON IDENTITY DISC — LOWER FRAME, REV 3</text>
+<text x="26.00" y="32.00" font-size="4.3" fill="#8fb6d6" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">FLAT covers · component-sized pockets · routed to a laser-cut acrylic template · 5/16" bushing + 1/8" bit · 1:1</text>
+<rect x="700" y="9" width="156" height="26" rx="3" fill="#b5179e"/>
+<text x="778.00" y="20.00" font-size="11.0" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="3" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">DRAFT</text>
+<text x="778.00" y="30.00" font-size="3.4" fill="#ffd9f3" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">not for cutting</text>
+<path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z" fill="#e3cda0" mask="url(#wF)"/>
+<g mask="url(#wF)" fill="none" stroke="#1b1b1b" stroke-width="1.0">
+<path d="M 155.000,312.000 a 60.0,60.0 0 1,0 120.0,0 a 60.0,60.0 0 1,0 -120.0,0 Z"/>
+<path d="M 198.500,283.421 L 253.926,251.421 L 286.926,308.579 L 231.500,340.579 Z"/>
+<path d="M 257.926,258.349 L 275.246,248.349 L 300.246,291.651 L 282.926,301.651 Z"/>
+<path d="M 196.000,344.909 L 140.574,312.909 L 178.574,247.091 L 234.000,279.091 Z"/>
+<path d="M 144.574,305.981 L 124.656,294.481 L 154.656,242.519 L 174.574,254.019 Z"/>
+<path d="M 129.656,285.821 L 125.326,283.321 L 145.326,248.679 L 149.656,251.179 Z"/>
+<path d="M 256.000,381.000 L 256.000,404.000 L 174.000,404.000 L 174.000,381.000 Z"/>
+<path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z"/>
+</g>
+<path d="M 101.000,312.000 a 114.0,114.0 0 1,0 228.0,0 a 114.0,114.0 0 1,0 -228.0,0 Z" fill="none" stroke="#8a8a8a" stroke-width="0.3" stroke-dasharray="3,2"/>
+<g clip-path="url(#tF)">
+<path d="M 236.281,258.859 L 254.797,248.168 L 290.178,309.450 L 271.662,320.141 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 254.673,257.478 L 276.118,245.097 L 303.499,292.522 L 282.054,304.903 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 155.838,324.471 L 137.322,313.781 L 177.703,243.838 L 196.219,254.529 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 145.446,309.234 L 121.403,295.352 L 153.784,239.266 L 177.827,253.148 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 130.527,289.073 L 122.073,284.192 L 144.454,245.427 L 152.909,250.308 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 258.381,378.619 L 258.381,406.381 L 171.619,406.381 L 171.619,378.619 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+</g>
+<path d="M 251.328,252.921 L 253.926,251.421 L 286.926,308.579 L 284.328,310.079 Z" fill="#2a2a2a" stroke="#1b1b1b" stroke-width="0.4"/>
+<circle cx="260.26" cy="252.39" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 253.33,256.39 L 263.72,250.39" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="289.26" cy="302.61" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 282.33,306.61 L 292.72,300.61" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="260.13" cy="265.16" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="266.13" cy="275.55" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="272.13" cy="285.95" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="278.13" cy="296.34" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<path d="M 143.172,314.409 L 140.574,312.909 L 178.574,247.091 L 181.172,248.591 Z" fill="#2a2a2a" stroke="#1b1b1b" stroke-width="0.4"/>
+<circle cx="138.24" cy="306.94" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 145.17,310.94 L 134.78,304.94" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="172.24" cy="248.06" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 179.17,252.06 L 168.78,246.06" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<path d="M 171.413,264.896 L 169.334,263.696 L 174.334,255.035 L 176.413,256.235 Z" fill="#1f6fb4" fill-opacity="0.5" stroke="#1f6fb4" stroke-width="0.6"/>
+<path d="M 262.823,257.831 L 264.382,256.931 L 287.382,296.769 L 285.823,297.669 Z" fill="#7a5c2e" fill-opacity="0.24" stroke="#7a5c2e" stroke-width="0.7"/>
+<path d="M 148.574,299.053 L 129.089,287.803 L 138.089,272.214 L 157.574,283.464 Z" fill="#c0392b" fill-opacity="0.24" stroke="#c0392b" stroke-width="0.7"/>
+<path d="M 150.82,295.16 L 155.32,287.36" stroke="#c0392b" stroke-width="2.4"/>
+<path d="M 160.074,279.134 L 135.826,265.134 L 144.326,250.412 L 168.574,264.412 Z" fill="#c0392b" fill-opacity="0.24" stroke="#c0392b" stroke-width="0.7"/>
+<path d="M 162.07,275.67 L 166.57,267.88" stroke="#c0392b" stroke-width="2.4"/>
+<path d="M 255.000,382.000 L 255.000,403.000 L 175.000,403.000 L 175.000,382.000 Z" fill="#2e7d4f" fill-opacity="0.20" stroke="#2e7d4f" stroke-width="0.7"/>
+<circle cx="215.00" cy="210.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 210.00,210.00 H 220.00 M 215.00,205.00 V 215.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="215.00" cy="232.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 210.00,232.00 H 220.00 M 215.00,227.00 V 237.00" stroke="#c0392b" stroke-width="0.4"/>
+<circle cx="303.33" cy="363.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 298.33,363.00 H 308.33 M 303.33,358.00 V 368.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="284.28" cy="352.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 279.28,352.00 H 289.28 M 284.28,347.00 V 357.00" stroke="#c0392b" stroke-width="0.4"/>
+<circle cx="126.67" cy="363.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 121.67,363.00 H 131.67 M 126.67,358.00 V 368.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="145.72" cy="352.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 140.72,352.00 H 150.72 M 145.72,347.00 V 357.00" stroke="#c0392b" stroke-width="0.4"/>
+<text x="215.00" y="312.00" font-size="4.4" fill="#9a9a9a" text-anchor="middle" font-weight="700" letter-spacing="1.2" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">HAND HOLE</text>
+<text x="215.00" y="318.00" font-size="4.0" fill="#9a9a9a" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Ø120</text>
+<text x="215.00" y="154.00" font-size="7.0" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="1.6" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">FRONT VIEW</text>
+<text x="215.00" y="161.50" font-size="3.7" fill="#555" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">seen from the front · angles clockwise from 12 o'clock</text>
+<path d="M 215.00,179.50 L 215.00,175.00" stroke="#8a8a8a" stroke-width="0.6"/>
+<text x="215.00" y="170.40" font-size="3.6" fill="#8a8a8a" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">0°</text>
+<path d="M 281.25,197.25 L 282.25,195.52" stroke="#8a8a8a" stroke-width="0.3"/>
+<path d="M 329.75,245.75 L 333.65,243.50" stroke="#8a8a8a" stroke-width="0.6"/>
+<text x="338.84" y="241.90" font-size="3.6" fill="#8a8a8a" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">60°</text>
+<path d="M 347.50,312.00 L 349.50,312.00" stroke="#8a8a8a" stroke-width="0.3"/>
+<path d="M 329.75,378.25 L 333.65,380.50" stroke="#8a8a8a" stroke-width="0.6"/>
+<text x="338.84" y="384.90" font-size="3.6" fill="#8a8a8a" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">120°</text>
+<path d="M 281.25,426.75 L 282.25,428.48" stroke="#8a8a8a" stroke-width="0.3"/>
+<path d="M 215.00,444.50 L 215.00,449.00" stroke="#8a8a8a" stroke-width="0.6"/>
+<text x="215.00" y="456.40" font-size="3.6" fill="#8a8a8a" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">180°</text>
+<path d="M 148.75,426.75 L 147.75,428.48" stroke="#8a8a8a" stroke-width="0.3"/>
+<path d="M 100.25,378.25 L 96.35,380.50" stroke="#8a8a8a" stroke-width="0.6"/>
+<text x="91.16" y="384.90" font-size="3.6" fill="#8a8a8a" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">240°</text>
+<path d="M 82.50,312.00 L 80.50,312.00" stroke="#8a8a8a" stroke-width="0.3"/>
+<path d="M 100.25,245.75 L 96.35,243.50" stroke="#8a8a8a" stroke-width="0.6"/>
+<text x="91.16" y="241.90" font-size="3.6" fill="#8a8a8a" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">300°</text>
+<path d="M 148.75,197.25 L 147.75,195.52" stroke="#8a8a8a" stroke-width="0.3"/>
+<text x="305.07" y="260.00" font-size="3.9" fill="#6b5a36" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">BUTTONS</text>
+<text x="124.93" y="260.00" font-size="3.9" fill="#6b5a36" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">ELECTRONICS</text>
+<text x="215.00" y="416.00" font-size="3.9" fill="#6b5a36" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">BATTERY</text>
+<text x="215.00" y="222.30" font-size="3.6" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R102</text>
+<text x="215.00" y="243.30" font-size="3.4" fill="#c0392b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R80</text>
+<text x="215.00" y="191.00" font-size="3.4" fill="#6b5a36" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">WEDGE 0°</text>
+<text x="293.81" y="358.80" font-size="3.6" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R102</text>
+<text x="275.62" y="348.30" font-size="3.4" fill="#c0392b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R80</text>
+<text x="319.79" y="372.50" font-size="3.4" fill="#6b5a36" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">WEDGE 120°</text>
+<text x="136.19" y="358.80" font-size="3.6" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R102</text>
+<text x="154.38" y="348.30" font-size="3.4" fill="#c0392b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R80</text>
+<text x="110.21" y="372.50" font-size="3.4" fill="#6b5a36" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">WEDGE 240°</text>
+<g clip-path="url(#cB)"><rect x="430" y="92" width="428" height="210" fill="#fcfcfc"/><g transform="translate(644.000,197.000) scale(2.2337) translate(-278.220,-275.500)">
+<path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z" fill="#e3cda0" mask="url(#wB)"/>
+<g mask="url(#wB)" fill="none" stroke="#1b1b1b" stroke-width="1.0">
+<path d="M 155.000,312.000 a 60.0,60.0 0 1,0 120.0,0 a 60.0,60.0 0 1,0 -120.0,0 Z"/>
+<path d="M 198.500,283.421 L 253.926,251.421 L 286.926,308.579 L 231.500,340.579 Z"/>
+<path d="M 257.926,258.349 L 275.246,248.349 L 300.246,291.651 L 282.926,301.651 Z"/>
+<path d="M 196.000,344.909 L 140.574,312.909 L 178.574,247.091 L 234.000,279.091 Z"/>
+<path d="M 144.574,305.981 L 124.656,294.481 L 154.656,242.519 L 174.574,254.019 Z"/>
+<path d="M 129.656,285.821 L 125.326,283.321 L 145.326,248.679 L 149.656,251.179 Z"/>
+<path d="M 256.000,381.000 L 256.000,404.000 L 174.000,404.000 L 174.000,381.000 Z"/>
+<path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z"/>
+</g>
+<path d="M 101.000,312.000 a 114.0,114.0 0 1,0 228.0,0 a 114.0,114.0 0 1,0 -228.0,0 Z" fill="none" stroke="#8a8a8a" stroke-width="0.3" stroke-dasharray="3,2"/>
+<g clip-path="url(#tB)">
+<path d="M 236.281,258.859 L 254.797,248.168 L 290.178,309.450 L 271.662,320.141 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 254.673,257.478 L 276.118,245.097 L 303.499,292.522 L 282.054,304.903 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 155.838,324.471 L 137.322,313.781 L 177.703,243.838 L 196.219,254.529 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 145.446,309.234 L 121.403,295.352 L 153.784,239.266 L 177.827,253.148 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 130.527,289.073 L 122.073,284.192 L 144.454,245.427 L 152.909,250.308 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 258.381,378.619 L 258.381,406.381 L 171.619,406.381 L 171.619,378.619 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+</g>
+<path d="M 251.328,252.921 L 253.926,251.421 L 286.926,308.579 L 284.328,310.079 Z" fill="#2a2a2a" stroke="#1b1b1b" stroke-width="0.4"/>
+<circle cx="260.26" cy="252.39" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 253.33,256.39 L 263.72,250.39" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="289.26" cy="302.61" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 282.33,306.61 L 292.72,300.61" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="260.13" cy="265.16" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="266.13" cy="275.55" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="272.13" cy="285.95" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="278.13" cy="296.34" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<path d="M 143.172,314.409 L 140.574,312.909 L 178.574,247.091 L 181.172,248.591 Z" fill="#2a2a2a" stroke="#1b1b1b" stroke-width="0.4"/>
+<circle cx="138.24" cy="306.94" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 145.17,310.94 L 134.78,304.94" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="172.24" cy="248.06" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 179.17,252.06 L 168.78,246.06" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<path d="M 171.413,264.896 L 169.334,263.696 L 174.334,255.035 L 176.413,256.235 Z" fill="#1f6fb4" fill-opacity="0.5" stroke="#1f6fb4" stroke-width="0.6"/>
+<path d="M 262.823,257.831 L 264.382,256.931 L 287.382,296.769 L 285.823,297.669 Z" fill="#7a5c2e" fill-opacity="0.24" stroke="#7a5c2e" stroke-width="0.7"/>
+<path d="M 148.574,299.053 L 129.089,287.803 L 138.089,272.214 L 157.574,283.464 Z" fill="#c0392b" fill-opacity="0.24" stroke="#c0392b" stroke-width="0.7"/>
+<path d="M 150.82,295.16 L 155.32,287.36" stroke="#c0392b" stroke-width="2.4"/>
+<path d="M 160.074,279.134 L 135.826,265.134 L 144.326,250.412 L 168.574,264.412 Z" fill="#c0392b" fill-opacity="0.24" stroke="#c0392b" stroke-width="0.7"/>
+<path d="M 162.07,275.67 L 166.57,267.88" stroke="#c0392b" stroke-width="2.4"/>
+<path d="M 255.000,382.000 L 255.000,403.000 L 175.000,403.000 L 175.000,382.000 Z" fill="#2e7d4f" fill-opacity="0.20" stroke="#2e7d4f" stroke-width="0.7"/>
+<circle cx="215.00" cy="210.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 210.00,210.00 H 220.00 M 215.00,205.00 V 215.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="215.00" cy="232.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 210.00,232.00 H 220.00 M 215.00,227.00 V 237.00" stroke="#c0392b" stroke-width="0.4"/>
+<circle cx="303.33" cy="363.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 298.33,363.00 H 308.33 M 303.33,358.00 V 368.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="284.28" cy="352.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 279.28,352.00 H 289.28 M 284.28,347.00 V 357.00" stroke="#c0392b" stroke-width="0.4"/>
+<circle cx="126.67" cy="363.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 121.67,363.00 H 131.67 M 126.67,358.00 V 368.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="145.72" cy="352.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 140.72,352.00 H 150.72 M 145.72,347.00 V 357.00" stroke="#c0392b" stroke-width="0.4"/>
+</g></g>
+<rect x="430" y="92" width="428" height="210" rx="2" fill="none" stroke="#8a8a8a" stroke-width="0.5"/>
+<text x="644.00" y="84.50" font-size="5.6" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="1.2" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">DETAIL — BUTTONS BAY   (flat cover)</text>
+<text x="644.00" y="89.40" font-size="3.4" fill="#555" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">cover 66 × 23.5 × 3 flat, seats on a shoulder at y = 64 · 4 buttons at 12 mm pitch · pocket |x| ≤ 25</text>
+<text x="587.14" y="183.40" font-size="3.6" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">-18</text>
+<text x="600.54" y="206.61" font-size="3.6" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">-6</text>
+<text x="613.95" y="229.83" font-size="3.6" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">+6</text>
+<text x="627.35" y="253.04" font-size="3.6" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">+18</text>
+<text x="599.51" y="222.69" font-size="3.4" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">tips 1.3–3.8 mm behind the hole edge</text>
+<text x="649.80" y="193.65" font-size="3.5" fill="#444" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">BOARD 46 × 20 on edge</text>
+<text x="671.08" y="181.36" font-size="3.1" fill="#666" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">pocket |x| ≤ 25, y 64–84, corner R87.6</text>
+<text x="597.99" y="130.71" font-size="3.3" fill="#2e7d4f" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">M4 insert</text>
+<text x="605.73" y="126.24" font-size="2.9" fill="#2e7d4f" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">8 mm ear</text>
+<text x="678.40" y="269.99" font-size="3.3" fill="#2e7d4f" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">M4 insert</text>
+<text x="686.14" y="265.52" font-size="2.9" fill="#2e7d4f" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">8 mm ear</text>
+<g clip-path="url(#cE)"><rect x="430" y="352" width="428" height="220" fill="#fcfcfc"/><g transform="translate(644.000,462.000) scale(2.0261) translate(-145.718,-272.000)">
+<path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z" fill="#e3cda0" mask="url(#wE)"/>
+<g mask="url(#wE)" fill="none" stroke="#1b1b1b" stroke-width="1.0">
+<path d="M 155.000,312.000 a 60.0,60.0 0 1,0 120.0,0 a 60.0,60.0 0 1,0 -120.0,0 Z"/>
+<path d="M 198.500,283.421 L 253.926,251.421 L 286.926,308.579 L 231.500,340.579 Z"/>
+<path d="M 257.926,258.349 L 275.246,248.349 L 300.246,291.651 L 282.926,301.651 Z"/>
+<path d="M 196.000,344.909 L 140.574,312.909 L 178.574,247.091 L 234.000,279.091 Z"/>
+<path d="M 144.574,305.981 L 124.656,294.481 L 154.656,242.519 L 174.574,254.019 Z"/>
+<path d="M 129.656,285.821 L 125.326,283.321 L 145.326,248.679 L 149.656,251.179 Z"/>
+<path d="M 256.000,381.000 L 256.000,404.000 L 174.000,404.000 L 174.000,381.000 Z"/>
+<path d="M 85.000,312.000 a 130.0,130.0 0 1,0 260.0,0 a 130.0,130.0 0 1,0 -260.0,0 Z"/>
+</g>
+<path d="M 101.000,312.000 a 114.0,114.0 0 1,0 228.0,0 a 114.0,114.0 0 1,0 -228.0,0 Z" fill="none" stroke="#8a8a8a" stroke-width="0.3" stroke-dasharray="3,2"/>
+<g clip-path="url(#tE)">
+<path d="M 236.281,258.859 L 254.797,248.168 L 290.178,309.450 L 271.662,320.141 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 254.673,257.478 L 276.118,245.097 L 303.499,292.522 L 282.054,304.903 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 155.838,324.471 L 137.322,313.781 L 177.703,243.838 L 196.219,254.529 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 145.446,309.234 L 121.403,295.352 L 153.784,239.266 L 177.827,253.148 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 130.527,289.073 L 122.073,284.192 L 144.454,245.427 L 152.909,250.308 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+<path d="M 258.381,378.619 L 258.381,406.381 L 171.619,406.381 L 171.619,378.619 Z" fill="none" stroke="#b5179e" stroke-width="0.55" stroke-dasharray="3.5,2"/>
+</g>
+<path d="M 251.328,252.921 L 253.926,251.421 L 286.926,308.579 L 284.328,310.079 Z" fill="#2a2a2a" stroke="#1b1b1b" stroke-width="0.4"/>
+<circle cx="260.26" cy="252.39" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 253.33,256.39 L 263.72,250.39" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="289.26" cy="302.61" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 282.33,306.61 L 292.72,300.61" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="260.13" cy="265.16" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="266.13" cy="275.55" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="272.13" cy="285.95" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<circle cx="278.13" cy="296.34" r="2.0" fill="#1f6fb4" fill-opacity="0.45" stroke="#1f6fb4" stroke-width="0.7"/>
+<path d="M 143.172,314.409 L 140.574,312.909 L 178.574,247.091 L 181.172,248.591 Z" fill="#2a2a2a" stroke="#1b1b1b" stroke-width="0.4"/>
+<circle cx="138.24" cy="306.94" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 145.17,310.94 L 134.78,304.94" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<circle cx="172.24" cy="248.06" r="3.0" fill="none" stroke="#2e7d4f" stroke-width="1.0"/>
+<path d="M 179.17,252.06 L 168.78,246.06" stroke="#2e7d4f" stroke-width="0.5" stroke-dasharray="2,1.4"/>
+<path d="M 171.413,264.896 L 169.334,263.696 L 174.334,255.035 L 176.413,256.235 Z" fill="#1f6fb4" fill-opacity="0.5" stroke="#1f6fb4" stroke-width="0.6"/>
+<path d="M 262.823,257.831 L 264.382,256.931 L 287.382,296.769 L 285.823,297.669 Z" fill="#7a5c2e" fill-opacity="0.24" stroke="#7a5c2e" stroke-width="0.7"/>
+<path d="M 148.574,299.053 L 129.089,287.803 L 138.089,272.214 L 157.574,283.464 Z" fill="#c0392b" fill-opacity="0.24" stroke="#c0392b" stroke-width="0.7"/>
+<path d="M 150.82,295.16 L 155.32,287.36" stroke="#c0392b" stroke-width="2.4"/>
+<path d="M 160.074,279.134 L 135.826,265.134 L 144.326,250.412 L 168.574,264.412 Z" fill="#c0392b" fill-opacity="0.24" stroke="#c0392b" stroke-width="0.7"/>
+<path d="M 162.07,275.67 L 166.57,267.88" stroke="#c0392b" stroke-width="2.4"/>
+<path d="M 255.000,382.000 L 255.000,403.000 L 175.000,403.000 L 175.000,382.000 Z" fill="#2e7d4f" fill-opacity="0.20" stroke="#2e7d4f" stroke-width="0.7"/>
+<circle cx="215.00" cy="210.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 210.00,210.00 H 220.00 M 215.00,205.00 V 215.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="215.00" cy="232.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 210.00,232.00 H 220.00 M 215.00,227.00 V 237.00" stroke="#c0392b" stroke-width="0.4"/>
+<circle cx="303.33" cy="363.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 298.33,363.00 H 308.33 M 303.33,358.00 V 368.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="284.28" cy="352.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 279.28,352.00 H 289.28 M 284.28,347.00 V 357.00" stroke="#c0392b" stroke-width="0.4"/>
+<circle cx="126.67" cy="363.00" r="4.0" fill="#1f6fb4" fill-opacity="0.15" stroke="#1f6fb4" stroke-width="0.9"/>
+<path d="M 121.67,363.00 H 131.67 M 126.67,358.00 V 368.00" stroke="#1f6fb4" stroke-width="0.4"/>
+<circle cx="145.72" cy="352.00" r="4.0" fill="#c0392b" fill-opacity="0.15" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="2,1.6"/>
+<path d="M 140.72,352.00 H 150.72 M 145.72,347.00 V 357.00" stroke="#c0392b" stroke-width="0.4"/>
+</g></g>
+<rect x="430" y="352" width="428" height="220" rx="2" fill="none" stroke="#8a8a8a" stroke-width="0.5"/>
+<text x="644.00" y="344.50" font-size="5.6" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="1.2" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">DETAIL — ELECTRONICS BAY   (flat cover)</text>
+<text x="644.00" y="349.40" font-size="3.4" fill="#555" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">cover 76 × 23.5 × 3 flat, seats on a shoulder at y = 64 · both USB-C mouths square to the cover</text>
+<text x="637.85" y="488.86" font-size="3.6" fill="#c0392b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">ESP32-C3</text>
+<text x="676.45" y="511.15" font-size="3.3" fill="#c0392b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">USB-C</text>
+<text x="643.10" y="439.25" font-size="3.6" fill="#c0392b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">TP4056</text>
+<text x="699.24" y="471.67" font-size="3.3" fill="#c0392b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">USB-C</text>
+<text x="713.93" y="446.23" font-size="3.3" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">slide switch</text>
+<text x="608.09" y="455.31" font-size="3.3" fill="#7a5c2e" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">MT3608 stacks on standoffs over the TP4056</text>
+<text x="601.07" y="451.25" font-size="3.0" fill="#777" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">z: 5 + 8 standoff + 8 = 21 of 24 mm</text>
+<text x="615.49" y="543.80" font-size="3.3" fill="#2e7d4f" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">M4 insert</text>
+<text x="700.58" y="396.41" font-size="3.3" fill="#2e7d4f" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">M4 insert</text>
+<text x="26.00" y="596.00" font-size="4.8" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="1.4" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">KEY</text>
+<rect x="26" y="600.0" width="6.5" height="5.4" fill="#e3cda0" stroke="#1b1b1b" stroke-width="0.6"/>
+<text x="36.00" y="604.00" font-size="3.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Solid plywood</text>
+<rect x="26" y="607.2" width="6.5" height="5.4" fill="#ffffff" stroke="#1b1b1b" stroke-width="0.6"/>
+<text x="36.00" y="611.20" font-size="3.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Routed away</text>
+<rect x="26" y="614.4" width="6.5" height="5.4" fill="#2a2a2a" stroke="#1b1b1b" stroke-width="0.6"/>
+<text x="36.00" y="618.40" font-size="3.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">FLAT 3 mm black acrylic cover</text>
+<rect x="26" y="621.6" width="6.5" height="5.4" fill="#ffffff" stroke="#b5179e" stroke-width="0.6"/>
+<text x="36.00" y="625.60" font-size="3.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">TEMPLATE aperture = finished pocket + 2.3813</text>
+<rect x="26" y="628.8" width="6.5" height="5.4" fill="#c0392b" stroke="#c0392b" stroke-width="0.6"/>
+<text x="36.00" y="632.80" font-size="3.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Board with USB-C; bar at y = 64 is the port mouth</text>
+<rect x="26" y="636.0" width="6.5" height="5.4" fill="#1f6fb4" stroke="#1f6fb4" stroke-width="0.6"/>
+<text x="36.00" y="640.00" font-size="3.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Button tip / slide switch</text>
+<rect x="26" y="643.2" width="6.5" height="5.4" fill="#2e7d4f" stroke="#2e7d4f" stroke-width="0.6"/>
+<text x="36.00" y="647.20" font-size="3.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">18650 holder · M4 insert in the solid ear</text>
+<text x="320.00" y="596.00" font-size="4.8" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="1.2" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">REV 3 — FLAT COVERS</text>
+<text x="320.00" y="604.00" font-size="3.8" fill="#2e7d4f" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Flat, and it still hugs the hole — because the covers are short.</text>
+<text x="320.00" y="608.30" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">A flat plate only runs away from a round hole if it is long. Rev 1's was 106 mm and finished 32.9 mm back.</text>
+<text x="320.00" y="612.20" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Setback at everything you actually touch: buttons 1.3 and 3.8 mm, TP4056 port 1.7, ESP32 port 2.4, slide</text>
+<text x="320.00" y="616.10" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">switch 6.0. The cover ends sit further back but you never reach there — they are the screw ears.</text>
+<text x="320.00" y="622.20" font-size="3.8" fill="#b5179e" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">The ear rebate had to go — it could not be routed.</text>
+<text x="320.00" y="626.50" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">A 3 mm-deep rebate needs a 7.76 mm template aperture and your bushing is 7.938: it would not fit. So the</text>
+<text x="320.00" y="630.40" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">notch is now the full cover width and the cover seats on the shoulder where the narrower pocket behind it</text>
+<text x="320.00" y="634.30" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">steps in — 6.41 mm of bearing each side after the R1.5875 fillet. Inserts drill into that shoulder face.</text>
+<text x="320.00" y="640.40" font-size="3.8" fill="#c0392b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">What the flat cover costs.</text>
+<text x="320.00" y="644.70" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">The 80 mm protoboard is out; a flat notch that wide puts its ends 25.8 mm back. Button board is now</text>
+<text x="320.00" y="648.60" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">46 × 20 with the four switches at 12 mm pitch. And the MT3608 no longer fits beside the other two boards,</text>
+<text x="320.00" y="652.50" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">so it stacks on standoffs over the TP4056 — 21 mm of the 24 mm bay height. Both need your OK.</text>
+<text x="320.00" y="658.60" font-size="3.8" fill="#b5179e" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Router-ready.</text>
+<text x="320.00" y="662.90" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Magenta is the acrylic template: every aperture grown by 2.3813 for the 5/16" bushing. Inside corners</text>
+<text x="320.00" y="666.80" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">finish at R1.5875 by design. No blocks anywhere, so nothing to chisel and nothing to glue — the cover</text>
+<text x="320.00" y="670.70" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">screws go into M4 inserts drilled radially into the solid ears at x = ±29 and ±34.</text>
+<text x="320.00" y="676.80" font-size="3.8" fill="#c0392b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Still unanswered.</text>
+<text x="320.00" y="681.10" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">One routed 24 mm sheet or four glued 6 mm layers? Bays through-cut or blind? MOSFET board dimensions.</text>
+<text x="320.00" y="685.00" font-size="3.3" fill="#444" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Battery pocket corners reach R100.7 — a rigid cell has to be a chord, so it is the one thing outside R95.</text>
+<rect x="0" y="690" width="880" height="10" fill="#15202b"/>
+<text x="26.00" y="696.60" font-size="3.3" fill="#8fb6d6" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">build-plans/render/frame_render_v3.py  ·  python3 frame_render_v3.py &amp;&amp; rsvg-convert -w 2600 frame-plan-v3.svg -o frame-plan-v3.png</text>
+</svg>
