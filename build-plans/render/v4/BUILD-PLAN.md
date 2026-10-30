@@ -11,7 +11,7 @@ the bottom. Cut files are in this folder, 1:1 mm, black = cut, blue = engrave (n
 
 | z | Part | Material | File |
 |---|---|---|---|
-| 0–3 | **Top plate** — black face + white C inset + white outer ring | 3 mm acrylic | 1, 2, 3 |
+| 0–3 | **Top plate** — black face 3, white C bar 9, white ring 9 | acrylic | 1, 2, 3 |
 | 3–12 | **Channel layer** — both LED channels | 9 mm plywood | 4 |
 | 12–15 | **Divider** — full annulus | 3 mm plywood | 5 |
 | 15–39 | **Frame** — 3 bridges, 3 open bays | 24 mm plywood | routed, 7 + 9 |
@@ -40,9 +40,9 @@ z 15–25 against z 29–39, leaving 4 mm of wood between. Checked, all 13 land 
 | File | Material | Qty | Notes |
 |---|---|---|---|
 | `1-top-black-3mm.svg` | black acrylic 3 | 1 | R60–118, C slot, 3 countersunk |
-| `2-top-white-C-3mm.svg` | white acrylic 3 | 1 | same path as the slot — kerf leaves the cement gap |
-| `3-top-white-ring-3mm.svg` | white acrylic 3 | 1 | R118–130 |
-| `4-channel-9mm-ply.svg` | plywood 9 | 1 | both channels cut through |
+| `2-top-white-C-3mm.svg` | white acrylic 3 | **3** | cement into one 9 mm-tall bar |
+| `3-top-white-ring-9mm.svg` | white acrylic **9** | 1 | R118–130, or 3 × 3 mm cemented |
+| `4-channel-9mm-ply.svg` | plywood 9 | 1 | OD 220 · **12 mm if you have 10 mm tape** |
 | `5-divider-3mm-ply.svg` | plywood 3 | 1 | full annulus + 4 wire holes |
 | `6-carrier-3mm-acrylic.svg` | acrylic 3 | 1 | all component mounting |
 | `7-router-template-acrylic.svg` | acrylic 4–6 | 1 | **the template** |
@@ -85,9 +85,11 @@ not add compensation in xTool.
 
 Three pieces, all 3 mm, all cemented edge to edge into a single disc:
 
-- **Black** R60–118 with a C-shaped slot at R82–88, 340°, solid bridge at 12 o'clock.
-- **White C** dropped into that slot.
-- **White ring** R118–130 butted to the black's outer edge.
+- **Black face**, 3 mm, R60–**126**, with a C-shaped slot at R82–88, 340°, solid bridge at
+  12 o'clock.
+- **White C bar**, 9 mm tall (3 × 3 mm cemented), dropped into that slot so 3 mm shows.
+- **White ring**, 9 mm thick, R118–130. The black face **laps onto its inner 8 mm** and is
+  cemented there — a lap joint, far stronger than the butt joint I had before.
 
 Lay them face-down on paper over a flat board, push the joints tight, and run solvent cement
 into the seams with a needle applicator. The laser kerf leaves roughly 0.1–0.2 mm at each
@@ -95,33 +97,44 @@ joint, which is exactly what the cement wants.
 
 ---
 
-## 5 · Lighting — both strips lie flat, facing up
+## 5 · Lighting — both strips stand ON EDGE
 
-**See `PREVIEW-lighting.png` for the plan and the section.**
+**See `PREVIEW-lighting.png`.** This is the one thing in the build that cannot be done the
+easy way, and it is worth understanding why before you cut the channel layer.
 
-| Strip | Sits in | Lights |
-|---|---|---|
-| C strip | C channel, R79–91 | the white C above it |
-| Ring strip | outer channel, R117–127 | the white outer ring above it |
+LED tape bends about its **thickness**, like a tape measure. It will not bend in its own
+plane. So a strip lying face-up **cannot follow a circle at all** — it would have to curve
+sideways. Standing the strip **on edge** against a circular wall turns the bend into a
+through-thickness bend, which tape does happily. That is the only arrangement that works,
+and it is what `disc-build.md` specified all along.
 
-Both strips lie **flat on the divider, LEDs pointing up** at the white acrylic 9 mm above.
-Paint the channel walls and floor white first. Feed both through the four Ø8 holes in the
-divider at 352° and 8°, either side of the C's gap, down into the electronics bay.
+| Strip | Stands on | Faces | Length | LEDs at 60/m |
+|---|---|---|---|---|
+| **C** | the **R93** wall, inside the C channel | inward, at the white C bar | **552 mm** | 33 |
+| **Ring** | the **R110** outer edge of the channel layer | outward, at the white ring | **691 mm** | 41 |
 
-| | Length | At 60/m | At 120/m |
-|---|---|---|---|
-| C strip, R85, 340° | **504 mm** | 30 LEDs | 60 |
-| Ring strip, R122, full circle | **767 mm** | 46 LEDs | 92 |
+Because the light now travels sideways, both white pieces have to be **tall enough to catch
+it edge-on**:
 
-There is **7 mm of air** between the LEDs and the underside of the white — enough to blur the
-dots. This is deliberately simpler than edge-lighting with a fin. If you can still see
-individual LEDs, drop a strip of 3 mm white acrylic or a layer of baking paper into the
-channel on top of the strip.
+- **White C bar — 9 mm tall, not 3.** Three 3 mm pieces cemented into one bar (or a single
+  piece from 9 mm white if you have it). Top 3 mm sits flush in the face's slot; the lower
+  6 mm hangs into the C channel where the strip can see it.
+- **White outer ring — 9 mm thick, not 3.** It fills the full height of the channel layer,
+  so the ring strip shines straight at its inner face across a 6 mm air gap. The black face
+  laps onto its inner 8 mm (R118–126) and is cemented there, so the ring shows as a 4 mm
+  border at R126–130 plus the whole outer edge.
 
-**Power.** 76 LEDs at 60/m. All-white at full brightness is 4.6 A, far beyond what the
+**Strip width matters.** Use **5 mm bare tape**. 10 mm tape will not stand up in a 9 mm
+channel — if that is what you have, cut the channel layer at **12 mm** and nothing else
+changes.
+
+Stick the tape to the wall with its own adhesive plus a dab of hot glue every 50 mm or so;
+adhesive alone on a curved vertical wall lets go. Paint the channel walls and the divider
+floor white first. Feed both sets of leads down through the four Ø8 holes in the divider at
+352° and 8°, either side of the C's solid bridge.
+
+**Power.** 75 LEDs at 60/m. All-white at full brightness is 4.5 A, far beyond what the
 MT3608 will give you — keep `LED_MAX_MA` in `include/config.h` set so you stay near 1 A.
-
----
 
 ## 6 · The carrier — build the electronics off the disc
 

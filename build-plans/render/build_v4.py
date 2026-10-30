@@ -24,10 +24,16 @@ BRIDGES = (0.0, 120.0, 240.0)
 # battery bay keeps the inner rim, because that is where your hand grips.
 BAY = {"BUTTONS": (60.0, 50.0), "BATTERY": (180.0, 72.0), "ELECTRONICS": (300.0, 50.0)}
 
-C_IN, C_OUT, C_GAP = 82.0, 88.0, 20.0       # white C in the top plate
-RING_IN = 118.0                             # white outer ring R118–130
-CH_C = (79.0, 91.0)                         # C channel in the 9 mm layer
-CH_O = (117.0, 127.0)                       # outer channel
+# --- lighting -------------------------------------------------------------
+# A flat LED strip bends about its thickness, not in its own plane, so a strip
+# lying face-up CANNOT follow a circle. Both strips therefore stand ON EDGE
+# against a circular wall, which is what disc-build.md said all along.
+C_IN, C_OUT, C_GAP = 82.0, 88.0, 20.0       # white C, 6 wide, 9 TALL (3 x 3 mm cemented)
+CH_C = (79.0, 93.0)                         # C channel; strip on the R93 wall, facing in
+FACE_OUT = 126.0                            # black face OD 252, laps onto the ring
+RING_IN = 118.0                             # white ring R118-130, 9 mm thick
+CH_OUT = 110.0                              # channel layer stops here; strip on it facing out
+STRIP_W = 5.0                               # 5 mm bare tape. 10 mm will NOT fit a 9 mm channel
 SCREW_F = 96.0                              # 3 front screws, in the solid R91-117 band
 # Back fasteners: disc-build.md's documented ten. R70 + R102 on each bridge, plus four in
 # the outer rim. Codex caught that my earlier three-at-R80 was invented, not read.
@@ -122,26 +128,33 @@ print("writing v4 cut files:")
 
 # 1 — top plate, black acrylic 3 mm
 emit("1-top-black-3mm.svg", "Top plate — BLACK acrylic 3 mm",
-     "Cut. OD 236 (R118), hole Ø120, C slot R82-88 with a 20 deg bridge at 12 o'clock, "
-     "3 x 4.5 countersunk at R96. The white ring butts to its outer edge at R118.",
-     [circle(RING_IN), circle(R_HOLE), c_slot()] + SCREWS_F)
+     "Cut. OD 252 (R126), hole O120, C slot R82-88 with a 20 deg bridge at 12 o'clock, "
+     "3 x 4.5 countersunk at R96. Its outer 8 mm (R118-126) LAPS ONTO the white ring and is "
+     "cemented to it, so the ring shows as a 4 mm border at R126-130 plus the whole edge.",
+     [circle(FACE_OUT), circle(R_HOLE), c_slot()] + SCREWS_F)
 
 # 2 — white C inset
-emit("2-top-white-C-3mm.svg", "C inset — WHITE acrylic 3 mm",
-     "Cut ONE. Same path as the slot in part 1, so the laser kerf leaves a cement gap.",
+emit("2-top-white-C-3mm.svg", "C bar — WHITE acrylic 3 mm, CUT THREE",
+     "Cut THREE and cement them into one 9 mm-tall bar. Same path as the slot in part 1. The "
+     "top 3 mm sits flush in the face; the lower 6 mm hangs into the C channel so the strip "
+     "on the R93 wall can light it edge-on. One piece cut from 9 mm white is better if you "
+     "have it.",
      [c_slot()])
 
 # 3 — white outer ring
-emit("3-top-white-ring-3mm.svg", "Outer ring — WHITE acrylic 3 mm",
-     "Cut. OD 260, ID 236. Butts to the black face at R118 and is solvent-cemented to it.",
+emit("3-top-white-ring-9mm.svg", "Outer ring — WHITE acrylic 9 mm (or 3 x 3 cemented)",
+     "OD 260, ID 236, 9 mm thick. It fills the full height of the channel layer, so the ring "
+     "strip on the R110 wall shines straight at its inner face across a 6 mm air gap. The "
+     "black face laps onto its inner 8 mm.",
      [circle(R_OUT), circle(RING_IN)])
 
 # 4 — channel layer, 9 mm ply
 emit("4-channel-9mm-ply.svg", "Channel layer — plywood 9 mm",
-     "Cut. Both LED channels go right through: C channel R79-91 (340 deg, solid bridge at "
-     "12 o'clock) and outer channel R117-127, full circle. Strips lie flat on the divider "
-     "below, facing up.",
-     [circle(R_OUT), circle(R_HOLE), c_slot(*CH_C), ring(*CH_O)] + SCREWS_F)
+     "Cut. OD 220 (R110) — it stops there, and the 6 mm gap out to the white ring at R118 is "
+     "the outer light channel. The C channel R79-93 goes right through. BOTH STRIPS STAND ON "
+     "EDGE against a wall: the C strip inside the R93 wall facing in, the ring strip on the "
+     "R110 outer edge facing out. 9 mm suits 5 mm tape; for 10 mm tape cut this layer 12 mm.",
+     [circle(CH_OUT), circle(R_HOLE), c_slot(*CH_C)] + SCREWS_F)
 
 # 5 — divider, 3 mm ply
 emit("5-divider-3mm-ply.svg", "Divider — plywood 3 mm",
