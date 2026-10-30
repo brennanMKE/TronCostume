@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220mm" height="220mm" viewBox="0 0 220 220">
+<style>text{font-family:Helvetica,Arial,sans-serif;font-size:3px;fill:#333}.label{font-size:4px;font-weight:700}</style>
+<rect width="220" height="220" fill="#fff"/>
+
+<g id="CUT" fill="none">
+<circle cx="110.0" cy="110.0" r="108" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+<circle cx="110.0" cy="110.0" r="60" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+<circle cx="110.000" cy="30.000" r="2.25" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+<circle cx="179.282" cy="150.000" r="2.25" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+<circle cx="40.718" cy="150.000" r="2.25" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+<polygon points="154.908,55.782 156.408,58.380 163.336,54.380 161.836,51.782" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<polygon points="177.908,95.620 179.408,98.218 186.336,94.218 184.836,91.620" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<polygon points="36.128,97.950 37.628,95.352 30.700,91.352 29.200,93.950" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<polygon points="61.128,54.648 62.628,52.050 55.700,48.050 54.200,50.648" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<polygon points="18.576,84.352 20.076,81.754 13.147,77.754 11.647,80.352" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<polygon points="40.576,46.246 42.076,43.648 35.147,39.648 33.647,42.246" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<polygon points="149.500,186.000 146.500,186.000 146.500,194.000 149.500,194.000" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<polygon points="73.500,186.000 70.500,186.000 70.500,194.000 73.500,194.000" fill="none" stroke="#ff0000" stroke-width="0.35"/>
+<circle cx="182.746" cy="68.000" r="2.5" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+<circle cx="110.000" cy="206.000" r="2.5" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+<circle cx="30.326" cy="64.000" r="2.5" fill="none" stroke="#ff0000" stroke-width="0.1"/>
+</g>
+<g id="ENGRAVE" fill="none">
+<polygon points="160.689,58.796 179.689,91.704 181.074,90.904 162.074,57.996" fill="none" stroke="#3366cc" stroke-width="0.35"/>
+<polygon points="47.538,98.187 56.538,82.598 37.053,71.348 28.053,86.937" fill="none" stroke="#3366cc" stroke-width="0.35"/>
+<polygon points="58.538,79.134 67.038,64.412 42.790,50.412 34.290,65.134" fill="none" stroke="#33aa66" stroke-width="0.35"/>
+<polygon points="24.790,81.588 42.790,50.412 28.067,41.912 10.067,73.088" fill="none" stroke="#3366cc" stroke-width="0.35"/>
+<polygon points="151.000,179.000 69.000,179.000 69.000,201.000 151.000,201.000" fill="none" stroke="#333333" stroke-width="0.35"/>
+<text x="177.55" y="71.00" text-anchor="middle">BUTTON BOARD</text>
+<text x="45.91" y="73.00" text-anchor="middle">ESP32 + CHARGER</text>
+<text x="25.13" y="61.00" text-anchor="middle">MT3608</text>
+<text x="110.00" y="192.00" text-anchor="middle">18650 HOLDER</text>
+<text x="110" y="108" text-anchor="middle" class="label">3 mm ACRYLIC CARRIER</text>
+<text x="110" y="113" text-anchor="middle">OD 216 · ID 120 · M4.5 @ R80 / 0° 120° 240°</text>
+</g></svg>
