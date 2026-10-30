@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1340mm" height="940mm" viewBox="0 0 1340 940">
+<rect width="1340" height="940" fill="#fff"/>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto"><path d="M 0,1 L 10,5 L 0,9 z" fill="#1f6fb4"/></marker>
+<marker id="jr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0,1 L 10,5 L 0,9 z" fill="#8a9099"/></marker>
+</defs>
+<rect width="1340" height="940" fill="#f5f6f7"/>
+<text x="44.00" y="56.00" font-size="28" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="1.0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">CLOAK — WIRING</text>
+<text x="44.00" y="82.00" font-size="14" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">one WS2812 chain, five segments, from your sketch  ·  pins from include/config.h</text>
+<path d="M 470,392 C 486,214 654,214 670,392" fill="none" stroke="#8a9099" stroke-width="2.4" stroke-opacity="0.35"/>
+<path d="M 470,392 L 470,760" fill="none" stroke="#8a9099" stroke-width="2.4" stroke-opacity="0.35"/>
+<path d="M 670,392 L 670,760" fill="none" stroke="#8a9099" stroke-width="2.4" stroke-opacity="0.35"/>
+<path d="M 470,392 C 362,426 282,524 238,640" fill="none" stroke="#8a9099" stroke-width="2.4" stroke-opacity="0.35"/>
+<path d="M 670,392 C 778,426 858,524 902,640" fill="none" stroke="#8a9099" stroke-width="2.4" stroke-opacity="0.35"/>
+<ellipse cx="236" cy="660" rx="34" ry="19" fill="none" stroke="#8a9099" stroke-width="2"/>
+<text x="236.00" y="704.00" font-size="14" fill="#5a6066" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">cuff 2</text>
+<ellipse cx="904" cy="660" rx="34" ry="19" fill="none" stroke="#8a9099" stroke-width="2"/>
+<text x="904.00" y="704.00" font-size="14" fill="#5a6066" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">cuff 1</text>
+<path d="M 470,760 L 470,392" fill="none" stroke="#1f6fb4" stroke-width="9" stroke-opacity="0.9" stroke-linecap="round"/>
+<path d="M 470,760 L 470,392" fill="none" stroke="#6fc3df" stroke-width="3.4" stroke-linecap="round" marker-end="url(#ar)"/>
+<circle cx="430" cy="580" r="15" fill="#1f6fb4"/>
+<text x="430.00" y="585.00" font-size="15" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">1</text>
+<text x="430.00" y="612.00" font-size="13" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">BODY 1</text>
+<path d="M 462,386 C 360,420 280,520 236,636" fill="none" stroke="#1f6fb4" stroke-width="9" stroke-opacity="0.9" stroke-linecap="round"/>
+<path d="M 462,386 C 360,420 280,520 236,636" fill="none" stroke="#6fc3df" stroke-width="3.4" stroke-linecap="round" marker-end="url(#ar)"/>
+<circle cx="268" cy="520" r="15" fill="#1f6fb4"/>
+<text x="268.00" y="525.00" font-size="15" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">2</text>
+<text x="268.00" y="552.00" font-size="13" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">CUFF 2</text>
+<path d="M 476,378 C 492,210 648,210 664,378" fill="none" stroke="#1f6fb4" stroke-width="9" stroke-opacity="0.9" stroke-linecap="round"/>
+<path d="M 476,378 C 492,210 648,210 664,378" fill="none" stroke="#6fc3df" stroke-width="3.4" stroke-linecap="round" marker-end="url(#ar)"/>
+<circle cx="570" cy="212" r="15" fill="#1f6fb4"/>
+<text x="570.00" y="217.00" font-size="15" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">3</text>
+<text x="570.00" y="244.00" font-size="13" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">HOOD</text>
+<path d="M 678,386 C 780,420 860,520 904,636" fill="none" stroke="#1f6fb4" stroke-width="9" stroke-opacity="0.9" stroke-linecap="round"/>
+<path d="M 678,386 C 780,420 860,520 904,636" fill="none" stroke="#6fc3df" stroke-width="3.4" stroke-linecap="round" marker-end="url(#ar)"/>
+<circle cx="872" cy="520" r="15" fill="#1f6fb4"/>
+<text x="872.00" y="525.00" font-size="15" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">4</text>
+<text x="872.00" y="552.00" font-size="13" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">CUFF 1</text>
+<path d="M 670,392 L 670,756" fill="none" stroke="#1f6fb4" stroke-width="9" stroke-opacity="0.9" stroke-linecap="round"/>
+<path d="M 670,392 L 670,756" fill="none" stroke="#6fc3df" stroke-width="3.4" stroke-linecap="round" marker-end="url(#ar)"/>
+<circle cx="714" cy="580" r="15" fill="#1f6fb4"/>
+<text x="714.00" y="585.00" font-size="15" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">5</text>
+<text x="714.00" y="612.00" font-size="13" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">BODY 2</text>
+<path d="M 236,636 L 470,392" fill="none" stroke="#8a9099" stroke-width="2" stroke-dasharray="7,6" marker-end="url(#jr)"/>
+<path d="M 904,636 L 670,392" fill="none" stroke="#8a9099" stroke-width="2" stroke-dasharray="7,6" marker-end="url(#jr)"/>
+<text x="330.00" y="700.00" font-size="12" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">return wire</text>
+<text x="812.00" y="700.00" font-size="12" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">return wire</text>
+<rect x="402" y="762" width="338" height="122" rx="8" fill="#fff" stroke="#1b1b1b" stroke-width="2"/>
+<text x="571.00" y="752.00" font-size="16" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="1.0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">CONTROL BOX</text>
+<rect x="416" y="778" width="74" height="34" rx="4" fill="#8e44ad" fill-opacity="0.85" stroke="#1b1b1b" stroke-width="1"/>
+<text x="453.00" y="799.00" font-size="11.5" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">18650</text>
+<rect x="500" y="778" width="68" height="34" rx="4" fill="#b03a2e" fill-opacity="0.85" stroke="#1b1b1b" stroke-width="1"/>
+<text x="534.00" y="799.00" font-size="11.5" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">TP4056</text>
+<rect x="578" y="778" width="72" height="34" rx="4" fill="#7a5c2e" fill-opacity="0.85" stroke="#1b1b1b" stroke-width="1"/>
+<text x="614.00" y="799.00" font-size="11.5" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">MT3608</text>
+<rect x="500" y="826" width="96" height="40" rx="4" fill="#1f6fb4" fill-opacity="0.85" stroke="#1b1b1b" stroke-width="1"/>
+<text x="548.00" y="850.00" font-size="11.5" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">ESP32-C3</text>
+<rect x="614" y="832" width="56" height="28" rx="4" fill="#2e7d4f" fill-opacity="0.85" stroke="#1b1b1b" stroke-width="1"/>
+<text x="642.00" y="850.00" font-size="11.5" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">button</text>
+<path d="M 498,795 L 490,795" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 578,812 L 570,812 L 570,795 L 568,795" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 614,795 L 632,795 L 632,820 L 548,820 L 548,826" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 500,846 L 442,846 L 442,744 L 470,744 L 470,760" fill="none" stroke="#1f6fb4" stroke-width="3"/>
+<circle cx="470" cy="760" r="7" fill="#1f6fb4"/>
+<text x="392.00" y="744.00" font-size="12.5" fill="#1f6fb4" text-anchor="end" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">START</text>
+<text x="392.00" y="759.00" font-size="11" fill="#5a6066" text-anchor="end" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">GPIO 4 + 330 Ω</text>
+<text x="960.00" y="150.00" font-size="17" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="1.0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">CONNECTIONS</text>
+<rect x="960" y="164" width="8" height="8" fill="#1f6fb4"/>
+<text x="976.00" y="178.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">ESP32-C3 GPIO 4</text>
+<text x="1110.00" y="178.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">330 Ω  →  strip DIN</text>
+<rect x="960" y="189" width="8" height="8" fill="#2e7d4f"/>
+<text x="976.00" y="203.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">ESP32-C3 GPIO 5</text>
+<text x="1110.00" y="203.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">button  →  GND  (wake)</text>
+<rect x="960" y="214" width="8" height="8" fill="#c0392b"/>
+<text x="976.00" y="228.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">ESP32-C3 5V</text>
+<text x="1110.00" y="228.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">MT3608 VOUT+</text>
+<rect x="960" y="239" width="8" height="8" fill="#2f3437"/>
+<text x="976.00" y="253.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">ESP32-C3 GND</text>
+<text x="1110.00" y="253.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">common ground</text>
+<rect x="960" y="264" width="8" height="8" fill="#c0392b"/>
+<text x="976.00" y="278.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Strip +5V</text>
+<text x="1110.00" y="278.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">MT3608 VOUT+</text>
+<rect x="960" y="289" width="8" height="8" fill="#2f3437"/>
+<text x="976.00" y="303.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Strip GND</text>
+<text x="1110.00" y="303.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">common ground</text>
+<rect x="960" y="314" width="8" height="8" fill="#c0392b"/>
+<text x="976.00" y="328.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">MT3608 VIN+ / VIN−</text>
+<text x="1110.00" y="328.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">TP4056 OUT+ / OUT−</text>
+<rect x="960" y="339" width="8" height="8" fill="#c0392b"/>
+<text x="976.00" y="353.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">TP4056 B+ / B−</text>
+<text x="1110.00" y="353.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">18650 + / −</text>
+<rect x="960" y="364" width="8" height="8" fill="#5a6066"/>
+<text x="976.00" y="378.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">TP4056 USB-C</text>
+<text x="1110.00" y="378.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">charge port, reachable</text>
+<rect x="960" y="389" width="8" height="8" fill="#8a9099"/>
+<text x="976.00" y="403.00" font-size="12.5" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">GPIO 20</text>
+<text x="1110.00" y="403.00" font-size="12.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">strip power MOSFET — not fitted yet</text>
+<text x="960.00" y="468.00" font-size="17" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="1.0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">CHAIN ORDER</text>
+<text x="960.00" y="494.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Data runs 1 → 2 → 3 → 4 → 5. Each segment's DOUT</text>
+<text x="960.00" y="512.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">goes to the next segment's DIN. +5 V and GND run</text>
+<text x="960.00" y="530.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">to every segment in parallel, never daisy-chained</text>
+<text x="960.00" y="548.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">through the data line.</text>
+<text x="960.00" y="566.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"></text>
+<text x="960.00" y="584.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Set MAIN_LEDS in include/config.h to the TOTAL of</text>
+<text x="960.00" y="602.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">all five segments. It is 30 right now, which is a</text>
+<text x="960.00" y="620.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">placeholder — count your strip and change it.</text>
+<text x="960.00" y="638.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"></text>
+<text x="960.00" y="656.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">LED_MAX_MA is 800, so FastLED will dim before it</text>
+<text x="960.00" y="674.00" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">pulls more than the MT3608 can give.</text>
+<text x="44.00" y="914.00" font-size="11" fill="#8a9099" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">build-plans/render/cloak_wiring.py  ·  pins read from include/config.h (LED_PIN 4, WAKE_PIN 5, LED_POWER_PIN 20)</text>
+</svg>
