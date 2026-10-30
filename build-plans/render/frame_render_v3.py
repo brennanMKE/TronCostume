@@ -265,4 +265,5 @@ def main():
     print("wrote frame-plan-v3.svg")
 
 
-main()
+if __name__ == "__main__":
+    main()
