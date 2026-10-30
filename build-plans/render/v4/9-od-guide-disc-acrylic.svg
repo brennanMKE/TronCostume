@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300.0mm" height="300.0mm" viewBox="0 0 300.0 300.0">
+<title>OD guide disc — acrylic</title><desc>Cut. A disc of 255.24 mm. Screw it to the blank through the same three R96 holes and run the bushing AROUND ITS OUTSIDE: the bit then cuts the Ø260 perimeter. The perimeter cannot live in template 7 — as an aperture its guide ring would fall away as soon as it was cut.</desc>
+<g id="cut" fill="none" stroke="#000000" stroke-width="0.1">
+<path d="M 22.3812,150.0000 a 127.6188,127.6188 0 1,0 255.2375,0 a 127.6188,127.6188 0 1,0 -255.2375,0 Z"/>
+<path d="M 147.7500,54.0000 a 2.2500,2.2500 0 1,0 4.5000,0 a 2.2500,2.2500 0 1,0 -4.5000,0 Z"/>
+<path d="M 230.8884,198.0000 a 2.2500,2.2500 0 1,0 4.5000,0 a 2.2500,2.2500 0 1,0 -4.5000,0 Z"/>
+<path d="M 64.6116,198.0000 a 2.2500,2.2500 0 1,0 4.5000,0 a 2.2500,2.2500 0 1,0 -4.5000,0 Z"/>
+</g>
+</svg>
