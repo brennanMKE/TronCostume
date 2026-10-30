@@ -37,3 +37,18 @@ newmtl button
 Kd 0.8 0.08 0.05
 Pr 0.3
 Pm 0.0
+
+newmtl acrylic
+Kd 0.1 0.12 0.16
+Pr 0.2
+Pm 0.0
+
+newmtl diffuser
+Kd 0.65 0.9 1.0
+Pr 0.24
+Pm 0.0
+
+newmtl led
+Kd 0.02 0.7 1.0
+Pr 0.18
+Pm 0.15
