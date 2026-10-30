@@ -121,6 +121,10 @@ def emit(name, title, desc, cut, engrave=()):
 SCREWS_F = [hole(SCREW_F, b, 4.5) for b in BRIDGES]
 SCREWS_B = ([hole(r, b, 4.5) for b in BRIDGES for r in BACK_BRIDGE_R]
             + [hole(BACK_RIM_R, a, 4.5) for a in BACK_RIM_A])
+# On the carrier the same ten holes are opened to 5.5. Ten hand-set inserts will not land
+# perfectly; 1.5 mm of slop on an M4 shank absorbs it and the countersunk head still covers.
+SCREWS_B_SLOP = ([hole(r, b, 5.5) for b in BRIDGES for r in BACK_BRIDGE_R]
+                 + [hole(BACK_RIM_R, a, 5.5) for a in BACK_RIM_A])
 REF = [circle(R_OUT), circle(R_HOLE),
        f"M {C0-8:.3f},{C0:.3f} H {C0+8:.3f} M {C0:.3f},{C0-8:.3f} V {C0+8:.3f}"]
 
@@ -164,7 +168,7 @@ emit("5-divider-3mm-ply.svg", "Divider — plywood 3 mm",
      + [hole(85, a, 8.0) for a in (352, 8)] + [hole(122, a, 8.0) for a in (352, 8)])
 
 # 6 — carrier / back, 3 mm acrylic
-carrier = [circle(R_OUT), circle(R_HOLE)] + SCREWS_B
+carrier = [circle(R_OUT), circle(R_HOLE)] + SCREWS_B_SLOP
 E = BAY["ELECTRONICS"][0]
 for x0, x1, y0, y1 in ((-32, -14, 73, 95.5), (-10, 7, 73, 101), (12, 48, 76, 93)):
     cx_, cy_ = (x0 + x1) / 2, (y0 + y1) / 2
@@ -210,6 +214,24 @@ emit("8-frame-finished-REFERENCE.svg", "Frame as finished — REFERENCE, do not 
      fin, [circle(SCREW_F)] + SCREWS_F + SCREWS_B
      + [hole(WIRE_R, b, 8.0) for b in BRIDGES])
 
+# 10 — the frame as laser-cut layers. Every layer is identical, so the whole router
+# workflow is optional. The wire tunnel becomes a notch in one middle layer.
+WIRE_NOTCH = 8.0
+emit("10-frame-layer-LASER.svg", "Frame layer — plywood, cut N and glue",
+     "Cut 24 mm worth: 8 x 3, 6 x 4, 4 x 6 or 2 x 12. Every layer is identical. Glue and "
+     "clamp the stack, then drill the inserts. This replaces files 7 and 9 and the entire "
+     "router operation.",
+     fin, [circle(SCREW_F)] + SCREWS_F + SCREWS_B)
+# the tunnel crosses the bridge TANGENTIALLY, breaking into the bay either side
+notch = [P([bp(b, -16.0, WIRE_R - WIRE_NOTCH / 2), bp(b, -16.0, WIRE_R + WIRE_NOTCH / 2),
+            bp(b, 16.0, WIRE_R + WIRE_NOTCH / 2), bp(b, 16.0, WIRE_R - WIRE_NOTCH / 2)])
+         for b in BRIDGES]
+emit("11-frame-layer-LASER-wire.svg", "Frame layer WITH wire notches — cut ONE",
+     "Identical to file 10 plus an 8 mm notch across each bridge. Put this layer anywhere in "
+     "the middle of the stack and the notches become tunnels the button harness runs through. "
+     "Replaces drilling O8 sideways through 24 mm of plywood.",
+     fin + notch, [circle(SCREW_F)] + SCREWS_F + SCREWS_B)
+
 # ---- checks
 print("\nchecks:")
 bad = 0
@@ -234,3 +256,5 @@ for nm, w in ap:
     print(f"  template {nm:12} narrowest {w:6.2f} mm vs {BUSH:.3f} bushing: {'ok' if w >= BUSH else 'TOO NARROW'}")
 print(f"  bridge at the template: {2*(BR_HALF-OFF):.2f} mm wide, finished {2*BR_HALF:.0f} mm")
 print("  FAIL" if bad else "  all components inside their bays")
+
+
