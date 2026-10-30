@@ -48,6 +48,7 @@
 #define LED_PIN        4       // through 330 ohm; beside 3V3/5V/GND on the C3 Super Mini
 #define LED_MAX_MA     800     // FastLED power cap for the 18650 + MT3608 budget
 #define LED_BRIGHTNESS 128
+#define LED_GAMMA      2.6f    // screen hex -> LED; tuned on the ButtonsAndColors breadboard
 #define FRAME_MS       20      // disc redraw rate for the outer ring effects (50 fps)
 
 // Outer ring effects (disc)

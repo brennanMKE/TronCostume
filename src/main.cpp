@@ -75,6 +75,24 @@ static const CRGB kColors[COLOR_COUNT] = {
 };
 static const char* kColorNames[COLOR_COUNT] = { "white", "green", "blue", "red", "yellow", "orange", "off" };
 
+// The hex values above are screen colors. A screen dims low channel values
+// (gamma), but an LED shows them close to face value, so red's 0x2A of green
+// and blue turns it pink. Applying the same curve here makes the strip match
+// the screen: small values drop to almost nothing, full ones stay full.
+// Tuned on the ButtonsAndColors breadboard.
+static CRGB ledColors[COLOR_COUNT];
+
+static uint8_t gammaByte(uint8_t v) {
+  return (uint8_t)(powf(v / 255.0f, LED_GAMMA) * 255.0f + 0.5f);
+}
+
+static void buildLedColors() {
+  for (uint8_t i = 0; i < COLOR_COUNT; i++) {
+    const CRGB& c = kColors[i];
+    ledColors[i] = CRGB(gammaByte(c.r), gammaByte(c.g), gammaByte(c.b));
+  }
+}
+
 // ---- Wire format ----
 static const uint32_t MSG_MAGIC = 0x44495343;  // "DISC"
 enum MsgType : uint8_t {
@@ -204,7 +222,7 @@ static void drawRing(uint32_t now) {
     } else if (ringMode == RING_FLICKER) {
       level = random8() < 6 ? flicker / 4 : flicker;
     }
-    CRGB c = i < lit ? kColors[currentColor] : CRGB::Black;
+    CRGB c = i < lit ? ledColors[currentColor] : CRGB::Black;
     c.nscale8_video(level);
     ring[i] = c;
   }
@@ -212,7 +230,7 @@ static void drawRing(uint32_t now) {
 #endif
 
 static void render() {
-  fill_solid(leds, MAIN_LEDS, kColors[currentColor]);
+  fill_solid(leds, MAIN_LEDS, ledColors[currentColor]);
 #if RING_LEDS > 0
   drawRing(millis());
 #endif
@@ -554,6 +572,7 @@ void setup() {
   pinMode(SYNC_DEBUG_PIN, OUTPUT);
 #endif
 
+  buildLedColors();
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setMaxPowerInVoltsAndMilliamps(5, LED_MAX_MA);
   FastLED.setBrightness(LED_BRIGHTNESS);
