@@ -21,8 +21,8 @@ Lined up on one side of the ESP32-C3 Super Mini, in this order:
 |---|---|---|
 | Black | 5 | Outer ring, off, and wake from deep sleep |
 | White | 6 | White / yellow |
-| Blue | 7 | Blue / red |
-| Green | 10 | Green / orange |
+| Green | 7 | Green / orange |
+| Blue | 10 | Blue / red |
 
 LED data is on GPIO 4. GPIO 8 (onboard LED) and 9 (BOOT) are skipped. Black is on GPIO 5 because only GPIO 0-5 can wake the C3. GPIO 0 and 1 are free for additions later.
 
@@ -51,12 +51,12 @@ Each color button has a **primary** and a **secondary** color:
 
 | Gesture | Result |
 |---|---|
-| **Tap** | Outer ring on / off |
-| **Double tap** | Outer ring: erratic flicker. Double tap again: back to steady |
-| **Triple tap** | Outer ring: motion (a bright section circling). Triple tap again: back to steady |
-| **Hold 3 s** | Your disc and cloak off (later: deep sleep) |
-| **Tap while off** | Back on in the saved color |
-| **Press while asleep** | Wakes the disc (planned, [deep-sleep.md](deep-sleep.md)) |
+| **Tap** | During flicker or motion: back to steady. When already steady: outer ring on / off |
+| **Double tap** | Outer ring: erratic flicker |
+| **Triple tap** | Outer ring: motion (a bright section circling) |
+| **Hold 3 s** | Your disc and cloak off, then the disc deep sleeps ([deep-sleep.md](deep-sleep.md)) |
+| **Press while asleep** | Wakes the disc in the saved color, with the cloak lighting at the same moment. White, blue and green do nothing while it sleeps |
+| **Tap while off** | With `DEEP_SLEEP` set to 0 (stays awake and dark): back on in the saved color |
 
 - Any color button tapped while off also turns the costume back on, in that color.
 - The **inner C** is always on while the costume is on, in a solid color. Only the **outer ring** has on/off and effects. See [disc-build.md](disc-build.md).
@@ -113,7 +113,7 @@ There is no "both off" gesture now. Black hold 3 s turns off your own costume on
 
 ## Decisions
 
-- **Four buttons**: black 5, white 6, blue 7, green 10, lined up in that order. Black is the wake button.
+- **Four buttons**: black 5, white 6, green 7, blue 10, lined up in that order. Black is the wake button.
 - **Colors in pairs**: tap for the primary, double tap for the secondary.
 - **Both costumes**: the 1 s hold versions of tap and double tap.
 - **Off**: black hold 3 s, own costume.

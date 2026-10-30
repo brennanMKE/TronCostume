@@ -37,7 +37,7 @@ Only GPIO 0-5 can wake the C3, so each board's wake button is on **GPIO 5** (`WA
 
 | Board | Wake button | Other buttons |
 |---|---|---|
-| Disc | Black (GPIO 5) | White, blue, green (GPIO 6, 7, 10) can't wake it |
+| Disc | Black (GPIO 5) | White, green, blue (GPIO 6, 7, 10) can't wake it |
 | Cloak | Its one button (GPIO 5 to GND) | None |
 
 While asleep, GPIO 5 has to stay HIGH until pressed. Try the chip's internal pull-up held through sleep first. If the board wakes by itself, or won't wake, add a **100 kΩ resistor from GPIO 5 to 3.3V**.
@@ -48,7 +48,7 @@ Wake is level-triggered: if the board goes to sleep while black is still held, i
 
 The disc owns the color and saves it in flash (NVS). The cloak never picks a color itself:
 
-1. **Disc wakes** (black button, or power switch): it **lights straight away in its saved color**. The black press that woke it is ignored until released, so it doesn't also toggle the outer ring. **Built.**
+1. **Disc wakes** (black button, or power switch): it **sends its saved color as soon as its radio is up**, scheduled like a button press, so the disc and an awake cloak light together (about 0.2 s after the press). The black press that woke it is ignored until released, so it doesn't also toggle the outer ring. **Built.**
 2. **Cloak wakes** (its button, or power reconnected): it stays dark until the disc tells it what to show. Today that's the disc's next heartbeat (within 1 s). **Built.** Planned: it broadcasts `HELLO` every `CLOAK_HELLO_MS` (200 ms) and the disc answers at once.
 3. **If the cloak hears nothing** for `CLOAK_LINK_WAIT_MS` (5 min), it goes back to deep sleep rather than sit awake and dark. Planned.
 

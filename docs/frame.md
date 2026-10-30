@@ -118,7 +118,7 @@ The step at y = 84, x = ±39 to ±53, makes a **pocket for each block**. The blo
 - **Protoboard, 80 × 20**, standing on edge: 80 along x, 20 along z. Its ends sit in the two block slots, which are 81 apart, giving 0.5 mm play.
 - **The buttons point at the hand hole, through the cover.**
 - **Board position**: the board's front face sits at **y = 61 + switch height** (for 6 × 6 × 9.5 mm tactile switches, y = 70.5), so the button tips come out flush with the cover's front. **Cut the block slots at that y.**
-- **Default hole layout on the cover** (black, white, blue, green, then the switch):
+- **Default hole layout on the cover** (black, white, green, blue, then the switch):
   - Buttons: Ø4 at x = −27, −9, +9, +27.
   - Switch: a 10 × 4 slot at x = +40, which sits over the block, so it's only usable if the switch is mounted on the cover itself. Otherwise move all of them to suit your board.
   - All centered in the height.

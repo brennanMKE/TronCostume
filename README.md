@@ -40,8 +40,8 @@ Disc only, four momentary buttons on a protoboard. Each one goes from its GPIO t
 |---|---|
 | Black | 5 |
 | White | 6 |
-| Blue | 7 |
-| Green | 10 |
+| Green | 7 |
+| Blue | 10 |
 
 All four are lined up on one side of the Super Mini in that order, skipping GPIO 8 (onboard LED, strapping pin) and 9 (BOOT, strapping pin). GPIO 0 and 1 are free for later additions.
 

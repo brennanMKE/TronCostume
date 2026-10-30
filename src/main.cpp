@@ -10,17 +10,20 @@
 //   white, blue, green   tap: that color; double tap: its pair (yellow, red,
 //                        orange); hold 1 s / tap then hold 1 s: the same for
 //                        both costumes
-//   black                tap: outer ring on/off; double tap: flicker; triple
-//                        tap: motion; hold 3 s: this costume off
+//   black                double tap: flicker; triple tap: motion; tap: back
+//                        to steady, or outer ring on/off when already
+//                        steady; hold 3 s: this costume off, then the disc
+//                        deep sleeps until black is pressed again
 //
 // The disc and its cloak always show the same color. The cloak has no color
 // buttons and shows whatever the disc tells it. The disc's strip is two
 // parts: the inner C (solid) and the outer ring (on/off and effects, disc
 // only).
 //
-// The disc keeps its last lit color in flash (NVS) and lights in it straight
-// away at power-on. A button already held at boot (the black button waking
-// the disc) is ignored until released. The cloak stores nothing: it starts
+// The disc keeps its last lit color in flash (NVS). At power-on or wake it
+// sends that color as a scheduled change as soon as ESP-NOW is up, so the
+// disc and cloak light together. A button already held at boot (the black
+// button waking the disc) is ignored until released. The cloak stores nothing: it starts
 // dark and lights from the disc's first heartbeat.
 //
 // Simultaneous change
@@ -51,6 +54,8 @@
 #include <esp_log.h>
 #include <FastLED.h>
 #include <Preferences.h>
+#include <esp_sleep.h>
+#include <driver/gpio.h>
 
 #include "config.h"
 #include "every_n_millis.h"
@@ -254,12 +259,16 @@ static uint8_t loadColor() {
   return c;
 }
 
+static void saveColor(uint8_t color) {
+  if (color == COLOR_OFF || color == savedColor) return;
+  prefs.putUChar("color", color);
+  savedColor = color;
+  Serial.printf("Saved %s\n", kColorNames[color]);
+}
+
 static void runSave() {
-  if (currentColor == COLOR_OFF || currentColor == savedColor) return;
   if (millis() - colorChangedMs < COLOR_SAVE_MS) return;
-  prefs.putUChar("color", currentColor);
-  savedColor = currentColor;
-  Serial.printf("Saved %s\n", kColorNames[currentColor]);
+  saveColor(currentColor);
 }
 #endif
 
@@ -392,18 +401,28 @@ static void onTaps(uint8_t b, uint8_t taps) {
     requestColor(savedColor);
     return;
   }
-  // Double and triple tap pick an effect; repeating it goes back to solid.
+  // Double and triple tap pick an effect. A single tap is the way back: it
+  // ends an effect (ring steady), and only toggles the ring when already steady.
   switch (taps) {
-    case 1: ringSet(!ringOn, ringMode); break;
-    case 2: ringSet(true, ringMode == RING_FLICKER ? RING_SOLID : RING_FLICKER); break;
-    case 3: ringSet(true, ringMode == RING_MOTION ? RING_SOLID : RING_MOTION); break;
+    case 1:
+      if (ringOn && ringMode != RING_SOLID) ringSet(true, RING_SOLID);
+      else ringSet(!ringOn, RING_SOLID);
+      break;
+    case 2: ringSet(true, RING_FLICKER); break;
+    case 3: ringSet(true, RING_MOTION); break;
   }
 }
+
+static bool sleepRequested = false;   // off: deep sleep once every button is up
 
 static void onHold(uint8_t b, uint8_t taps) {
   if (b == BTN_BLACK) {
     Serial.println("Hold: lights off");
+    saveColor(targetColor());   // don't lose a color picked under COLOR_SAVE_MS ago
     requestColor(COLOR_OFF);
+#if DEEP_SLEEP
+    sleepRequested = true;
+#endif
     return;
   }
   requestBoth(taps == 1 ? kPrimary[b] : kSecondary[b]);
@@ -416,6 +435,7 @@ static uint8_t  seqTaps = 0;
 static uint32_t seqAt = 0;   // press time in DOWN, release time in GAP
 
 static void onPress(uint8_t b, uint32_t now) {
+  if (sleepRequested) return;  // going to sleep: nothing turns it back on now
   if (seqState == SEQ_GAP && b == seqButton) {
     seqTaps++;
   } else if (seqState == SEQ_IDLE || seqState == SEQ_GAP) {
@@ -487,6 +507,49 @@ static void pollButtons() {
   }
   runSequence(now);
 }
+
+// ---- Disc: deep sleep (docs/deep-sleep.md) ----
+// Off is a hold on black. The LEDs go dark straight away (that's the
+// feedback), then the disc sleeps once the cloak has been told and every
+// button has been up for RELEASE_SETTLE_MS. Wake is level-triggered, so
+// sleeping with black still held would wake it again at once.
+//
+// Asleep, only black (WAKE_PIN, GPIO 5) can wake it: only GPIO 0-5 can, and
+// white, green and blue are on 6, 7 and 10. Waking restarts the board, which
+// lights in the saved color and ignores the waking press until it's released.
+static void goToSleep() {
+  Serial.println("Deep sleep: press black to wake");
+  Serial.flush();
+
+  // Strip already dark. Hold its data line low so noise on a floating pin
+  // can't light LEDs while the strip still has power (no MOSFET yet).
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
+  gpio_hold_en((gpio_num_t)LED_PIN);
+  gpio_deep_sleep_hold_en();
+
+  esp_now_deinit();
+  WiFi.mode(WIFI_OFF);
+
+  // Keep black's pull-up on through sleep. If the disc wakes by itself or
+  // won't wake, fit a 100k from GPIO 5 to 3.3V (docs/deep-sleep.md).
+  gpio_pullup_en((gpio_num_t)WAKE_PIN);
+  gpio_pulldown_dis((gpio_num_t)WAKE_PIN);
+  esp_deep_sleep_enable_gpio_wakeup(1ULL << WAKE_PIN, ESP_GPIO_WAKEUP_GPIO_LOW);
+  esp_deep_sleep_start();
+}
+
+static void runSleep() {
+  static uint32_t allUpSince = 0;
+  if (!sleepRequested) return;
+  if (pending || repeatsLeft > 0) return;   // the cloak hasn't been told yet
+  uint32_t now = millis();
+  for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
+    if (digitalRead(kButtonPins[i]) == LOW) { allUpSince = 0; return; }
+  }
+  if (allUpSince == 0) allUpSince = now ? now : 1;
+  if (now - allUpSince >= RELEASE_SETTLE_MS) goToSleep();
+}
 #endif
 
 static void notePeer(const RxPacket& p) {
@@ -556,6 +619,12 @@ void setup() {
   delay(500);  // let USB CDC enumerate so the first lines aren't lost
 
 #if DEVICE_ROLE == ROLE_DISC
+  // Serial logs don't survive deep sleep, so say why we're starting.
+  if (esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_GPIO) Serial.println("Woke: black button");
+  // Release the LED data line held low through sleep (goToSleep).
+  gpio_hold_dis((gpio_num_t)LED_PIN);
+  gpio_deep_sleep_hold_dis();
+
   for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
     pinMode(kButtonPins[i], INPUT_PULLUP);
     // Still held from the press that powered on or woke the disc: ignore
@@ -565,8 +634,10 @@ void setup() {
       buttons[i].ignore = true;
     }
   }
-  currentColor = loadColor();
-  Serial.printf("Restored %s\n", kColorNames[currentColor]);
+  // Start dark: the saved color goes out as a scheduled change once ESP-NOW
+  // is up (end of setup), so the disc and cloak light together.
+  uint8_t bootColor = loadColor();
+  Serial.printf("Restored %s\n", kColorNames[bootColor]);
 #endif
 #if SYNC_DEBUG_PIN >= 0
   pinMode(SYNC_DEBUG_PIN, OUTPUT);
@@ -591,6 +662,9 @@ void setup() {
   if (esp_now_init() != ESP_OK) {
     ESP_LOGE(TAG, "esp_now_init failed");
     Serial.println("ESP-NOW init FAILED");
+#if DEVICE_ROLE == ROLE_DISC
+    applyColor(bootColor, "power on, no radio");
+#endif
     return;
   }
   esp_now_register_recv_cb(onRecv);
@@ -606,6 +680,12 @@ void setup() {
   Serial.printf("\nTronIdentityDisc costume %d %s\nMy MAC: %s  channel %d\n",
                 COSTUME_ID, DEVICE_NAME, WiFi.macAddress().c_str(), ESPNOW_CHANNEL);
   ESP_LOGI(TAG, "ready");
+
+#if DEVICE_ROLE == ROLE_DISC
+  // Light like a button press: scheduled APPLY_DELAY_MS ahead and sent to
+  // the cloak, so both strips come on at the same moment.
+  requestColor(bootColor);
+#endif
 }
 
 void loop() {
@@ -618,6 +698,7 @@ void loop() {
   pollButtons();
   runRepeats();
   runSave();
+  runSleep();
 
   static uint32_t tFrame = 0;
   if (everyMillis(tFrame, FRAME_MS)) render();  // outer ring animation

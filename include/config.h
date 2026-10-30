@@ -30,8 +30,15 @@
   #define PEER_NAME   "Cloak"
   // One strip chain: the inner C first, then the outer ring (docs/disc-build.md;
   // 60 LEDs/m counts, change for the strip you buy).
-  #define MAIN_LEDS   33      // inner C: always on, solid color
-  #define RING_LEDS   41      // outer ring: on/off and effects
+  #ifdef BENCH_RING_LEDS
+    // Bench strip (env disc-1-bench): every LED is outer ring, so the ring
+    // effects can be tried on a short test strip.
+    #define MAIN_LEDS 0
+    #define RING_LEDS BENCH_RING_LEDS
+  #else
+    #define MAIN_LEDS 33      // inner C: always on, solid color
+    #define RING_LEDS 41      // outer ring: on/off and effects
+  #endif
 #elif DEVICE_ROLE == ROLE_CLOAK
   #define DEVICE_NAME "Cloak"
   #define PEER_NAME   "Disc"
@@ -61,7 +68,7 @@
 // C3 from deep sleep, so each board's wake button is on GPIO 5.
 //
 // Disc: four buttons lined up on one side of the C3 Super Mini, in order
-// black, white, blue, green. GPIO 8 (onboard LED, strapping) and 9 (BOOT,
+// black, white, green, blue. GPIO 8 (onboard LED, strapping) and 9 (BOOT,
 // strapping) are skipped. Black is the outer ring button and the wake button.
 // Gestures are in docs/controls.md.
 //
@@ -71,7 +78,7 @@
 // off, so the pair stays in sync.
 #define WAKE_PIN       5
 #if DEVICE_ROLE == ROLE_DISC
-  #define BUTTON_PINS  { 5, 6, 7, 10 }   // black, white, blue, green
+  #define BUTTON_PINS  { 5, 6, 10, 7 }   // black, white, blue, green (board order: black 5, white 6, green 7, blue 10)
   #define BUTTON_COUNT 4
 #else
   #define BUTTON_PINS  { 5 }
@@ -81,6 +88,12 @@
 #define TAP_GAP_MS     350     // a further tap must start within this of the last release
 #define SHORT_HOLD_MS  1000    // color button held: send the color to both costumes
 #define LONG_HOLD_MS   3000    // black button held: this costume off
+
+// Disc: off (black hold) puts the disc into deep sleep; black wakes it.
+// Set to 0 to stay awake and dark instead, e.g. while debugging over USB,
+// which disappears while the board sleeps.
+#define DEEP_SLEEP        1
+#define RELEASE_SETTLE_MS 200   // every button up this long before sleeping
 
 // Disc saves its color to flash (NVS) once it has held this long, so a burst
 // of taps is one write. Power-on and wake restore it.
