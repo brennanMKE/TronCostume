@@ -28,7 +28,11 @@ C_IN, C_OUT, C_GAP = 82.0, 88.0, 20.0       # white C in the top plate
 RING_IN = 118.0                             # white outer ring R118–130
 CH_C = (79.0, 91.0)                         # C channel in the 9 mm layer
 CH_O = (117.0, 127.0)                       # outer channel
-SCREW_F, SCREW_B = 96.0, 80.0               # M4 front / back circles
+SCREW_F = 96.0                              # 3 front screws, in the solid R91-117 band
+# Back fasteners: disc-build.md's documented ten. R70 + R102 on each bridge, plus four in
+# the outer rim. Codex caught that my earlier three-at-R80 was invented, not read.
+BACK_BRIDGE_R = (70.0, 102.0)
+BACK_RIM_R, BACK_RIM_A = 122.0, (60.0, 155.0, 205.0, 300.0)
 
 BTN_X = (-27.0, -9.0, 9.0, 27.0)
 BTN_NOTCH, USB_NOTCH = 35.0, 23.0           # half-widths of the inner-rim notches
@@ -109,7 +113,8 @@ def emit(name, title, desc, cut, engrave=()):
 
 
 SCREWS_F = [hole(SCREW_F, b, 4.5) for b in BRIDGES]
-SCREWS_B = [hole(SCREW_B, b, 4.5) for b in BRIDGES]
+SCREWS_B = ([hole(r, b, 4.5) for b in BRIDGES for r in BACK_BRIDGE_R]
+            + [hole(BACK_RIM_R, a, 4.5) for a in BACK_RIM_A])
 REF = [circle(R_OUT), circle(R_HOLE),
        f"M {C0-8:.3f},{C0:.3f} H {C0+8:.3f} M {C0:.3f},{C0-8:.3f} V {C0+8:.3f}"]
 
@@ -154,6 +159,7 @@ for x0, x1, y0, y1 in ((-32, -14, 73, 95.5), (-10, 7, 73, 101), (12, 48, 76, 93)
         for sy in (y0 + 3.5, y1 - 3.5):
             p = bp(E, sx, sy); carrier.append(circle(1.6, *p))
 carrier.append(slot(BAY["BUTTONS"][0], -41, 41, 71.1, 72.9))          # protoboard drops in on edge
+carrier.append(hole(WIRE_R, 0.0, 9.0))                                # harness exit, 0 deg bridge
 for sx in (-34, 34):                                                # battery holder screws
     p = bp(BAY["BATTERY"][0], sx, 86.5); carrier.append(circle(1.6, *p))
 emit("6-carrier-3mm-acrylic.svg", "Carrier / back cover — acrylic 3 mm",
@@ -171,7 +177,7 @@ emit("7-router-template-acrylic.svg", "ROUTER TEMPLATE — acrylic, for the 24 m
      f"a 1/8in bit — do NOT add compensation in xTool. Cuts the hand hole, the three bays "
      f"and the three bays; the O260 perimeter is file 9. Three 4.5 holes at R96 "
      f"screw it to the blank. Engrave layer is reference only.",
-     tpl + SCREWS_F, REF + [circle(SCREW_F), circle(SCREW_B)]
+     tpl + SCREWS_F, REF + [circle(SCREW_F)] + SCREWS_B
      + [hole(WIRE_R, b, 8.0) for b in BRIDGES])
 
 # 9 — outside guide for the Ø260 perimeter
@@ -188,7 +194,8 @@ fin += [bay_path(a, ri, BAY_OUT, BR_HALF) for a, ri in BAY.values()]
 emit("8-frame-finished-REFERENCE.svg", "Frame as finished — REFERENCE, do not cut",
      "What the 24 mm plywood should measure after routing. Routed corners will carry the "
      "flush-trim bit's radius, which this outline does not show.",
-     fin, [circle(SCREW_F), circle(SCREW_B)])
+     fin, [circle(SCREW_F)] + SCREWS_F + SCREWS_B
+     + [hole(WIRE_R, b, 8.0) for b in BRIDGES])
 
 # ---- checks
 print("\nchecks:")

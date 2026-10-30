@@ -20,10 +20,18 @@ the bottom. Cut files are in this folder, 1:1 mm, black = cut, blue = engrave (n
 The **divider** is what makes this rigid. It is a full unbroken annulus glued between the
 channel layer and the frame, so the whole disc is a closed box rather than a stack of rings.
 
-**Screws.** 3 × M4 × 16 countersunk from the front at **R96** (0°/120°/240°) through the top
-plate, channel layer and divider into inserts in the frame's front face. 3 × M4 × 12
-countersunk from the back at **R80**, same angles, into inserts in the frame's back face.
-The two sets are 16 mm apart radially and 4 mm apart in z, so they never meet.
+**Screws — 13 in total.**
+
+- **Front, 3 × M4 × 16 countersunk at R96** (0°/120°/240°), through the top plate, channel
+  layer and divider into inserts in the frame's front face. R96 sits in the channel layer's
+  solid R91–117 band, so it never breaks into a light channel.
+- **Back, 10 × M4 × 12 countersunk** into inserts in the frame's back face: **R70 and R102
+  on each bridge** (6) plus **R122 at 60° / 155° / 205° / 300°** in the outer rim (4). This
+  is `disc-build.md`'s documented pattern — Codex caught that my earlier three-screw version
+  was invented rather than read. The four rim screws are what clamp the outer rim down.
+
+Front R96 and back R102 share an angle but are 6 mm apart radially, and their inserts are
+z 15–25 against z 29–39, leaving 4 mm of wood between. Checked, all 13 land in solid wood.
 
 ---
 
@@ -41,7 +49,9 @@ The two sets are 16 mm apart radially and 4 mm apart in z, so they never meet.
 | `9-od-guide-disc-acrylic.svg` | acrylic 4–6 | 1 | outside guide for the Ø260 |
 | `8-frame-finished-REFERENCE.svg` | — | — | reference only, do not cut |
 
-Plywood blank for the frame: one 24 mm square at least 280 × 280.
+**Plywood blank for the frame: 24 mm, at least 280 × 280.** If you do not have 24 mm, glue
+up **18 + 6** or **2 × 12** first and rout the laminated blank as one piece. The frame
+thickness is the only dimension that depends on your stock.
 
 ---
 
@@ -60,8 +70,11 @@ not add compensation in xTool.
 4. Screw **disc 9** to the blank through the same holes and run the bushing **around its
    outside** to cut the Ø260 perimeter. Same two-stage depth.
 5. Drill **Ø8 through each bridge at R90**, square across the 24 mm width, mid-thickness.
-   Those three holes are how the wires get from bay to bay.
-6. Set the inserts: 3 × M4 in the front face at R96, 3 × M4 in the back face at R80.
+   Only the **0° bridge** hole is strictly needed — the five button wires run from the bay at
+   60° to the bay at 300°, which crosses that one bridge. Drill all three anyway; they cost
+   nothing and leave you room to re-route later.
+6. Set the inserts: **3 × M4 in the front face at R96**; **10 × M4 in the back face** at R70
+   and R102 on each bridge and at R122 on 60/155/205/300.
 
 > In template 7 the two upper bays run into the hand hole, so their outlines cross it. Those
 > crossing segments are inside the waste and fall out. Cut every line once.
@@ -110,8 +123,10 @@ Everything mounts to file 6 and goes in as one unit:
 | **Battery 180°** | 18650 holder on two M3 screws. Inner rim is solid here — this is where you grip |
 
 **Button wiring, 5 wires:** one common ground plus one per switch. Run them from the button
-board, through the **Ø8 hole in the 0° bridge**, into the electronics bay. Use a 5-way
-JST-XH or Dupont strip so the carrier can still be lifted out.
+board through the **Ø8 hole in the 0° bridge** into the electronics bay — 60° → 0° → 300°
+crosses exactly one bridge. The carrier has a 9 mm hole over that bridge so the bundle is
+never pinched between acrylic and plywood. Use a 5-way JST-XH or Dupont strip so the
+carrier still lifts out as one wired assembly.
 
 Assemble and test the whole carrier on the bench. Then screw it to the frame with three M4.
 
@@ -125,7 +140,7 @@ Assemble and test the whole carrier on the bench. Then screw it to the frame wit
 4. Paint the channels white. Lay both strips, feed the leads down through the divider.
 5. Glue the **channel layer to the divider**. Permanent.
 6. Build and test the carrier, all three bays.
-7. Drop the carrier on, 3 × M4 from the back.
+7. Drop the carrier on, 10 × M4 from the back.
 8. Top plate on, 3 × M4 countersunk from the front.
 
 ---
@@ -134,7 +149,7 @@ Assemble and test the whole carrier on the bench. Then screw it to the frame wit
 
 | Decision | Why | If you disagree |
 |---|---|---|
-| **24 mm frame, 18650 in a holder** | Your mockup photo shows a plastic holder, and a holder is ~21 mm — it will not fit an 18 mm bay. Soldering tabs to a bare cell the night before a build is a bad trade | Drop to 18 mm ply and a bare tabbed cell; total becomes 36 mm |
+| **24 mm frame, 18650 in a holder** | Your mockup photo shows a plastic holder, and a holder is ~21 mm — it will not fit an 18 mm bay. Soldering tabs to a bare cell the night before a build is a bad trade. Laminate 18+6 or 2×12 if you lack 24 mm stock | Drop to 18 mm and a bare tabbed cell; total becomes 36 mm |
 | **Strips flat, facing up** | Edge-lighting with a fin is two more parts and a test cut you do not have time for | Dotting is the risk; add a diffuser layer in the channel |
 | **Top plate all one 3 mm plane** | This is what you described — inset white into black and fuse | A thicker white ring under the black edge is stronger but no longer flat |
 | **No inner-rim covers** | The two service bays open straight into the hand hole, so buttons and both USB ports are directly reachable. Fewer parts, no end blocks, no chisel work | Add 3 mm black cover plates later; nothing stops you |
@@ -143,9 +158,8 @@ Assemble and test the whole carrier on the bench. Then screw it to the frame wit
 
 ## 9 · Not resolved
 
-- **Plywood thickness you actually have.** Everything assumes 24 / 9 / 3. If yours differs,
-  the frame thickness is the only one that matters structurally — tell me and I will re-cut
-  the numbers.
+- **Plywood thickness you actually have.** Everything assumes 24 / 9 / 3. The frame is the
+  only one that matters and it can be laminated, so this should not block you.
 - **Magnet mount for the cloak.** Not designed. The back carrier has room at 6 o'clock
   outboard of the battery, R100–130, which is where `disc-build.md` puts it.
 - **MOSFET board.** No space reserved; dimensions unknown.
