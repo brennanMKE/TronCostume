@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900mm" height="620mm" viewBox="0 0 900 620">
+<style>
+text { font-family: Helvetica, Arial, sans-serif }
+.title { font-size:11px; font-weight:700; letter-spacing:1.2px }
+.sub { font-size:4.2px; fill:#506070 }
+.label { font-size:4.6px; font-weight:700 }
+.note { font-size:3.7px }
+.tiny { font-size:2.8px; font-weight:700 }
+.dim { font-size:3.2px; fill:#185a8d; font-weight:700 }
+</style>
+<rect width="900" height="620" fill="#f7f5ef"/>
+<rect width="900" height="42" fill="#15202b"/>
+<text x="24" y="21" class="title" fill="#fff">TRON IDENTITY DISC — ARC-BASED FRAME DRAFT V2</text>
+<text x="24" y="32" class="sub" fill="#9fc3df">review geometry only · not a cut file · all dimensions mm · 12 o'clock is 0°</text>
+<text x="876" y="22" class="label" fill="#ffcc66" text-anchor="end">DRAFT — DO NOT BUILD</text>
+
+<text x="200" y="61" class="label" text-anchor="middle">A — LOWER FRAME: FINISHED POCKETS + COMPONENTS</text>
+<circle cx="200" cy="225" r="130.0" fill="#e1c38f" stroke="#17202a" stroke-width="1"/>
+<circle cx="200" cy="225" r="60.0" fill="#f7f5ef" stroke="#17202a" stroke-width="1"/>
+<path d="M 235.229,172.771 L 236.135,173.393 L 237.030,174.032 L 237.914,174.686 L 238.787,175.355 L 239.647,176.040 L 240.496,176.739 L 241.332,177.453 L 242.155,178.182 L 242.966,178.925 L 243.763,179.682 L 244.548,180.452 L 245.318,181.237 L 246.075,182.034 L 246.818,182.845 L 247.547,183.668 L 248.261,184.504 L 248.960,185.353 L 249.645,186.213 L 250.314,187.086 L 250.968,187.970 L 251.607,188.865 L 252.229,189.771 L 252.836,190.688 L 253.427,191.615 L 254.002,192.553 L 254.560,193.500 L 255.101,194.457 L 255.626,195.423 L 256.133,196.399 L 256.624,197.383 L 257.097,198.375 L 257.553,199.376 L 257.992,200.384 L 258.413,201.400 L 258.816,202.423 L 259.201,203.453 L 259.568,204.489 L 259.917,205.532 L 260.247,206.581 L 260.559,207.635 L 260.853,208.694 L 261.129,209.759 L 261.385,210.828 L 261.623,211.902 L 261.843,212.979 L 262.043,214.060 L 262.224,215.145 L 262.387,216.232 L 262.530,217.322 L 262.655,218.415 L 262.760,219.509 L 262.847,220.605 L 277.810,219.559 L 277.703,218.202 L 277.573,216.847 L 277.419,215.494 L 277.241,214.144 L 277.040,212.798 L 276.815,211.455 L 276.567,210.117 L 276.296,208.783 L 276.001,207.454 L 275.683,206.130 L 275.342,204.812 L 274.978,203.500 L 274.592,202.195 L 274.182,200.897 L 273.750,199.606 L 273.296,198.322 L 272.819,197.047 L 272.320,195.781 L 271.799,194.523 L 271.257,193.275 L 270.692,192.036 L 270.106,190.807 L 269.499,189.589 L 268.870,188.381 L 268.220,187.185 L 267.550,186.000 L 266.859,184.827 L 266.148,183.666 L 265.416,182.518 L 264.665,181.383 L 263.894,180.261 L 263.103,179.153 L 262.294,178.058 L 261.465,176.978 L 260.617,175.913 L 259.751,174.863 L 258.867,173.827 L 257.965,172.808 L 257.046,171.804 L 256.109,170.817 L 255.154,169.846 L 254.183,168.891 L 253.196,167.954 L 252.192,167.035 L 251.173,166.133 L 250.137,165.249 L 249.087,164.383 L 248.022,163.535 L 246.942,162.706 L 245.847,161.897 L 244.739,161.106 L 243.617,160.335 Z" fill="#fff" stroke="#17202a" stroke-width="0.65"/>
+<path d="M 137.038,227.199 L 137.010,226.100 L 137.000,225.000 L 137.010,223.900 L 137.038,222.801 L 137.086,221.703 L 137.153,220.605 L 137.240,219.509 L 137.345,218.415 L 137.470,217.322 L 137.613,216.232 L 137.776,215.145 L 137.957,214.060 L 138.157,212.979 L 138.377,211.902 L 138.615,210.828 L 138.871,209.759 L 139.147,208.694 L 139.441,207.635 L 139.753,206.581 L 140.083,205.532 L 140.432,204.489 L 140.799,203.453 L 141.184,202.423 L 141.587,201.400 L 142.008,200.384 L 142.447,199.376 L 142.903,198.375 L 143.376,197.383 L 143.867,196.399 L 144.374,195.423 L 144.899,194.457 L 145.440,193.500 L 145.998,192.553 L 146.573,191.615 L 147.164,190.688 L 147.771,189.771 L 148.393,188.865 L 149.032,187.970 L 149.686,187.086 L 150.355,186.213 L 151.040,185.353 L 151.739,184.504 L 152.453,183.668 L 153.182,182.845 L 153.925,182.034 L 154.682,181.237 L 155.452,180.452 L 156.237,179.682 L 157.034,178.925 L 157.845,178.182 L 158.668,177.453 L 159.504,176.739 L 160.353,176.040 L 161.213,175.355 L 162.086,174.686 L 162.970,174.032 L 163.865,173.393 L 164.771,172.771 L 165.688,172.164 L 166.615,171.573 L 167.553,170.998 L 168.500,170.440 L 169.457,169.899 L 170.423,169.374 L 156.809,143.769 L 155.398,144.535 L 154.000,145.326 L 152.616,146.141 L 151.247,146.980 L 149.893,147.842 L 148.554,148.729 L 147.231,149.638 L 145.924,150.570 L 144.633,151.526 L 143.359,152.503 L 142.103,153.503 L 140.864,154.524 L 139.643,155.567 L 138.440,156.631 L 137.256,157.715 L 136.091,158.821 L 134.946,159.946 L 133.821,161.091 L 132.715,162.256 L 131.631,163.440 L 130.567,164.643 L 129.524,165.864 L 128.503,167.103 L 127.503,168.359 L 126.526,169.633 L 125.570,170.924 L 124.638,172.231 L 123.729,173.554 L 122.842,174.893 L 121.980,176.247 L 121.141,177.616 L 120.326,179.000 L 119.535,180.398 L 118.769,181.809 L 118.027,183.233 L 117.311,184.670 L 116.620,186.119 L 115.954,187.580 L 115.314,189.053 L 114.699,190.536 L 114.111,192.030 L 113.548,193.534 L 113.012,195.048 L 112.503,196.570 L 112.020,198.102 L 111.564,199.641 L 111.135,201.189 L 110.733,202.743 L 110.358,204.305 L 110.010,205.872 L 109.690,207.446 L 109.398,209.024 L 109.133,210.608 L 108.895,212.196 L 108.686,213.788 L 108.504,215.383 L 108.350,216.982 L 108.224,218.582 L 108.126,220.185 L 108.056,221.789 L 108.014,223.394 L 108.000,225.000 L 108.014,226.606 L 108.056,228.211 Z" fill="#fff" stroke="#17202a" stroke-width="0.65"/>
+<path d="M 231.779,287.370 L 230.686,287.916 L 229.583,288.442 L 228.472,288.948 L 227.351,289.435 L 226.222,289.903 L 225.086,290.351 L 223.941,290.778 L 222.790,291.186 L 221.631,291.574 L 220.466,291.941 L 219.295,292.288 L 218.117,292.615 L 216.935,292.921 L 215.747,293.206 L 214.554,293.470 L 213.357,293.714 L 212.155,293.937 L 210.950,294.138 L 209.742,294.319 L 208.531,294.478 L 207.317,294.617 L 206.101,294.734 L 204.883,294.829 L 203.664,294.904 L 202.443,294.957 L 201.222,294.989 L 200.000,295.000 L 198.778,294.989 L 197.557,294.957 L 196.336,294.904 L 195.117,294.829 L 193.899,294.734 L 192.683,294.617 L 191.469,294.478 L 190.258,294.319 L 189.050,294.138 L 187.845,293.937 L 186.643,293.714 L 185.446,293.470 L 184.253,293.206 L 183.065,292.921 L 181.883,292.615 L 180.705,292.288 L 179.534,291.941 L 178.369,291.574 L 177.210,291.186 L 176.059,290.778 L 174.914,290.351 L 173.778,289.903 L 172.649,289.435 L 171.528,288.948 L 170.417,288.442 L 169.314,287.916 L 168.221,287.370 L 156.417,310.537 L 157.916,311.284 L 159.429,312.006 L 160.953,312.700 L 162.490,313.368 L 164.038,314.010 L 165.597,314.624 L 167.166,315.210 L 168.745,315.770 L 170.334,316.301 L 171.932,316.805 L 173.539,317.281 L 175.153,317.729 L 176.775,318.148 L 178.405,318.540 L 180.040,318.902 L 181.682,319.236 L 183.330,319.542 L 184.982,319.818 L 186.639,320.066 L 188.301,320.284 L 189.965,320.474 L 191.633,320.635 L 193.303,320.766 L 194.976,320.868 L 196.650,320.942 L 198.325,320.985 L 200.000,321.000 L 201.675,320.985 L 203.350,320.942 L 205.024,320.868 L 206.697,320.766 L 208.367,320.635 L 210.035,320.474 L 211.699,320.284 L 213.361,320.066 L 215.018,319.818 L 216.670,319.542 L 218.318,319.236 L 219.960,318.902 L 221.595,318.540 L 223.225,318.148 L 224.847,317.729 L 226.461,317.281 L 228.068,316.805 L 229.666,316.301 L 231.255,315.770 L 232.834,315.210 L 234.403,314.624 L 235.962,314.010 L 237.510,313.368 L 239.047,312.700 L 240.571,312.006 L 242.084,311.284 L 243.583,310.537 Z" fill="#fff" stroke="#17202a" stroke-width="0.65"/>
+<path d="M 230.000,173.038 L 245.963,186.433 L 248.261,184.504 L 231.500,170.440 Z" fill="#222" stroke="#fff" stroke-width="0.35"/>
+<path d="M 245.963,186.433 L 256.382,204.479 L 259.201,203.453 L 248.261,184.504 Z" fill="#222" stroke="#fff" stroke-width="0.35"/>
+<path d="M 256.382,204.479 L 260.000,225.000 L 263.000,225.000 L 259.201,203.453 Z" fill="#222" stroke="#fff" stroke-width="0.35"/>
+<path d="M 140.228,230.229 L 141.422,212.014 L 138.493,211.364 L 137.240,230.491 Z" fill="#222" stroke="#fff" stroke-width="0.35"/>
+<path d="M 141.422,212.014 L 148.038,195.000 L 145.440,193.500 L 138.493,211.364 Z" fill="#222" stroke="#fff" stroke-width="0.35"/>
+<path d="M 148.038,195.000 L 159.465,180.763 L 157.438,178.552 L 145.440,193.500 Z" fill="#222" stroke="#fff" stroke-width="0.35"/>
+<path d="M 159.465,180.763 L 174.643,170.622 L 173.375,167.903 L 157.438,178.552 Z" fill="#222" stroke="#fff" stroke-width="0.35"/>
+<circle cx="235.53" cy="167.02" r="3" fill="#d4a017" stroke="#5f4700" stroke-width="0.5"/>
+<circle cx="267.98" cy="223.22" r="3" fill="#d4a017" stroke="#5f4700" stroke-width="0.5"/>
+<circle cx="132.44" cy="232.70" r="3" fill="#d4a017" stroke="#5f4700" stroke-width="0.5"/>
+<circle cx="172.89" cy="162.64" r="3" fill="#d4a017" stroke="#5f4700" stroke-width="0.5"/>
+<circle cx="235.74" cy="175.81" r="2.2" fill="#e74c3c" stroke="#7b241c" stroke-width="0.4"/>
+<circle cx="242.24" cy="181.26" r="2.2" fill="#e74c3c" stroke="#7b241c" stroke-width="0.4"/>
+<circle cx="250.41" cy="191.00" r="2.2" fill="#e74c3c" stroke="#7b241c" stroke-width="0.4"/>
+<circle cx="254.65" cy="198.35" r="2.2" fill="#e74c3c" stroke="#7b241c" stroke-width="0.4"/>
+<path d="M 234.627,172.370 L 235.496,172.952 L 236.355,173.548 L 237.204,174.159 L 238.043,174.783 L 238.871,175.422 L 239.689,176.074 L 240.496,176.739 L 241.291,177.418 L 242.075,178.110 L 242.848,178.815 L 243.609,179.533 L 244.357,180.263 L 245.094,181.005 L 245.818,181.760 L 254.545,173.524 L 253.683,172.625 L 252.806,171.741 L 251.915,170.872 L 251.009,170.018 L 250.090,169.179 L 249.156,168.355 L 248.209,167.547 L 247.249,166.754 L 246.275,165.978 L 245.289,165.218 L 244.291,164.474 L 243.280,163.748 L 242.257,163.038 L 241.223,162.345 Z" fill="#f5b7b1" stroke="#17202a" stroke-width="0.55"/>
+<text x="244.35" y="173.44" class="tiny" text-anchor="middle">2-BUTTON PCB</text>
+<path d="M 250.539,187.387 L 251.157,188.231 L 251.760,189.085 L 252.349,189.949 L 252.924,190.823 L 253.484,191.706 L 254.029,192.599 L 254.560,193.500 L 255.075,194.410 L 255.575,195.328 L 256.060,196.255 L 256.529,197.190 L 256.983,198.132 L 257.421,199.081 L 257.844,200.038 L 268.862,195.284 L 268.359,194.145 L 267.837,193.014 L 267.297,191.892 L 266.738,190.780 L 266.161,189.677 L 265.565,188.583 L 264.952,187.500 L 264.320,186.427 L 263.671,185.365 L 263.005,184.313 L 262.321,183.273 L 261.619,182.244 L 260.901,181.227 L 260.166,180.222 Z" fill="#f5b7b1" stroke="#17202a" stroke-width="0.55"/>
+<text x="259.76" y="191.80" class="tiny" text-anchor="middle">2-BUTTON PCB</text>
+<path d="M 261.071,209.528 L 261.315,210.529 L 261.544,211.533 L 261.756,212.542 L 261.951,213.553 L 262.130,214.568 L 262.293,215.585 L 262.438,216.605 L 262.567,217.628 L 262.679,218.652 L 272.628,217.644 L 272.498,216.457 L 272.349,215.273 L 272.180,214.091 L 271.992,212.912 L 271.785,211.736 L 271.558,210.564 L 271.313,209.396 L 271.048,208.232 L 270.764,207.072 Z" fill="#d6eaf8" stroke="#17202a" stroke-width="0.55"/>
+<text x="266.97" y="214.49" class="tiny" text-anchor="middle">SLIDE</text>
+<path d="M 137.037,227.157 L 137.009,226.064 L 137.000,224.970 L 137.010,223.877 L 137.039,222.783 L 137.087,221.691 L 137.154,220.599 L 137.240,219.509 L 137.344,218.421 L 137.468,217.334 L 137.611,216.250 L 137.772,215.168 L 137.952,214.090 L 138.151,213.014 L 138.368,211.942 L 116.357,207.279 L 116.062,208.733 L 115.792,210.193 L 115.548,211.657 L 115.329,213.125 L 115.135,214.596 L 114.968,216.071 L 114.825,217.548 L 114.709,219.028 L 114.618,220.509 L 114.553,221.992 L 114.514,223.475 L 114.500,224.960 L 114.512,226.444 L 114.550,227.927 Z" fill="#85c1e9" stroke="#17202a" stroke-width="0.55"/>
+<text x="126.03" y="219.83" class="tiny" text-anchor="middle">ESP32-C3</text>
+<path d="M 139.339,207.992 L 139.637,206.962 L 139.953,205.938 L 140.286,204.919 L 140.637,203.906 L 141.004,202.898 L 141.389,201.898 L 141.790,200.904 L 142.209,199.917 L 142.644,198.937 L 143.096,197.965 L 143.564,197.000 L 144.049,196.044 L 144.550,195.096 L 119.905,181.805 L 119.182,183.174 L 118.482,184.556 L 117.805,185.949 L 117.152,187.353 L 116.524,188.768 L 115.919,190.194 L 115.339,191.630 L 114.784,193.075 L 114.253,194.530 L 113.747,195.994 L 113.266,197.466 L 112.810,198.946 L 112.379,200.433 Z" fill="#5dade2" stroke="#17202a" stroke-width="0.55"/>
+<text x="128.61" y="197.46" class="tiny" text-anchor="middle">TP4056</text>
+<path d="M 143.876,183.166 L 144.603,182.207 L 145.347,181.261 L 146.107,180.328 L 146.883,179.408 L 147.675,178.501 L 148.482,177.609 L 149.305,176.730 L 150.142,175.865 L 150.994,175.015 L 151.861,174.180 L 152.742,173.360 L 153.637,172.555 L 154.546,171.766 L 155.468,170.992 L 156.403,170.234 L 157.351,169.493 L 158.311,168.768 L 159.285,168.059 L 160.270,167.368 L 161.266,166.693 L 162.275,166.036 L 163.294,165.396 L 164.324,164.773 L 165.365,164.169 L 166.416,163.582 L 167.477,163.014 L 168.548,162.464 L 160.909,147.277 L 159.579,147.960 L 158.260,148.667 L 156.954,149.396 L 155.660,150.147 L 154.380,150.920 L 153.113,151.716 L 151.860,152.533 L 150.621,153.371 L 149.396,154.231 L 148.187,155.111 L 146.993,156.013 L 145.815,156.934 L 144.653,157.876 L 143.507,158.837 L 142.377,159.818 L 141.265,160.819 L 140.170,161.838 L 139.093,162.876 L 138.034,163.933 L 136.993,165.007 L 135.971,166.099 L 134.968,167.209 L 133.984,168.336 L 133.019,169.479 L 132.074,170.639 L 131.150,171.815 L 130.246,173.007 Z" fill="#7fb3d5" stroke="#17202a" stroke-width="0.55"/>
+<text x="149.54117263960666" y="165.86551121516024" class="tiny" text-anchor="middle">MT3608</text>
+<path d="M 145.717,193.025 L 146.226,192.176 L 146.749,191.336 L 147.284,190.504 L 147.832,189.680 L 148.393,188.865 L 141.021,183.702 L 140.380,184.634 L 139.753,185.575 L 139.141,186.527 L 138.544,187.487 L 137.963,188.457 Z" fill="#58d68d" stroke="#17202a" stroke-width="0.45"/>
+<text x="143.2298666249035" y="189.48422318266043" class="tiny" text-anchor="middle">HALL</text>
+<circle cx="200.00" cy="123.00" r="4" fill="#2471a3" fill-opacity=".25" stroke="#2471a3"/>
+<circle cx="200.00" cy="145.00" r="4" fill="none" stroke="#a93226" stroke-dasharray="2,1"/>
+<circle cx="288.33" cy="276.00" r="4" fill="#2471a3" fill-opacity=".25" stroke="#2471a3"/>
+<circle cx="269.28" cy="265.00" r="4" fill="none" stroke="#a93226" stroke-dasharray="2,1"/>
+<circle cx="111.67" cy="276.00" r="4" fill="#2471a3" fill-opacity=".25" stroke="#2471a3"/>
+<circle cx="130.72" cy="265.00" r="4" fill="none" stroke="#a93226" stroke-dasharray="2,1"/>
+<text x="200" y="230" class="label" text-anchor="middle">Ø120 HAND OPENING</text>
+<text x="200" y="367" class="sub" text-anchor="middle">blue = front inserts R102 · dashed red = back inserts R80</text>
+<text x="565" y="61" class="label" text-anchor="middle">B — UPPER FRAME: LED CHANNELS (SEPARATE LAYER)</text>
+<circle cx="565" cy="225" r="130" fill="#f5f5f5" stroke="#17202a"/>
+<circle cx="565" cy="225" r="118" fill="none" stroke="#bfc9ca" stroke-width="16"/>
+<circle cx="565" cy="225" r="110" fill="none" stroke="#17202a" stroke-width="16"/>
+<circle cx="565" cy="225" r="93" fill="none" stroke="#f7dc6f" stroke-width="14"/>
+<circle cx="565" cy="225" r="79" fill="none" stroke="#17202a" stroke-width="19"/>
+<circle cx="565" cy="225" r="60" fill="#f7f5ef" stroke="#17202a"/>
+<circle cx="565" cy="225" r="93" fill="none" stroke="#00a8ff" stroke-width="2" stroke-dasharray="3,2"/>
+<circle cx="565" cy="225" r="110" fill="none" stroke="#00a8ff" stroke-width="2" stroke-dasharray="3,2"/>
+<text x="565" y="124" class="dim" text-anchor="middle">OUTER STRIP ON R110 WALL →</text>
+<text x="565" y="142" class="dim" text-anchor="middle">← C STRIP ON R93 WALL</text>
+<text x="565" y="230" class="label" text-anchor="middle">Ø120</text>
+<text x="565" y="368" class="sub" text-anchor="middle">R79–93 C channel · R93–110 solid barrier · R110–118 outer channel</text>
+<text x="755" y="61" class="label" text-anchor="middle">C — ROUTER TEMPLATE</text>
+<rect x="675" y="92" width="160" height="112" rx="10" fill="#fff" stroke="#17202a"/>
+<rect x="695" y="112" width="120" height="72" rx="1.5875" fill="#f7f5ef" stroke="#17202a" stroke-width="1"/>
+<rect x="692.619" y="109.619" width="124.762" height="76.762" rx="3.96875" fill="none" stroke="#8e44ad" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="755" y="136" class="note" text-anchor="middle">solid: finished wood pocket</text>
+<text x="755" y="146" class="note" text-anchor="middle">purple dash: acrylic template opening</text>
+<text x="755" y="160" class="dim" text-anchor="middle">+2.381 mm (3/32 in) all around</text>
+<text x="755" y="171" class="dim" text-anchor="middle">finished inside corner R1.588</text>
+<text x="755" y="193" class="sub" text-anchor="middle">5/16 in bushing · 1/8 in bit</text>
+<rect x="645" y="224" width="220" height="255" rx="5" fill="#fff" stroke="#95a5a6"/>
+<text x="660" y="246" class="label" text-anchor="start" fill="#17202a">REVISED DESIGN</text>
+<text x="660" y="258" class="note" text-anchor="start">• Covers follow the Ø120 arc in short facets.</text>
+<text x="660" y="268" class="note" text-anchor="start">• USB-C faces terminate at R63, directly</text>
+<text x="660" y="278" class="note" text-anchor="start">  behind the removable electronics cover.</text>
+<text x="660" y="288" class="note" text-anchor="start">• Button actuator tips terminate at R60.</text>
+<text x="660" y="298" class="note" text-anchor="start">• Pockets stop at R92; outer wood stays solid.</text>
+<text x="660" y="308" class="note" text-anchor="start">• LED channels live above the 3 mm floor.</text>
+<text x="660" y="318" class="note" text-anchor="start">• No glued cover blocks; screws enter solid</text>
+<text x="660" y="328" class="note" text-anchor="start">  frame ears to eliminate square block pockets.</text>
+<text x="660" y="338" class="note" text-anchor="start"></text>
+<text x="660" y="348" class="label" text-anchor="start" fill="#a93226">OPEN / NOT VALIDATED</text>
+<text x="660" y="360" class="note" text-anchor="start">• MOSFET board size and location are TBD.</text>
+<text x="660" y="370" class="note" text-anchor="start">• Confirm actual board and connector envelopes.</text>
+<text x="660" y="380" class="note" text-anchor="start">• Confirm one-piece 24 mm routed frame and</text>
+<text x="660" y="390" class="note" text-anchor="start">  whether pockets are through-cuts or blind.</text>
+<text x="660" y="400" class="note" text-anchor="start">• This sheet is not router-ready geometry.</text>
+<rect x="0" y="545" width="900" height="75" fill="#15202b"/>
+<text x="24" y="568" class="label" fill="#fff">WHAT TO REVIEW IN THIS DRAFT</text>
+<text x="24" y="582" class="sub" fill="#d5e5ef">1. Covers and controls visibly hug the center opening; no 106 mm flat chord remains.</text>
+<text x="24" y="582" class="sub" fill="#d5e5ef">2. ESP32-C3 and TP4056 USB-C mouths are accessible immediately after removing the faceted cover.</text>
+<text x="24" y="582" class="sub" fill="#d5e5ef">3. Component pockets end by R92 and do not consume the LED-channel structure above them.</text>
+<text x="24" y="582" class="sub" fill="#d5e5ef">4. Finished pocket and guide-bushing template outlines remain separate deliverables after layout approval.</text>
+<rect x="20" y="574" width="860" height="42" fill="#15202b"/>
+<text x="24" y="585" class="sub" fill="#d5e5ef" transform="translate(0,0)">1. Covers and controls visibly hug the center opening; no 106 mm flat chord remains.</text>
+<text x="24" y="585" class="sub" fill="#d5e5ef" transform="translate(0,9)">2. ESP32-C3 and TP4056 USB-C mouths are accessible immediately after removing the faceted cover.</text>
+<text x="24" y="585" class="sub" fill="#d5e5ef" transform="translate(0,18)">3. Component pockets end by R92 and do not consume the LED-channel structure above them.</text>
+<text x="24" y="585" class="sub" fill="#d5e5ef" transform="translate(0,27)">4. Finished pocket and guide-bushing template outlines remain separate deliverables after layout approval.</text>
+</svg>
