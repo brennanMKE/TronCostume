@@ -97,6 +97,8 @@ joint, which is exactly what the cement wants.
 
 ## 5 · Lighting — both strips lie flat, facing up
 
+**See `PREVIEW-lighting.png` for the plan and the section.**
+
 | Strip | Sits in | Lights |
 |---|---|---|
 | C strip | C channel, R79–91 | the white C above it |
@@ -106,9 +108,18 @@ Both strips lie **flat on the divider, LEDs pointing up** at the white acrylic 9
 Paint the channel walls and floor white first. Feed both through the four Ø8 holes in the
 divider at 352° and 8°, either side of the C's gap, down into the electronics bay.
 
-This is deliberately simpler than edge-lighting with a fin. If you can see individual LEDs
-through the white, drop a second strip of 3 mm white acrylic or a layer of baking paper into
-the channel on top of the strip.
+| | Length | At 60/m | At 120/m |
+|---|---|---|---|
+| C strip, R85, 340° | **504 mm** | 30 LEDs | 60 |
+| Ring strip, R122, full circle | **767 mm** | 46 LEDs | 92 |
+
+There is **7 mm of air** between the LEDs and the underside of the white — enough to blur the
+dots. This is deliberately simpler than edge-lighting with a fin. If you can still see
+individual LEDs, drop a strip of 3 mm white acrylic or a layer of baking paper into the
+channel on top of the strip.
+
+**Power.** 76 LEDs at 60/m. All-white at full brightness is 4.6 A, far beyond what the
+MT3608 will give you — keep `LED_MAX_MA` in `include/config.h` set so you stay near 1 A.
 
 ---
 
