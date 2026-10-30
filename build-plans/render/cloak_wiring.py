@@ -22,8 +22,8 @@ def main():
     sh = Sheet(W, H)
     sh.add(f'<rect width="{W}" height="{H}" fill="#f5f6f7"/>')
     sh.text(44, 56, "CLOAK — WIRING", 28, INK, anchor="start", weight="700", ls="1.0")
-    sh.text(44, 82, "one WS2812 chain, five segments, from your sketch  ·  pins from "
-            "include/config.h", 14, MUT, anchor="start")
+    sh.text(44, 82, "one WS2812 chain, five segments  ·  control box is an ESP32-C3 on protoboard, "
+            "one resistor, USB battery bank. Nothing else.", 14, MUT, anchor="start")
 
     sh.define(f'<marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5.5" '
               f'markerHeight="5.5" orient="auto"><path d="M 0,1 L 10,5 L 0,9 z" fill="{DATA}"/></marker>')
@@ -60,22 +60,24 @@ def main():
     x0, y0, x1, y1 = BOX
     sh.add(f'<rect x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}" rx="8" fill="#fff" '
            f'stroke="{INK}" stroke-width="2"/>')
-    sh.text((x0 + x1) / 2, y0 - 10, "CONTROL BOX", 16, INK, weight="700", ls="1.0")
-    parts = [("18650", x0 + 14, y0 + 16, 74, 34, "#8e44ad"),
-             ("TP4056", x0 + 98, y0 + 16, 68, 34, "#b03a2e"),
-             ("MT3608", x0 + 176, y0 + 16, 72, 34, "#7a5c2e"),
-             ("ESP32-C3", x0 + 98, y0 + 64, 96, 40, "#1f6fb4"),
-             ("button", x0 + 212, y0 + 70, 56, 28, BTN)]
+    sh.text((x0 + x1) / 2, y0 - 30, "CONTROL BOX", 16, INK, weight="700", ls="1.0")
+    parts = [("ESP32-C3", x0 + 36, y0 + 46, 104, 44, "#1f6fb4"),
+             ("330 Ω", x0 + 168, y0 + 54, 60, 28, "#7a5c2e")]
     for lab, px, py, pw, ph, col in parts:
         sh.add(f'<rect x="{px}" y="{py}" width="{pw}" height="{ph}" rx="4" fill="{col}" '
                f'fill-opacity="0.85" stroke="{INK}" stroke-width="1"/>')
         sh.text(px + pw / 2, py + ph / 2 + 4, lab, 11.5, "#fff", weight="700")
-    sh.add(f'<path d="M {x0+96},{y0+33} L {x0+88},{y0+33}" stroke="{PWR}" stroke-width="2.5"/>')
-    sh.add(f'<path d="M {x0+176},{y0+50} L {x0+168},{y0+50} L {x0+168},{y0+33} '
-           f'L {x0+166},{y0+33}" fill="none" stroke="{PWR}" stroke-width="2.5"/>')
-    sh.add(f'<path d="M {x0+212},{y0+33} L {x0+230},{y0+33} L {x0+230},{y0+58} '
-           f'L {x0+146},{y0+58} L {x0+146},{y0+64}" fill="none" stroke="{PWR}" stroke-width="2.5"/>')
-    sh.add(f'<path d="M {x0+98},{y0+84} L {x0+40},{y0+84} L {x0+40},{y0-18} '
+    # protoboard outline
+    sh.add(f'<rect x="{x0+22}" y="{y0+32}" width="{x1-x0-44}" height="72" rx="4" fill="none" '
+           f'stroke="{GREY}" stroke-width="1.4" stroke-dasharray="5,4"/>')
+    sh.text(x0 + 30, y0 + 26, "protoboard", 11.5, GREY, anchor="start")
+    # GPIO 4 out through the resistor
+    sh.add(f'<path d="M {x0+140},{y0+68} L {x0+168},{y0+68}" stroke="{DATA}" stroke-width="3"/>')
+    # USB-C in from the battery bank
+    sh.add(f'<path d="M {x0+36},{y0+68} L {x0+8},{y0+68}" stroke="{PWR}" stroke-width="3"/>')
+    sh.text(x0 - 4, y0 + 64, "USB-C", 12.5, PWR, anchor="end", weight="700")
+    sh.text(x0 - 4, y0 + 80, "5 V USB battery bank", 11.5, PWR, anchor="end")
+    sh.add(f'<path d="M {x0+228},{y0+68} L {x1-14},{y0+68} L {x1-14},{y0-18} '
            f'L 470,{y0-18} L 470,760" fill="none" stroke="{DATA}" stroke-width="3"/>')
     sh.add(f'<circle cx="470" cy="760" r="7" fill="{DATA}"/>')
     sh.text(392, 744, "START", 12.5, DATA, anchor="end", weight="700")
@@ -84,23 +86,17 @@ def main():
     # ---- the table
     tx, ty = 960, 150
     sh.text(tx, ty, "CONNECTIONS", 17, INK, anchor="start", weight="700", ls="1.0")
-    rows = [("ESP32-C3 GPIO 4", "330 Ω  →  strip DIN", DATA),
-            ("ESP32-C3 GPIO 5", "button  →  GND  (wake)", BTN),
-            ("ESP32-C3 5V", "MT3608 VOUT+", PWR),
-            ("ESP32-C3 GND", "common ground", GND),
-            ("Strip +5V", "MT3608 VOUT+", PWR),
-            ("Strip GND", "common ground", GND),
-            ("MT3608 VIN+ / VIN−", "TP4056 OUT+ / OUT−", PWR),
-            ("TP4056 B+ / B−", "18650 + / −", PWR),
-            ("TP4056 USB-C", "charge port, reachable", MUT),
-            ("GPIO 20", "strip power MOSFET — not fitted yet", GREY)]
+    rows = [("ESP32-C3 USB-C", "5 V USB battery bank — the only supply", PWR),
+            ("ESP32-C3 GPIO 4", "330 Ω  →  strip DIN", DATA),
+            ("ESP32-C3 5V pin", "strip +5 V", PWR),
+            ("ESP32-C3 GND", "strip GND", GND)]
     for i, (a, b, col) in enumerate(rows):
         y = ty + 28 + i * 25
         sh.add(f'<rect x="{tx}" y="{y-14}" width="8" height="8" fill="{col}"/>')
         sh.text(tx + 16, y, a, 12.5, INK, anchor="start", weight="700")
         sh.text(tx + 150, y, b, 12.5, MUT, anchor="start")
 
-    ny = ty + 318
+    ny = ty + 150
     sh.text(tx, ny, "CHAIN ORDER", 17, INK, anchor="start", weight="700", ls="1.0")
     for i, t in enumerate([
         "Data runs 1 → 2 → 3 → 4 → 5. Each segment's DOUT",
@@ -109,11 +105,16 @@ def main():
         "through the data line.",
         "",
         "Set MAIN_LEDS in include/config.h to the TOTAL of",
-        "all five segments. It is 30 right now, which is a",
-        "placeholder — count your strip and change it.",
+        "all five segments. It is 30 right now — a",
+        "placeholder. Count your strip and change it.",
         "",
-        "LED_MAX_MA is 800, so FastLED will dim before it",
-        "pulls more than the MT3608 can give.",
+        "All strip current goes through the C3's USB-C and",
+        "its 5 V pin. Fine up to roughly 1 A. Past that,",
+        "feed the strip straight off the bank with a cut",
+        "USB cable and only share the ground.",
+        "",
+        "config.h expects a wake button on GPIO 5. No",
+        "button is fine — the cloak just never sleeps.",
     ]):
         sh.text(tx, ny + 26 + i * 18, t, 12.5, "#434a52", anchor="start")
 
