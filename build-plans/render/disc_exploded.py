@@ -107,10 +107,11 @@ def bay_span(r):
     return math.degrees(math.asin(min(1.0, BR_HALF / r)))
 
 
-def bay_cut(cy, A):
-    """open sector between two bridges, from the hand hole out to the outer rim"""
-    a0, a1 = A - 60 + bay_span(R_HOLE), A + 60 - bay_span(R_HOLE)
-    pts = arcpts(cy, R_HOLE, a0, a1)
+def bay_cut(cy, A, r_in=None):
+    """open sector between two bridges, from r_in out to the outer rim"""
+    r_in = R_HOLE if r_in is None else r_in
+    a0, a1 = A - 60 + bay_span(r_in), A + 60 - bay_span(r_in)
+    pts = arcpts(cy, r_in, a0, a1)
     o0, o1 = A - 60 + bay_span(R_RIM), A + 60 - bay_span(R_RIM)
     pts += list(reversed(arcpts(cy, R_RIM, o0, o1)))
     return pathof(pts)
