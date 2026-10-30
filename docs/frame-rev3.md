@@ -186,6 +186,23 @@ them into the electronics pocket. The C-strip leads drop at R86, already inside 
 > With rev 3's pockets those angles no longer sit over an opening. Both C drops must land
 > inside 265°–335° or 30°–90°, and the outer drop must line up with the feeder at 310°.
 
+## Stiffness
+
+20 N finger press, conservative cantilever model (the real plates are supported on three
+sides, so the true numbers are better).
+
+| Part | Free span | Deflection | Stress | SF |
+|---|---|---|---|---|
+| Cover, 3 mm acrylic, buttons | 56 between screws | 0.46 | 7.9 | 8.8 |
+| Cover, 3 mm acrylic, electronics | 62 between screws | 0.63 | 8.8 | 8.0 |
+| **Floor, 3 mm acrylic over the electronics pocket** | **27 radial** | **1.30** | **24.0** | **2.9** |
+| Floor, 3 mm acrylic over the buttons pocket | 24 radial | 0.91 | 21.3 | 3.3 |
+
+The covers are not a concern. The floor is the marginal part and 3 mm acrylic is still
+adequate. For margin: 4 mm acrylic gives SF 5.2 but grows the stack 1 mm and the face screws
+with it; 3 mm polycarbonate will not crack but does not laser cleanly and would have to be
+cut mechanically.
+
 ## Build Order
 
 1. Cut the acrylic template on the laser. Check the Ø119.6 bore against the jig plug.
