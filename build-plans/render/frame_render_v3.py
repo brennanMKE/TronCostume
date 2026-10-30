@@ -13,7 +13,11 @@ R_INS_F, R_INS_B, INSERT_OD = 102.0, 80.0, 8.0
 WEDGES = (0.0, 120.0, 240.0)
 COV_Y0, COV_Y1 = 61.0, 64.0
 BUSH, BIT = 5 / 16 * 25.4, 1 / 8 * 25.4
-TOFF, RCORNER = (BUSH - BIT) / 2, BIT / 2
+TOFF = (BUSH - BIT) / 2
+# Finished inside-corner radius. The 1/8" bit cannot reach 24 mm + the template, so the
+# depth is finished with a bearing-guided flush-trim bit and THAT sets this number.
+# 3.175 = 1/4" flush trim (recommended). 6.350 = 1/2". 1.5875 only if the 1/8" could reach.
+RCORNER = 3.175
 
 BAYS = [
     dict(name="BUTTONS", A=60.0, notch=35.0, cover=35.0, ear=28.0,
@@ -25,8 +29,8 @@ BAYS = [
 ]
 BOARDS = [  # bay index, label, x0, x1, y0, y1, has USB-C at y0
     (0, "BUTTON BOARD 38×20 on edge", -19.0, 19.0, 68.5, 70.3, False),
-    (1, "ESP32-C3", -21.0, -3.0, 64.0, 86.5, True),
-    (1, "TP4056", 1.0, 18.0, 64.0, 92.0, True),
+    (1, "ESP32-C3", -19.0, -1.0, 64.0, 86.5, True),
+    (1, "TP4056", 2.0, 19.0, 64.0, 92.0, True),
 ]
 BAT_A, BAT_HALF, BAT_Y0, BAT_Y1 = 180.0, 41.0, 69.0, 92.0
 
@@ -48,6 +52,15 @@ def circle_path(cx, cy, r):
 def rect(cx, cy, A, x0, x1, y0, y1):
     return path([bay(cx, cy, A, x0, y0), bay(cx, cy, A, x0, y1),
                  bay(cx, cy, A, x1, y1), bay(cx, cy, A, x1, y0)])
+
+def fillet_patch(cx, cy, A, xs, y0, r):
+    """Wood the bit leaves in the reentrant corner where the pocket meets the shoulder."""
+    sg = 1.0 if xs > 0 else -1.0
+    pts = [bay(cx, cy, A, xs, y0), bay(cx, cy, A, xs + sg * r, y0)]
+    pts += [bay(cx, cy, A, xs + sg * r * (1 - math.sin(math.radians(t))),
+                y0 + r * (1 - math.cos(math.radians(t)))) for t in range(0, 91, 5)]
+    return path(pts)
+
 
 def removed(cx, cy):
     """Every piece the router takes out, as separate overlapping rectangles."""
@@ -87,11 +100,17 @@ class Sheet:
 
 def draw_frame(sh, cx, cy, uid):
     cuts = removed(cx, cy)
+    patches = []
+    for b in BAYS:
+        for sgn in (-1.0, 1.0):
+            patches.append(fillet_patch(cx, cy, b["A"], sgn * b["pocket"][0][0],
+                                        b["pocket"][0][1], RCORNER))
     sh.define(f'<mask id="w{uid}"><path d="{circle_path(cx,cy,R_OUT)}" fill="#fff"/>'
-              + "".join(f'<path d="{d}" fill="#000"/>' for d in cuts) + '</mask>')
+              + "".join(f'<path d="{d}" fill="#000"/>' for d in cuts)
+              + "".join(f'<path d="{d}" fill="#fff"/>' for d in patches) + '</mask>')
     sh.add(f'<path d="{circle_path(cx,cy,R_OUT)}" fill="{MAPLE}" mask="url(#w{uid})"/>')
     sh.add(f'<g mask="url(#w{uid})" fill="none" stroke="{INK}" stroke-width="1.0">')
-    for d in cuts + [circle_path(cx, cy, R_OUT)]:
+    for d in cuts + patches + [circle_path(cx, cy, R_OUT)]:
         sh.add(f'<path d="{d}"/>')
     sh.add('</g>')
     sh.add(f'<path d="{circle_path(cx,cy,R_RIM_IN)}" fill="none" stroke="{GREY}" '
@@ -168,7 +187,7 @@ def main():
     sh.add('<rect x="0" y="0" width="880" height="44" fill="#15202b"/>')
     sh.text(26, 21, "TRON IDENTITY DISC — LOWER FRAME, REV 3", 11.0, "#fff", anchor="start", weight="700", ls="2.0")
     sh.text(26, 32, "FLAT covers · component-sized pockets · routed to a laser-cut acrylic template "
-            "· 5/16\" bushing + 1/8\" bit · 1:1", 4.3, "#8fb6d6", anchor="start")
+            "· 5/16\" bushing, 1/8\" bit, 1/4\" flush trim · 1:1", 4.3, "#8fb6d6", anchor="start")
     sh.add('<rect x="700" y="9" width="156" height="26" rx="3" fill="#b5179e"/>')
     sh.text(778, 20, "DRAFT", 11.0, "#fff", weight="700", ls="3")
     sh.text(778, 30, "not for cutting", 3.4, "#ffd9f3")
@@ -243,6 +262,11 @@ def main():
          "The 80 mm protoboard is out; a flat notch that wide puts its ends 25.8 mm back. Button board is now",
          "38 × 20 with the four switches at 11 mm pitch. And the MT3608 no longer fits beside the other two boards,",
          "so it stacks on standoffs over the TP4056 — 21 mm of the 24 mm bay height. Both need your OK."),
+        ("Corners are drawn at R3.175 — an assumption, not an answer.", MAG,
+         "The flush-trim bit sets the finished inside corner, and 1/4in gives R3.175. Checked against it:",
+         "a square-cornered part seated on a filleted wall needs the pocket wider than the part by 2r, so",
+         "the boards moved to x −19…−1 and +2…+19, leaving 1.8 mm of margin. A 1/2in flush trim would",
+         "give R6.350, which needs the electronics pocket out to |x| ≤ 25.35 and the shoulder down to 12.65."),
         ("Router-ready.", MAG,
          "Magenta is the acrylic template: every aperture grown by 2.3813 for the 5/16\" bushing. Inside corners",
          "finish at R1.5875 by design. No blocks anywhere, so nothing to chisel and nothing to glue — the cover",
