@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240mm" height="900mm" viewBox="0 0 1240 900">
+<rect width="1240" height="900" fill="#fff"/>
+<defs>
+<marker id="lr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0,1 L 10,5 L 0,9 z" fill="#6fc3df"/></marker>
+<marker id="t2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0,1 L 10,5 L 0,9 z" fill="#1b1b1b"/></marker>
+</defs>
+<rect width="1240" height="900" fill="#f4f5f6"/>
+<text x="52.00" y="56.00" font-size="27" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="1.0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">WHERE EVERYTHING LIVES</text>
+<text x="52.00" y="80.00" font-size="13.5" fill="#5a6066" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">one radial slice through the disc, at the battery bay · 42 mm total · scale 7.6 : 1</text>
+<text x="52.00" y="100.00" font-size="13" fill="#b5179e" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">LEDs live in the top 12 mm. Components live in the 24 mm below the divider. Different depth AND different radius — they never meet.</text>
+<rect x="150.0" y="240.0" width="501.6" height="22.8" fill="#232629" stroke="#1b1b1b" stroke-width="0.9"/>
+<rect x="317.2" y="240.0" width="45.6" height="68.4" fill="#f2f4f6" stroke="#1b1b1b" stroke-width="0.9"/>
+<rect x="590.8" y="262.8" width="91.2" height="68.4" fill="#f2f4f6" stroke="#1b1b1b" stroke-width="0.9"/>
+<rect x="150.0" y="262.8" width="144.4" height="68.4" fill="#e3cda0" stroke="#1b1b1b" stroke-width="0.9"/>
+<rect x="400.8" y="262.8" width="129.2" height="68.4" fill="#e3cda0" stroke="#1b1b1b" stroke-width="0.9"/>
+<rect x="150.0" y="331.2" width="532.0" height="22.8" fill="#c9ad7c" stroke="#1b1b1b" stroke-width="0.9"/>
+<text x="416.00" y="346.45" font-size="11" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">DIVIDER  3 mm — the part that makes it a box</text>
+<rect x="150.0" y="354.0" width="91.2" height="182.4" fill="#e3cda0" stroke="#1b1b1b" stroke-width="0.9"/>
+<rect x="530.0" y="354.0" width="152.0" height="182.4" fill="#e3cda0" stroke="#1b1b1b" stroke-width="0.9"/>
+<rect x="150.0" y="536.4" width="532.0" height="22.8" fill="#bfe3f2" stroke="#1b1b1b" stroke-width="0.9"/>
+<text x="416.00" y="551.65" font-size="11" fill="#1b1b1b" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">CARRIER / BACK  3 mm acrylic — everything bolts to this</text>
+<rect x="385.6" y="262.8" width="15.2" height="38.0" fill="#1f6fb4" stroke="#1b1b1b" stroke-width="0.7"/>
+<rect x="530.0" y="262.8" width="15.2" height="38.0" fill="#1f6fb4" stroke="#1b1b1b" stroke-width="0.7"/>
+<path d="M 385.6,281.8 L 365.8,281.8" stroke="#6fc3df" stroke-width="2.6" marker-end="url(#lr)"/>
+<path d="M 545.2,281.8 L 586.2,281.8" stroke="#6fc3df" stroke-width="2.6" marker-end="url(#lr)"/>
+<rect x="271.6" y="376.8" width="159.6" height="159.6" fill="#8e44ad" stroke="#1b1b1b" stroke-width="0.9"/>
+<text x="351.40" y="460.45" font-size="11" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">18650 in its holder — 21 mm tall</text>
+<path d="M 271.6,354.0 H 431.2" stroke="#b03a2e" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="351.40" y="366.16" font-size="9.5" fill="#b03a2e" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">3 mm clear</text>
+<path d="M 150.0,224.8 V 570.6" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="150.00" y="593.40" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R60</text>
+<path d="M 241.2,224.8 V 594.9" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="241.20" y="617.72" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R72</text>
+<path d="M 294.4,224.8 V 570.6" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="294.40" y="593.40" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R79</text>
+<path d="M 362.8,224.8 V 594.9" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="362.80" y="617.72" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R88</text>
+<path d="M 400.8,224.8 V 570.6" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="400.80" y="593.40" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R93</text>
+<path d="M 530.0,224.8 V 594.9" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="530.00" y="617.72" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R110</text>
+<path d="M 590.8,224.8 V 570.6" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="590.80" y="593.40" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R118</text>
+<path d="M 651.6,224.8 V 594.9" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="651.60" y="617.72" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R126</text>
+<path d="M 682.0,224.8 V 570.6" stroke="#8a9099" stroke-width="0.4" stroke-dasharray="2,2"/>
+<text x="682.00" y="593.40" font-size="10.5" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">R130</text>
+<text x="226.00" y="254.44" font-size="10.5" fill="#fff" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">BLACK FACE 3 mm</text>
+<text x="195.60" y="205.80" font-size="11" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">hand hole wall</text>
+<text x="416.00" y="205.80" font-size="12.5" fill="#1f6fb4" text-anchor="middle" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">LED CHANNELS</text>
+<text x="606.00" y="205.80" font-size="11" fill="#8a9099" text-anchor="middle" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">white ring</text>
+<text x="752.00" y="205.80" font-size="13" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">THICKNESS</text>
+<rect x="752.0" y="240.0" width="26" height="22.8" fill="#232629" stroke="#1b1b1b" stroke-width="0.8"/>
+<text x="788.00" y="255.40" font-size="12.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">3 mm   face</text>
+<rect x="752.0" y="262.8" width="26" height="68.4" fill="#e3cda0" stroke="#1b1b1b" stroke-width="0.8"/>
+<text x="788.00" y="301.00" font-size="12.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">9 mm   channel layer — the LEDs</text>
+<rect x="752.0" y="331.2" width="26" height="22.8" fill="#c9ad7c" stroke="#1b1b1b" stroke-width="0.8"/>
+<text x="788.00" y="346.60" font-size="12.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">3 mm   divider</text>
+<rect x="752.0" y="354.0" width="26" height="182.4" fill="#e3cda0" stroke="#1b1b1b" stroke-width="0.8"/>
+<text x="788.00" y="449.20" font-size="12.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">24 mm   frame — the components</text>
+<rect x="752.0" y="536.4" width="26" height="22.8" fill="#bfe3f2" stroke="#1b1b1b" stroke-width="0.8"/>
+<text x="788.00" y="551.80" font-size="12.5" fill="#333" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">3 mm   carrier / back</text>
+<path d="M 732.0,240.0 V 559.2" stroke="#1b1b1b" stroke-width="1.4" marker-start="url(#t2)" marker-end="url(#t2)"/>
+<text x="724.00" y="404.60" font-size="17" fill="#1b1b1b" text-anchor="end" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">42 mm</text>
+<text x="52.00" y="680.80" font-size="15" fill="#1b1b1b" text-anchor="start" font-weight="700" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">SO, TO ANSWER BOTH QUESTIONS</text>
+<text x="52.00" y="704.80" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">The LED strips never share space with the electronics. The strips stand on edge in the</text>
+<text x="52.00" y="722.80" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">9 mm channel layer, between R79 and R110, in the top 12 mm of the disc. The boards, the</text>
+<text x="52.00" y="740.80" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">battery and the button board all sit in the 24 mm frame below the divider, between R72</text>
+<text x="52.00" y="758.80" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">and R110. The divider is the floor of one and the ceiling of the other.</text>
+<text x="52.00" y="776.80" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"></text>
+<text x="52.00" y="794.80" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Total 42 mm. The 18650 holder is what sets it: 21 mm tall, in a 24 mm bay, 3 mm clear.</text>
+<text x="52.00" y="812.80" font-size="12.5" fill="#434a52" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">Drop to a bare tabbed cell and an 18 mm frame and the disc becomes 36 mm.</text>
+<text x="52.00" y="878.00" font-size="10.5" fill="#8a9099" text-anchor="start" font-weight="400" letter-spacing="0" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">build-plans/render/stack_section.py  ·  same constants as the v4 cut files</text>
+</svg>
