@@ -31,10 +31,12 @@
   // One strip chain: the inner C first, then the outer ring (docs/disc-build.md;
   // 60 LEDs/m counts, change for the strip you buy).
   #ifdef BENCH_RING_LEDS
-    // Bench strip (env disc-1-bench): every LED is outer ring, so the ring
-    // effects can be tried on a short test strip.
-    #define MAIN_LEDS 0
-    #define RING_LEDS BENCH_RING_LEDS
+    // Bench strip (env disc-1-bench): the first BENCH_RING_LEDS are the
+    // outer ring, the rest the inner C, so ring on/off and effects can be
+    // tried on a short test strip.
+    #define RING_LEDS  BENCH_RING_LEDS
+    #define MAIN_LEDS  (BENCH_LEDS - BENCH_RING_LEDS)
+    #define RING_FIRST
   #else
     #define MAIN_LEDS 33      // inner C: always on, solid color
     #define RING_LEDS 41      // outer ring: on/off and effects
@@ -50,6 +52,13 @@
 
 #define PEER_ROLE (DEVICE_ROLE == ROLE_DISC ? ROLE_CLOAK : ROLE_DISC)
 #define NUM_LEDS  (MAIN_LEDS + RING_LEDS)
+#ifdef RING_FIRST
+  #define RING_START 0
+  #define MAIN_START RING_LEDS
+#else
+  #define MAIN_START 0
+  #define RING_START MAIN_LEDS
+#endif
 
 // ---- LEDs ----
 #define LED_PIN        4       // through 330 ohm; beside 3V3/5V/GND on the C3 Super Mini

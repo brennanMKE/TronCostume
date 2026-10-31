@@ -11,8 +11,8 @@
 //                        orange); hold 1 s / tap then hold 1 s: the same for
 //                        both costumes
 //   black                double tap: flicker; triple tap: motion; tap: back
-//                        to steady (never turns anything off); hold 3 s:
-//                        this costume off, then the disc
+//                        to steady, or outer ring on/off when already
+//                        steady; hold 3 s: this costume off, then the disc
 //                        deep sleeps until black is pressed again
 //
 // The disc and its cloak always show the same color. The cloak has no color
@@ -182,9 +182,9 @@ static void send(DiscMsg& m) {
 }
 
 // ---- Drawing ----
-// The first MAIN_LEDS are the solid part: the disc's inner C, or the cloak's
-// strip. On the disc the next RING_LEDS are the outer ring, which can be off
-// and has effects.
+// MAIN_LEDS are the solid part: the disc's inner C, or the cloak's strip.
+// On the disc RING_LEDS are the outer ring, which can be off and has effects.
+// The ring follows the main part, except on the bench strip (RING_FIRST).
 enum RingMode : uint8_t { RING_SOLID, RING_FLICKER, RING_MOTION };
 static const char* kRingNames[] = { "solid", "flicker", "motion" };
 static bool     ringOn = true;
@@ -206,7 +206,7 @@ static uint8_t ringFlickerLevel(uint32_t now) {
 }
 
 static void drawRing(uint32_t now) {
-  CRGB* ring = leds + MAIN_LEDS;
+  CRGB* ring = leds + RING_START;
   if (!ringOn || currentColor == COLOR_OFF) {
     fill_solid(ring, RING_LEDS, CRGB::Black);
     return;
@@ -235,7 +235,7 @@ static void drawRing(uint32_t now) {
 #endif
 
 static void render() {
-  fill_solid(leds, MAIN_LEDS, ledColors[currentColor]);
+  fill_solid(leds + MAIN_START, MAIN_LEDS, ledColors[currentColor]);
 #if RING_LEDS > 0
   drawRing(millis());
 #endif
@@ -401,10 +401,13 @@ static void onTaps(uint8_t b, uint8_t taps) {
     requestColor(savedColor);
     return;
   }
-  // Double and triple tap pick an effect. A single tap is the way back to
-  // steady: the ring on and solid. It never turns anything off.
+  // Double and triple tap pick an effect. A single tap is the way back: it
+  // ends an effect (ring steady), and only toggles the ring when already steady.
   switch (taps) {
-    case 1: ringSet(true, RING_SOLID); break;
+    case 1:
+      if (ringOn && ringMode != RING_SOLID) ringSet(true, RING_SOLID);
+      else ringSet(!ringOn, RING_SOLID);
+      break;
     case 2: ringSet(true, RING_FLICKER); break;
     case 3: ringSet(true, RING_MOTION); break;
   }
