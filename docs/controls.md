@@ -51,7 +51,7 @@ Each color button has a **primary** and a **secondary** color:
 
 | Gesture | Result |
 |---|---|
-| **Tap** | During flicker or motion: back to steady. When already steady: outer ring on / off |
+| **Tap** | Back to steady: the outer ring on and solid. Never turns anything off |
 | **Double tap** | Outer ring: erratic flicker |
 | **Triple tap** | Outer ring: motion (a bright section circling) |
 | **Hold 3 s** | Your disc and cloak off, then the disc deep sleeps ([deep-sleep.md](deep-sleep.md)) |
@@ -61,7 +61,7 @@ Each color button has a **primary** and a **secondary** color:
 - Any color button tapped while off also turns the costume back on, in that color.
 - The **inner C** is always on while the costume is on, in a solid color. Only the **outer ring** has on/off and effects. See [disc-build.md](disc-build.md).
 - The ring's on/off and effect are the disc's own. The cloak only follows the color.
-- When the ring comes on (by tap, or with the costume), it sweeps around in about 0.4 s.
+- When the ring comes on with the costume, it sweeps around in about 0.4 s.
 
 ## Timing
 

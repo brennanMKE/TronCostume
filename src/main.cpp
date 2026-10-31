@@ -11,8 +11,8 @@
 //                        orange); hold 1 s / tap then hold 1 s: the same for
 //                        both costumes
 //   black                double tap: flicker; triple tap: motion; tap: back
-//                        to steady, or outer ring on/off when already
-//                        steady; hold 3 s: this costume off, then the disc
+//                        to steady (never turns anything off); hold 3 s:
+//                        this costume off, then the disc
 //                        deep sleeps until black is pressed again
 //
 // The disc and its cloak always show the same color. The cloak has no color
@@ -401,13 +401,10 @@ static void onTaps(uint8_t b, uint8_t taps) {
     requestColor(savedColor);
     return;
   }
-  // Double and triple tap pick an effect. A single tap is the way back: it
-  // ends an effect (ring steady), and only toggles the ring when already steady.
+  // Double and triple tap pick an effect. A single tap is the way back to
+  // steady: the ring on and solid. It never turns anything off.
   switch (taps) {
-    case 1:
-      if (ringOn && ringMode != RING_SOLID) ringSet(true, RING_SOLID);
-      else ringSet(!ringOn, RING_SOLID);
-      break;
+    case 1: ringSet(true, RING_SOLID); break;
     case 2: ringSet(true, RING_FLICKER); break;
     case 3: ringSet(true, RING_MOTION); break;
   }

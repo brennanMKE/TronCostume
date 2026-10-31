@@ -7,7 +7,7 @@ Each disc has four buttons: **black, white, blue, green**. Six colors come in pa
 - **Tap** white, blue or green: your disc and cloak change to that color.
 - **Double tap**: the paired color (yellow, red, orange).
 - **Hold 1 s**, or **tap then hold 1 s** (both costumes planned): the same, for both costumes at once.
-- **Black**: tap turns the outer ring on or off, a double tap gives an erratic flicker, a triple tap gives motion. Hold 3 s turns your costume off.
+- **Black**: tap goes back to a steady solid ring, a double tap gives an erratic flicker, a triple tap gives motion. Hold 3 s turns your costume off.
 
 See [docs/controls.md](docs/controls.md) for the full controls.
 
@@ -16,7 +16,7 @@ See [docs/controls.md](docs/controls.md) for the full controls.
 ## Features
 
 - **Disc controls the cloak**: Three color buttons on the disc, each with a primary and a secondary color. The cloak follows the disc.
-- **Outer ring effects**: The inner C is always a solid color; the outer ring can be off, steady, flickering or circling, set with the black button.
+- **Outer ring effects**: The inner C is always a solid color; the outer ring can be steady, flickering or circling, set with the black button.
 - **Hold to turn off**: Hold black for 3 s and your disc and cloak go dark together. Tap any button to come back on.
 - **Change together or separately** (both planned): A tap changes your own costume; the same gesture held for 1 s changes both costumes at once. See [docs/controls.md](docs/controls.md).
 - **Simultaneous change**: The disc schedules each change 50 ms ahead and tells the cloak exactly how long is left, corrected for measured radio latency, so both strips switch together.
@@ -140,7 +140,7 @@ Peer Cloak found: 7C:DF:A1:AB:CD:EF
 | Tap blue on the disc | After about 0.4 s, disc logs `Color -> blue (button)`, cloak logs `Color -> blue (disc button)`, strips change together |
 | Double tap blue | Both change to red |
 | Hold green 1 s | Disc logs `Both costumes -> green (group message not built yet ...)` and both change to green |
-| Tap black | Disc logs `Outer ring off`; the ring part of the disc strip goes dark, the C stays lit |
+| Tap black | Disc logs `Outer ring on (solid)`; the ring goes steady, nothing turns off |
 | Double tap black, then triple tap black | `Outer ring on (flicker)`, then `(motion)` |
 | Hold black 3 s | Disc logs `Hold: lights off`, both log `Color -> off` |
 | Tap black while off | Both come back on in the saved color |
