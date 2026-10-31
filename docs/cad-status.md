@@ -107,6 +107,15 @@ You need to reach the components and swap the battery once the wood is glued. Th
 - **Screws**: 6 × M4 through the face at the bridges (0°, 120°, 240°), at R72 and R103. They thread into inserts in the base's ribs. Length about M4 × 25.
 - **LED connection**: one 3-pin connector (5 V, ground, data) between lid and base. The C strip feeds the outer strip.
 - **Opening it**: lift the lid and every bay is open from the top. The bay covers stay with the base, and the protoboard stays in its layer 1 slot.
+- **Checked against the current model**:
+  - **Base**: an insert 8 mm across and 10 mm long, set into the base from its top, lands fully in solid wood at all six spots (R72 and R103 at 0°, 120° and 240°). It clears the bay notches, the insert-block sockets and the wire slots.
+  - **Lid**: a 4.5 mm screw hole at R72 is in the inner wood (R60–R80), and one at R103 is in the wood between the channels (R96–R107). Neither crosses the C channel or the white C.
+
+To model the split, add to `cad/disc.py`:
+1. 4.5 mm clearance holes through the face and layers 4–5.
+2. Insert holes, sized to the measured insert, in layers 1–3.
+3. A countersink note on the face, or button-head screws.
+4. A reference connector in a bay.
 
 ## Open questions
 
