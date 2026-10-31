@@ -1,5 +1,11 @@
 # Wood Frame
 
+> **SUPERSEDED — 2026-10-29.** The bay geometry below was rejected: the bays run out to
+> R114 and the covers are 106-long chords whose ends finish 32.9 mm behind the hand hole.
+> Use **[frame-rev3.md](frame-rev3.md)** instead. This file is kept because other docs still
+> link to it and because the conventions, the insert radii (R102 front, R80 back) and the
+> overall Ø260 / Ø120 are unchanged.
+
 The plywood ring that holds the three sets of components. Its measurements are the reference for everything else:
 
 - **The front** ([front-face.md](front-face.md)) screws into **3 inserts on its front side**.

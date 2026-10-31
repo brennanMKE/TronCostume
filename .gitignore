@@ -12,3 +12,7 @@
 
 # Reference videos: large and not ours to redistribute
 references/
+
+# Python
+__pycache__/
+*.pyc
