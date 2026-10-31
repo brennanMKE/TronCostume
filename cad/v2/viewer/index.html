@@ -63,8 +63,19 @@ const PARTS = [
   { id: "fscrews", name: "Front screws, black M4 x 20 (3)", file: "models/front_screws_ref.json", color: 0x141416, rough: 0.35, order: 5 },
   { id: "rscrews", name: "Back screws, black M4 x 12 (6)", file: "models/rear_screws_ref.json", color: 0x141416, rough: 0.35, order: -1.5, rear: true },
   { id: "inserts", name: "M4 x 12 wood inserts (9)", file: "models/inserts_ref.json", color: 0xc8b04a, rough: 0.35, order: 0.5 },
-  { id: "pod",    name: "Electronics pod (rough)", file: "models/pod_ref.json", color: 0x1a1b1e, rough: 0.15, order: -1, rear: true },
-  { id: "usb",    name: "Charger, ESP32-C3, MT3608", file: "models/electronics_ref.json", color: 0x2a4d7a, rough: 0.5, order: -1, rear: true },
+  { id: "pod",    name: "Pod hold-down, black 3 mm", file: "models/pod_holddown.json", color: 0x16171a, rough: 0.15, order: -1, rear: true },
+  { id: "podloc", name: "Pod locator, thin acrylic", file: "models/pod_locator.json", color: 0x3a3f48, rough: 0.2, order: -1, rear: true },
+  { id: "usb",    name: "Charger + MT3608 boards", file: "models/pod_pcb_blue.json", color: 0x1d4fa0, rough: 0.5, order: -1, rear: true },
+  { id: "esp",    name: "ESP32-C3 board", file: "models/pod_pcb_black.json", color: 0x111214, rough: 0.5, order: -1, rear: true },
+  { id: "podics", name: "Board components", file: "models/pod_ics.json", color: 0x202124, rough: 0.6, order: -1, rear: true },
+  { id: "podmet", name: "USB-C ports + pads", file: "models/pod_metal.json", color: 0xc9cdd2, rough: 0.25, order: -1, rear: true },
+  { id: "pot",    name: "MT3608 trimpot", file: "models/pod_trimpot.json", color: 0x3f7fd6, rough: 0.5, order: -1, rear: true },
+  { id: "podhw",  name: "Pod M2 screws + nuts (4)", file: "models/pod_hardware.json", color: 0x141416, rough: 0.35, order: -1, rear: true },
+  { id: "podcov", name: "Pod cover, black 3 mm (cemented)", file: "models/pod_cover.json", color: 0x111214, rough: 0.12, order: -1, rear: true },
+  { id: "ledwp",  name: "LED wires, pod side", file: "models/led_wire_pod.json", color: 0xc23b3b, rough: 0.5, order: -1, rear: true },
+  { id: "ledcon", name: "LED connector, 3-pin in-line", file: "models/led_connector.json", color: 0xe8e2d0, rough: 0.6, order: 0 },
+  { id: "ledws",  name: "LED wires, strip side", file: "models/led_wire_strip.json", color: 0xc23b3b, rough: 0.5, order: 1 },
+  { id: "ledjmp", name: "LED jumper, C end to outer strip", file: "models/led_jumper.json", color: 0xc23b3b, rough: 0.5, order: 2 },
   { id: "led1",   name: "Maple LED 1", file: "models/led1.json", color: 0xd8b88a, rough: 0.8, order: 3, ink: true },
   { id: "led2",   name: "Maple LED 2", file: "models/led2.json", color: 0xcfae7e, rough: 0.8, order: 4, ink: true },
   { id: "strip",  name: "Outer LED strip", file: "models/led_strip_ref.json", color: 0x5ff3ff, rough: 0.4, order: 2.5, led: true },
@@ -105,7 +116,7 @@ let glowOn = true, sectionOn = false;
 const dirW = a => [Math.sin(a * Math.PI / 180), -Math.cos(a * Math.PI / 180)];
 function around(a, r, y) { const [x, z] = dirW(a); return [x * r, y, z * r]; }
 const TOP = ["face", "c", "led1", "led2", "cstrip", "strip", "white", "fscrews"];
-const REAR = ["back", "box", "boxhw", "holder", "cell", "buttons", "pod", "usb", "rscrews"];
+const REAR = ["back", "box", "boxhw", "holder", "cell", "buttons", "pod", "podloc", "usb", "esp", "podics", "podmet", "pot", "podhw", "podcov", "ledwp", "rscrews"];
 const VIEWS = [
   { id: "overview", label: "Whole disc", pos: [260, 230, 330], target: [0, 0, 0], hide: [],
     note: "v2: three-bridge maple frame, two maple LED layers, white ring, black face with the white C. 31 mm thick; the battery box sticks out 9 mm at the back." },
@@ -116,7 +127,7 @@ const VIEWS = [
   { id: "back-off", label: "Back removed", pos: [280, -200, 330], target: [0, -30, 0], hide: [], drop: 70,
     note: "Take out six screws and the back drops away with every component on it: buttons, battery box and holder, charger, ESP32-C3 and MT3608. The frame and front stay together." },
   { id: "electronics", label: "Electronics on the back", pos: [-60, 330, 60], target: [0, -40, 0], hide: ["f1", "f2", "inserts", "led1", "led2", "strip", "cstrip", "white", "face", "c"], drop: 40,
-    note: "The back seen from inside, frame and front hidden. The electronics pod (charger and ESP32-C3 under a black cover, USB-C slots at the front) and the MT3608 at 10 o'clock, button board at 2 o'clock, battery holder in its box at 6 o'clock." },
+    note: "The back seen from inside, frame and front hidden. The electronics pod (charger and ESP32-C3 at the front, MT3608 behind, under a black hold-down plate) at 10 o'clock, button board at 2 o'clock, battery holder in its box at 6 o'clock." },
   { id: "inside", label: "Frame from the back", pos: [40, -320, 140], target: [0, 0, 10], hide: REAR,
     note: "Back and its parts hidden. The open sectors between the three bridges; the LED layers above close the top." },
   { id: "frame", label: "Frame only", pos: [260, 260, 300], target: [0, 0, 0], hide: TOP.concat(REAR),
@@ -124,9 +135,11 @@ const VIEWS = [
   { id: "battery-section", label: "Battery, cut through", pos: [230, 10, 140], target: [0, -2, 85], hide: [], clip: [-1, 0, 0, 0],
     note: "Cut across the holder. The box is two black rings and a floor, stacked under the back and clamped by four M3 screws with nuts inside. The holder stands on the floor 6 mm below the back and stops 2 mm under the LED layer." },
   { id: "pod", label: "Electronics pod", pos: around(255, 150, 120), target: around(300, 80, 6), hide: ["f1", "f2", "f3", "inserts", "led1", "led2", "strip", "cstrip", "white", "face", "c", "fscrews"],
-    note: "Rough pod at 10 o'clock: 36 x 48 x 13 on the back, 3 mm carrier and cemented black cover, two 13 mm plug slots at the front. Detailed separately; dimensions in cad/v2/electronics-pod.md." },
+    note: "Electronics pod at 10 o'clock: charger and ESP32-C3 side by side at the hand hole with the MT3608 turned sideways behind them, in a thin locator under a black hold-down plate, clamped by four M2 screws. Its own build board shows each step." },
+  { id: "led-path", label: "LED path", pos: around(345, 120, 210), target: around(340, 95, 10), hide: ["face", "c", "led2", "white"],
+    note: "The C strip's input at 350 deg drops through the C channel to an in-line 3-pin connector (5 V, ground, data) on the back, then into the pod. Unplug it to take the back off. A jumper carries the signal from the C's end at 10 deg to the outer strip's start at 12 deg." },
   { id: "usb", label: "USB ports from hand hole", pos: around(120, 30, 40), target: around(300, 62, 5), hide: [],
-    note: "A 52 mm notch in the frame at 10 o'clock opens the pod's front to the hand hole. Two slots in the pod's front pass a USB-C plug straight to the charger and the ESP32." },
+    note: "A 59 mm flat in the frame and the back at 10 o'clock. The charger's and ESP32-C3's USB-C ports sit flush with the hand hole, under the front edge of the black cover." },
 ];
 
 let tween = null;
@@ -203,7 +216,7 @@ Promise.all(PARTS.map(p => fetch(p.file).then(r => { if (!r.ok) throw new Error(
   const ux = Math.sin(300 * Math.PI / 180), uy = Math.cos(300 * Math.PI / 180);
   const exposed = (x, y) => {
     const r = Math.hypot(x, y), lr = x * ux + y * uy, lt = Math.abs(-x * uy + y * ux);
-    return r > 129.5 || r < 60.5 || (lr > 40 && lr < 75.5 && lt < 26.5);
+    return r > 129.5 || r < 60.5 || (lr > 40 && lr < 75.5 && lt < 30);
   };
   if (p.ink) {
     // sanded outer edge, colored with black acrylic pen: vertical triangles on the outer radius go last, in their own group

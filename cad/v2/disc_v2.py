@@ -42,7 +42,7 @@ INSERT_HOLE_D = 7.8                  # drawn size; the kerf opens it to about 8.
 FRONT_R = 101.0                      # face screws -> inserts in the bridge tops (outer end)
 REAR_R = 84.0                        # back screws -> inserts in the bridge bottoms (inner end)
 REAR_RING_R, REAR_RING_ANGLES = 122.0, (60, 180, 300)   # extra back screws in the outer ring
-WIRE_W, WIRE_R = 6.0, 92.5           # wire notch across bridges 0 and 240, top frame layer
+WIRE_W, WIRE_R = 5.0, 92.5           # wire notch across bridges 0 and 240 in the BOTTOM frame layer: wires on the back pass under
 
 # buttons: protoboard screwed to the inside of the back, switches facing out
 BTN_ANGLE, BTN_R = 60, 90.0          # board center
@@ -53,18 +53,30 @@ BTN_PITCH = 10.0                     # 36 across four 6 mm switches with 4 mm ga
 BTN_OFF_L, BTN_OFF_W = -3.8, -4.0    # button row center from board center (from the photo - measure)
 MOUNT_DX, MOUNT_DY, MOUNT_D = 37.0, 7.5, 2.4   # M2 corner holes (estimated - measure)
 
-# USB: charger + ESP32-C3 in an acrylic pod (carrier + cemented black cover), ports facing the
-# hand hole through a notch in the inner ring. Rough envelope only - detailed in its own model.
-USB_ANGLE, USB_NOTCH_W = 300, 52.0
-POD_R0 = 61.0                        # pod front face, 1 mm behind the hand hole
-POD_WALL, POD_CARRIER_T, POD_TOP_T = 3.0, 3.0, 3.0
-POD_INNER_H = 7.0                    # boards 4.5 tall + 2.5, so a plug overmold clears the top
-POD_LEN, POD_W = 36.0, 48.0          # radial x tangential, outside
-PORT_R = POD_R0 + POD_WALL           # board USB-C ends at the front wall's inside face
-CHARGER_T = (-20.0, -3.0)            # tangential span, TP4056 17 x 28
-ESP_T = (2.0, 20.0)                  # ESP32-C3 Super Mini 18 x 22.5
-PLUG_W = 13.0                        # slot width for a USB-C plug overmold (about 12.4 wide)
-MT_R, MT_T = (78.0, 95.8), (27.0, 59.8)   # MT3608 32.8 x 17.8, beside the pod on the back
+# Electronics pod at 10 o'clock: TP4056 charger, MT3608 boost and ESP32-C3 side by side on the back,
+# USB-C ports at the hand hole. A thin locator sheet with a pocket per board, then a 3 mm black
+# hold-down plate with windows, clamped to the back by small black screws from outside, nuts inside.
+# Local frame: x from R61 outward, y sideways, z up from the back's inside face. Sizes from the photos.
+USB_ANGLE, USB_NOTCH_W = 300, 59.0
+POD_R0 = 63.0                        # pod starts behind the 3 mm face plate (R60-R63)
+FP_T, FP_CLR, FP_SLOT_CLR = 3.0, 0.25, 0.3   # face plate: black 3 mm, cemented to the back; port openings +0.3 a side
+POD_LOC_T, POD_PLATE_T = 1.0, 3.0    # locator = board thickness (all three boards are 1.0); hold-down in the 3 mm black
+POD_X1, POD_HALF_W = 48.6, 27.5      # carrier plates: x 0..48.6; +-27.5 at the front (screws), +-BACK_HALF_W at the back
+POD_BACK_R = 6.0
+BACK_HALF_W = 20.9
+POD_CLR, POD_RIM = 0.2, 0.8          # pocket clearance per side; hold-down rim over each board edge
+BOARD_X0 = 0.0                       # board front edges against the face plate; USB-C sticks 1.5 into its openings
+USBC_W, USBC_L, USBC_H, USBC_OUT = 8.9, 7.3, 3.2, 1.5   # USB-C receptacle; sticks out 1.5 past the board edge (measured on the ESP32)
+PODS = {                             # name: (y0, y1, length, pcb thickness), built pointing outward
+    "tp4056": (-19.15, -1.85, 28.0, 1.0),   # measured 28 x 17.3 x 1.0
+    "esp32c3": (1.25, 19.25, 22.0, 1.0),    # measured 22 x 18 x 1.0
+    "mt3608": (-8.6, 8.6, 37.0, 1.0),       # measured 37 x 17.2 x 1.0; no USB-C: turned sideways behind (see MT_X0)
+}
+MT_X0 = 29.2                         # MT3608's front edge once turned sideways (x 29.2..46.4, y +-18.5)
+POD_SCREWS = [(4.0, -25.0), (4.0, 25.0), (32.0, -25.0), (32.0, 25.0)]   # outside the cover, so they unscrew
+POD_SCREW_HOLE, POD_SCREW_L = 2.4, 10.0      # M2 x 10 black, nuts on top of the plate
+M2_NUT_AF, M2_NUT_H = 4.0, 1.6
+PLUG_W = 12.4                        # USB-C plug overmold, about 12.4 x 6.5
 
 # battery: holder in a black acrylic box under the back
 HOLDER_L, HOLDER_W, HOLDER_H = 80.0, 21.0, 22.0
@@ -113,10 +125,10 @@ for a in BRIDGES:
     frame_sk += rot(a) * lrect(INNER_D/2 + 1, RING_OUT_IN + 1, -BRIDGE_W/2, BRIDGE_W/2)
 frame_sk -= rot(USB_ANGLE) * lrect(0, RING_IN_OUT + 1, -USB_NOTCH_W/2, USB_NOTCH_W/2)   # square mouth, clear plug path
 frame_sk -= holes(front_pts + rear_pts, INSERT_HOLE_D)
-frame1_sk = frame_sk
-frame2_sk = frame_sk - (rot(0) * lrect(WIRE_R - WIRE_W/2, WIRE_R + WIRE_W/2, -11, 11)) \
+frame1_sk = frame_sk - (rot(0) * lrect(WIRE_R - WIRE_W/2, WIRE_R + WIRE_W/2, -11, 11)) \
                     - (rot(240) * lrect(WIRE_R - WIRE_W/2, WIRE_R + WIRE_W/2, -11, 11))
-frame_sks = [frame1_sk] * (FRAME_N - 1) + [frame2_sk]     # wire notches in the top frame layer only
+frame2_sk = frame_sk
+frame_sks = [frame1_sk] + [frame2_sk] * (FRAME_N - 1)     # wire notches in the bottom frame layer only
 
 # --- LED layers ---
 def c_bridge(a):
@@ -159,9 +171,12 @@ box_floor_bot = holder_bot - ACRYLIC_T
 box_screw_pts = [hold_loc * Pos(a, b) for a, b in BOX_SCREWS]
 
 # --- back ---
+pod_loc = rot(USB_ANGLE) * Pos(POD_R0, 0)
 back_sk = annulus - window_sk - btn_cut \
     - holes([board_pt(l, w) for l, w in mount_pts], MOUNT_D) \
-    - holes(rear_pts, SCREW_CLR_D) - holes(box_screw_pts, BOX_SCREW_HOLE)
+    - holes(rear_pts, SCREW_CLR_D) - holes(box_screw_pts, BOX_SCREW_HOLE) \
+    - holes([pod_loc * Pos(x, y) for x, y in POD_SCREWS], POD_SCREW_HOLE) \
+    - rot(USB_ANGLE) * lrect(0, INNER_D/2, -USB_NOTCH_W/2, USB_NOTCH_W/2)   # flat at the hand hole, matching the frame notch
 
 # --- solids ---
 back = Pos(0, 0, -ACRYLIC_T) * extrude(back_sk, ACRYLIC_T)
@@ -206,6 +221,9 @@ def holder_tray():
                         (-HOLDER_L/2 + end_t, low_h), close=True)
         wall = Pos(sx*(HOLDER_W/2 - side_t/2), 0, 0) * extrude(Plane.YZ * make_face(prof), side_t/2, both=True)
         tray += wall
+    # the single mounting hole, countersunk from inside
+    tray -= Cylinder(1.7, base_t, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    tray -= Pos(0, 0, base_t - 1.65) * Cone(1.5, 2.9, 1.65, align=(Align.CENTER, Align.CENTER, Align.MIN))
     return tray
 
 CELL_D, CELL_L = 18.3, 65.2        # Samsung INR18650-30Q
@@ -229,29 +247,116 @@ cell = hold_loc * Pos(0, 0, holder_bot) * holder_cell()
 board = btn_loc * Pos(0, 0, SW_STANDOFF) * extrude(Rectangle(BOARD_W, BOARD_L), BOARD_T)
 switches = [board_pt(l, w) * Pos(0, 0, SW_STANDOFF - SW_H) * extrude(Rectangle(SW, SW), SW_H) for l, w in btn_pts]
 caps = [board_pt(l, w) * Pos(0, 0, SW_STANDOFF - SW_H - 1.5) * extrude(Circle(1.75), 1.5) for l, w in btn_pts]
-# all electronics sit on the inside of the back and come away with it
-zb = POD_CARRIER_T                   # boards sit on the carrier
-usb_boards = [
-    rot(USB_ANGLE) * lbox(PORT_R, PORT_R + 28.0, *CHARGER_T, zb, zb + 4.5),
-    rot(USB_ANGLE) * lbox(PORT_R, PORT_R + 22.5, *ESP_T, zb, zb + 4.5),
-    rot(USB_ANGLE) * lbox(*MT_R, *MT_T, 0, 6.0),                         # MT3608 boost, straight on the back
-]
+# --- electronics pod (built in its local frame, placed with pod_loc) ---
+def pbox(x0, x1, y0, y1, z0, z1):
+    return Pos((x0 + x1)/2, (y0 + y1)/2, z0) * extrude(Rectangle(x1 - x0, y1 - y0), z1 - z0)
 
-# pod: carrier plate, cemented cover (two side walls, back wall, top, front posts between plug slots)
-r1, w2, z_in = POD_R0 + POD_LEN, POD_W/2, POD_CARRIER_T + POD_INNER_H
-slots = [((t0 + t1)/2 - PLUG_W/2, (t0 + t1)/2 + PLUG_W/2) for t0, t1 in (CHARGER_T, ESP_T)]
-posts, t = [], -w2 + POD_WALL
-for s0, s1 in slots:
-    posts.append((t, s0)); t = s1
-posts.append((t, w2 - POD_WALL))
-pod_carrier = rot(USB_ANGLE) * lbox(PORT_R, r1, -w2, w2, 0, POD_CARRIER_T)   # starts behind the front wall
-pod_cover = [rot(USB_ANGLE) * lbox(POD_R0, PORT_R, -w2, -w2 + POD_WALL, 0, POD_CARRIER_T),
-             rot(USB_ANGLE) * lbox(POD_R0, PORT_R, w2 - POD_WALL, w2, 0, POD_CARRIER_T),
-             rot(USB_ANGLE) * lbox(POD_R0, r1, -w2, -w2 + POD_WALL, POD_CARRIER_T, z_in),
-             rot(USB_ANGLE) * lbox(POD_R0, r1, w2 - POD_WALL, w2, POD_CARRIER_T, z_in),
-             rot(USB_ANGLE) * lbox(r1 - POD_WALL, r1, -w2 + POD_WALL, w2 - POD_WALL, POD_CARRIER_T, z_in),
-             rot(USB_ANGLE) * lbox(POD_R0, r1, -w2, w2, z_in, z_in + POD_TOP_T)] + \
-            [rot(USB_ANGLE) * lbox(POD_R0, PORT_R, a, b, 0, z_in) for a, b in posts if b - a > 0.5]
+def usbc(y0, y1, t):
+    yc = (y0 + y1)/2
+    shell = pbox(BOARD_X0 - USBC_OUT, BOARD_X0 - USBC_OUT + USBC_L, yc - USBC_W/2, yc + USBC_W/2, t, t + USBC_H)
+    return fillet(shell.edges().filter_by(Axis.X), 1.2)
+
+def board_parts(name):
+    """(pcb, metal, parts, extra) solids for one board, from the photos."""
+    y0, y1, L, t = PODS[name]
+    x0, x1, yc = BOARD_X0, BOARD_X0 + L, (y0 + y1)/2
+    pcb = pbox(x0, x1, y0, y1, 0, t)
+    metal, parts, extra = [], [], []
+    if name == "tp4056":
+        metal.append(usbc(y0, y1, t))
+        parts += [pbox(x0 + 12, x0 + 17, yc - 3, yc + 2, t, t + 1.5),          # TP4056 SOP-8
+                  pbox(x0 + 19, x0 + 24, y0 + 2, y0 + 6, t, t + 1.5)]           # DW01 protection
+        for i in range(4):                                                     # B+ B- OUT+ OUT- pads at the far end
+            metal.append(pbox(x1 - 3, x1 - 0.8, y0 + 1.5 + i*4.0, y0 + 3.7 + i*4.0, t, t + 0.1))
+    elif name == "mt3608":
+        extra.append(pbox(x0 + 3, x0 + 12.5, y0 + 3.5, y0 + 13.5, t, t + 7.0))        # blue trimpot
+        parts += [pbox(x0 + 17, x0 + 23, yc - 3, yc + 3, t, t + 4.5),              # inductor
+                  pbox(x0 + 25, x0 + 29, y0 + 2, y0 + 5, t, t + 2.0)]              # diode
+        for xa in (x0 + 0.8, x1 - 4.8):                                            # VIN / VOUT pads at both ends
+            for ya in (y0 + 1, y1 - 5):
+                metal.append(pbox(xa, xa + 4, ya, ya + 4, t, t + 0.1))
+    else:
+        metal.append(usbc(y0, y1, t))
+        parts += [pbox(x0 + 11, x0 + 16, yc - 2.5, yc + 2.5, t, t + 0.9),          # ESP32-C3
+                  pbox(x0 + 8, x0 + 11, y0 + 3, y0 + 7, t, t + 1.6),               # BOOT
+                  pbox(x0 + 8, x0 + 11, y1 - 7, y1 - 3, t, t + 1.6)]               # RST
+        for i in range(8):                                                     # castellated pins down both long edges
+            xc = x0 + 4 + i*2.54
+            pcb -= Pos(xc, y0) * Cylinder(0.5, 2*t) + Pos(xc, y1) * Cylinder(0.5, 2*t)
+    return pcb, metal, parts, extra
+
+pod_pcbs, pod_metal, pod_ics, pod_extra = {}, [], [], []
+_mt = PODS["mt3608"]
+mt_xf = Pos(MT_X0 + (_mt[1] - _mt[0])/2, 0) * Rot(0, 0, 90) * Pos(-(BOARD_X0 + _mt[2]/2), 0)   # MT3608: turn sideways, set behind
+for nm in PODS:
+    pcb, metal, parts, extra = board_parts(nm)
+    xf = pod_loc * (mt_xf if nm == "mt3608" else Location())
+    pod_pcbs[nm] = xf * pcb
+    pod_metal += [xf * m for m in metal]; pod_ics += [xf * m for m in parts]; pod_extra += [xf * m for m in extra]
+
+# back part of the carrier outline: y +-BACK_HALF_W, back corners rounded to stay off the frame
+cover_sk = Pos(POD_X1/2, 0) * Rectangle(POD_X1, 2*BACK_HALF_W)
+cover_sk = fillet(cover_sk.vertices().filter_by(lambda v: v.X > POD_X1/2), POD_BACK_R)
+# plate: the cover outline, widened at the front for the screw tabs
+plate_sk = cover_sk + Pos(18.0, 0) * fillet(Rectangle(36.0, 2*POD_HALF_W).vertices(), 2.0)
+pod_holes = holes([Pos(x, y) for x, y in POD_SCREWS], POD_SCREW_HOLE)
+locator_sk = plate_sk - pod_holes
+holddown_sk = plate_sk - pod_holes
+for nm, (y0, y1, L, t) in PODS.items():
+    if nm == "mt3608":
+        # behind the others: a closed pocket and a window with a rim all round
+        mx1 = MT_X0 + (y1 - y0)
+        locator_sk -= Pos((MT_X0 + mx1)/2, 0) * Rectangle(mx1 - MT_X0 + 2*POD_CLR, L + 2*POD_CLR)
+        holddown_sk -= Pos((MT_X0 + mx1)/2, 0) * Rectangle(mx1 - MT_X0 - 2*POD_RIM, L - 2*POD_RIM)
+        continue
+    # locator: a pocket per board, open at the front
+    locator_sk -= Pos((BOARD_X0 + L + POD_CLR - 1)/2, (y0 + y1)/2) * Rectangle(BOARD_X0 + L + POD_CLR + 1, y1 - y0 + 2*POD_CLR)
+    # hold-down: a window per board, leaving a rim over its back end and sides; open at the front for USB-C
+    wx1 = BOARD_X0 + L - POD_RIM
+    holddown_sk -= Pos((wx1 - 1)/2, (y0 + y1)/2) * Rectangle(wx1 + 1, y1 - y0 - 2*POD_RIM)
+# face plate: black 3 mm, standing at the hand hole (pod x -3..0), as wide as the frame notch and just under the
+# frame height. Cemented along its bottom edge to the back. Openings only for the two USB-C ports, open at the bottom
+# so no thin strip is left under them.
+FP_HALF_W, FP_H = USB_NOTCH_W/2 - FP_CLR, FRAME_H - 0.5
+fp_sk = Pos(0, FP_H/2) * Rectangle(2*FP_HALF_W, FP_H)
+for nm in ("tp4056", "esp32c3"):
+    y0, y1, L, t = PODS[nm]; yc = (y0 + y1)/2
+    sw, sh = USBC_W + 2*FP_SLOT_CLR, t + USBC_H + FP_SLOT_CLR
+    fp_sk -= Pos(yc, sh/2 - 0.5) * Rectangle(sw, sh + 1)
+face_plate = pod_loc * Pos(-FP_T, 0, 0) * extrude(Plane.YZ * fp_sk, FP_T)
+pod_locator = pod_loc * extrude(locator_sk, POD_LOC_T)
+pod_holddown = pod_loc * Pos(0, 0, POD_LOC_T) * extrude(holddown_sk, POD_PLATE_T)
+pod_hw = []
+for x, y in POD_SCREWS:
+    pt = pod_loc * Pos(x, y)
+    pod_hw += [pt * Pos(0, 0, -ACRYLIC_T - 1.3) * Cylinder(1.9, 1.3, align=(Align.CENTER, Align.CENTER, Align.MIN)),
+               pt * Pos(0, 0, -ACRYLIC_T) * Cylinder(1.0, POD_SCREW_L, align=(Align.CENTER, Align.CENTER, Align.MIN)),
+               pt * Pos(0, 0, POD_LOC_T + POD_PLATE_T) * extrude(RegularPolygon(M2_NUT_AF/math.sqrt(3), 6) - Circle(1.0), M2_NUT_H)]
+usb_boards = list(pod_pcbs.values())     # board outlines, for clearance checks
+
+# --- LED path: GPIO -> C strip input (350 deg) -> C runs to 10 deg -> jumper -> outer strip start (12 deg).
+# One 3-wire bundle (5 V, ground, data) drops from the C input to an in-line connector on the back, so the back
+# (with the pod) unplugs from the strips. Wires drawn as 2.5 mm bundles.
+def P(a, r, z):
+    return Vector(r*math.sin(math.radians(a)), r*math.cos(math.radians(a)), z)
+def tube(pts, d=2.5):
+    segs = []
+    for a_, b_ in zip(pts, pts[1:]):
+        v = b_ - a_
+        segs.append(Pos(a_) * Solid.make_cylinder(d/2, v.length, Plane(origin=(0, 0, 0), z_dir=v)))
+    segs += [Pos(q) * Sphere(d/2) for q in pts]
+    return segs
+CONN_A, CONN_R, CONN_L, CONN_W, CONN_H = 333.0, 99.0, 25.0, 7.5, 6.0     # in-line 3-pin connector pair (JST-SM size)
+conn = rot(CONN_A) * lbox(CONN_R - CONN_W/2, CONN_R + CONN_W/2, -CONN_L/2, CONN_L/2, 0, CONN_H)
+conn_end_strip = P(CONN_A + math.degrees(CONN_L/2/CONN_R), CONN_R, CONN_H/2)
+conn_end_pod = P(CONN_A - math.degrees(CONN_L/2/CONN_R), CONN_R, CONN_H/2)
+c_mid = (C_CH_OUT - STRIP_T/2)
+z_pod_top = POD_LOC_T + POD_PLATE_T
+pod_exit = (pod_loc * Pos(40.0, -BACK_HALF_W - 1.5)).position + Vector(0, 0, z_pod_top + 1.5)
+pod_inside = (pod_loc * Pos(40.0, -BACK_HALF_W + 4)).position + Vector(0, 0, z_pod_top + 1.5)
+wire_strip_side = tube([P(350, c_mid, FRAME_H + PLY_T + STRIP_W/2), P(350, c_mid, CONN_H/2), conn_end_strip])
+wire_pod_side = tube([conn_end_pod, pod_exit, pod_inside])
+jumper = tube([P(10, c_mid, FRAME_H + PLY_T + STRIP_W/2), P(10, c_mid, 12.0), P(12, 108.5, 12.0), P(12, 108.5, FRAME_H + (WHITE_T - STRIP_W)/2)])
 led_strip = Pos(0, 0, FRAME_H + (WHITE_T - STRIP_W)/2) * extrude(Circle(WHITE_IN_R) - Circle(WOOD_OUT_R), STRIP_W)
 c_strip = Pos(0, 0, FRAME_H + PLY_T) * extrude(arc_sector(C_CH_OUT - STRIP_T, C_CH_OUT, C_GAP_DEG/2, 360 - C_GAP_DEG/2), STRIP_W)
 
@@ -306,11 +411,75 @@ for name, shape in [("led1_outline", led1_sk), ("led1", led1), ("led2_outline", 
                     ("box_ring_outline", ring_sk), ("box_hardware_ref", Compound(children=box_hw)),
                     ("box_floor_outline", floor_sk), ("battery_box", battery_box),
                     ("holder_ref", holder), ("cell_ref", cell), ("buttons_ref", Compound(children=[board, *switches, *caps])),
-                    ("electronics_ref", Compound(children=usb_boards)), ("inserts_ref", inserts),
-                    ("pod_carrier", pod_carrier), ("pod_cover", Compound(children=[c.moved(Location()) for c in pod_cover])),
+                    ("electronics_ref", Compound(children=[b.moved(Location()) for b in usb_boards])), ("inserts_ref", inserts),
+                    ("pod_locator_outline", locator_sk), ("pod_holddown_outline", holddown_sk),
+                    ("pod_locator", pod_locator), ("pod_holddown", pod_holddown),
+                    ("pod_pcb_blue", Compound(children=[pod_pcbs["tp4056"].moved(Location()), pod_pcbs["mt3608"].moved(Location())])),
+                    ("pod_pcb_black", pod_pcbs["esp32c3"].moved(Location())),
+                    ("pod_metal", Compound(children=[m.moved(Location()) for m in pod_metal])),
+                    ("pod_ics", Compound(children=[m.moved(Location()) for m in pod_ics])),
+                    ("pod_trimpot", Compound(children=[m.moved(Location()) for m in pod_extra])),
+                    ("pod_hardware", Compound(children=[m.moved(Location()) for m in pod_hw])),
+                    ("face_plate_outline", fp_sk), ("face_plate", face_plate),
+                    ("led_connector", conn), ("led_wire_strip", Compound(children=wire_strip_side)),
+                    ("led_wire_pod", Compound(children=wire_pod_side)), ("led_jumper", Compound(children=jumper)),
                     ("front_screws_ref", front_screws), ("rear_screws_ref", rear_screws),
                     ("led_strip_ref", led_strip), ("c_strip_ref", c_strip)]:
     show(shape, name)
+# --- battery box detail: the same parts in the holder's own frame (x across, y along, z as in the disc),
+# with a piece of the back and the frame/LED layers above for context. Exported to cad/v2/battery/.
+to_batt = hold_loc.inverse() if hasattr(hold_loc, "inverse") else Location(hold_loc).inverse()
+crop = Pos(0, 0, -20) * Box(70, 130, 60, align=(Align.CENTER, Align.CENTER, Align.MIN))
+def batt(shape):
+    return to_batt * shape.moved(Location())
+def batt_crop(shape):
+    return (batt(shape)) & crop
+HOLDER_SCREW_L = 8.0                  # M3 x 8 flat head down through the holder base and the floor, nut outside
+hs_z = holder_bot + 1.5               # top of the holder's base
+batt_parts = {
+    "back_piece": batt_crop(back),
+    "frame_piece": batt_crop(frames[0]) + batt_crop(frames[1]) + batt_crop(frames[2]),
+    "led_piece": batt_crop(led1) + batt_crop(led2),
+    "ring1": batt(box_parts[0]), "ring2": batt(box_parts[1]), "floor": batt(box_parts[2]),
+    "holder": batt(holder), "cell": batt(cell),
+    "box_screws": Compound(children=[batt(h) for h in box_hw]),
+    "holder_screw": Compound(children=[
+        Pos(0, 0, hs_z - 1.65) * Cone(1.5, 2.8, 1.65, align=(Align.CENTER, Align.CENTER, Align.MIN)),
+        Pos(0, 0, hs_z - HOLDER_SCREW_L) * Cylinder(1.5, HOLDER_SCREW_L, align=(Align.CENTER, Align.CENTER, Align.MIN)),
+        Pos(0, 0, box_floor_bot - NUT_H) * extrude(RegularPolygon(NUT_AF/math.sqrt(3), 6) - Circle(1.5), NUT_H)]),
+}
+for k, v in batt_parts.items():
+    show(v, f"batt_{k}")
+
+# --- electronics pod detail: the pod in its own frame (x from R61 outward, y sideways, z as in the disc),
+# with a piece of the back and the frame/LED layers for context, plus a USB-C plug. Exported to cad/v2/pod/.
+to_pod = pod_loc.inverse()
+pod_crop = Pos(15, 0, -20) * Box(80, 100, 60, align=(Align.CENTER, Align.CENTER, Align.MIN))
+def podl(shape):
+    return to_pod * shape.moved(Location())
+def plug_ref(name):
+    y0, y1, L, t = PODS[name]; yc, zc_ = (y0 + y1)/2, t + USBC_H/2
+    body = Pos(-FP_T - 16, yc, zc_ - 3.25) * Box(16, PLUG_W, 6.5, align=(Align.MIN, Align.CENTER, Align.MIN))     # grip stops at the face plate
+    tongue = Pos(-FP_T, yc, zc_ - 1.25) * Box(FP_T - USBC_OUT, 8.3, 2.5, align=(Align.MIN, Align.CENTER, Align.MIN))  # metal shell through the opening
+    cable = Pos(-FP_T - 28, yc, zc_) * Rot(0, 90, 0) * Cylinder(2.0, 12, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    return Compound(children=[body, tongue, cable])   # a reference USB-C plug, seated
+pod_parts = {
+    "back_piece": podl(back) & pod_crop,
+    "frame_piece": (podl(frames[0]) & pod_crop) + (podl(frames[1]) & pod_crop) + (podl(frames[2]) & pod_crop),
+    "led_piece": (podl(led1) & pod_crop) + (podl(led2) & pod_crop),
+    "locator": podl(pod_locator), "holddown": podl(pod_holddown),
+    "pcb_blue": Compound(children=[podl(pod_pcbs["tp4056"]), podl(pod_pcbs["mt3608"])]),
+    "pcb_black": podl(pod_pcbs["esp32c3"]),
+    "metal": Compound(children=[podl(m) for m in pod_metal]),
+    "ics": Compound(children=[podl(m) for m in pod_ics]),
+    "trimpot": Compound(children=[podl(m) for m in pod_extra]),
+    "hardware": Compound(children=[podl(m) for m in pod_hw]),
+    "plugs": Compound(children=[*plug_ref("tp4056").children, *plug_ref("esp32c3").children]),
+    "face_plate": podl(face_plate),
+}
+for k, v in pod_parts.items():
+    show(v, f"podlocal_{k}")       # not "pod_": those names are the pod in the disc
+
 # test strip: drawn pilot sizes for the M4 x 12 inserts; pick the snug one and set INSERT_HOLE_D
 TEST_DS = [7.4, 7.6, 7.8, 8.0, 8.2, 8.4]
 insert_test = fillet(Rectangle(14*len(TEST_DS) + 6, 22).vertices(), 1.0)

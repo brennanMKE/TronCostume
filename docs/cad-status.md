@@ -1,5 +1,13 @@
 # Disc CAD status
 
+> **Where we stopped (30 Oct, night).** The pod's black **cover** was replaced by a vertical **face plate** (`cad/v2/acrylic-3mm-black-pod-face-plate`).
+>
+> - **Face plate:** 3 mm black, 58.5 × 14.5. It stands at the hand hole and gets cemented to the back. It has two openings for the USB-C ports and leaves nothing else open.
+> - **Pod:** moved 3 mm back so the boards touch the plate's back face. The ports sit 1.5 mm into the openings.
+> - **Model and cut files:** updated and re-exported.
+> - **Not yet updated:** the main and pod boards, which still show the old cover. Re-export their STL/JSON files and republish.
+> - **Next:** refresh both boards, then a wiring diagram, assembly order, and cut list / sheet layout.
+
 > **v2 is the current design.** It uses the three-bridge frame, with every component on a removable back.
 > - **Source:** [`cad/v2/disc_v2.py`](../cad/v2/disc_v2.py).
 > - **Cut files:** in `cad/v2/`.
