@@ -1,0 +1,230 @@
+<title>Identity Disc Stack</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: full-bleed 3D stage, a slim control strip under it. Deliberately single dark theme (a lit disc reads best on dark). */
+:root {
+  --bg: #0b0f14;
+  --panel: #121922;
+  --line: #233140;
+  --fg: #dfe8f0;
+  --muted: #8a9aab;
+  --glow: #5ff3ff;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); display: flex; flex-direction: column; }
+#stage { flex: 1; min-height: 320px; position: relative; }
+#stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+#hint { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); top: 12px; font: 12px var(--font-data); color: var(--muted); pointer-events: none; }
+#status { position: absolute; inset: 0; display: grid; place-items: center; font: 13px var(--font-data); color: var(--muted); pointer-events: none; }
+.controls { background: var(--panel); border-top: 1px solid var(--line); padding-block: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
+.label { font: 11px var(--font-data); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+label.chip { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; user-select: none; }
+label.chip input { accent-color: var(--glow); margin: 0; }
+.sw { width: 10px; height: 10px; border-radius: 2px; border: 1px solid var(--line); }
+input[type=range] { accent-color: var(--glow); width: 140px; }
+button { font: 13px var(--font-ui); color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+button[aria-pressed="true"] { border-color: var(--glow); color: var(--glow); }
+.views { border-top: none; padding-block: 0 12px; }
+.note { font: 12px var(--font-data); color: var(--muted); flex-basis: 100%; min-width: 0; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500&display=swap">
+
+<div id="stage"><div id="hint">drag to orbit · scroll or pinch to zoom · mm</div><div id="status">Loading parts…</div></div>
+<div class="controls">
+  <div class="group" id="parts" aria-label="Parts"><span class="label">Parts</span></div>
+  <div class="group"><span class="label">Explode</span><input id="explode" type="range" min="0" max="30" value="0" aria-label="Explode layers"></div>
+  <div class="group"><button id="glow" aria-pressed="true">LEDs on</button><button id="section" aria-pressed="false">Cut in half</button><button id="reset">Reset view</button></div>
+</div>
+<div class="controls views">
+  <div class="group" id="views" aria-label="Views"><span class="label">Views</span></div>
+  <div id="viewnote" class="note"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+// z ranges are the model's own (mm); explode spreads by stack order
+const PARTS = [
+  { id: "back",  name: "Black acrylic 3 mm", file: "models/acrylic-3mm-back.json", color: 0x0d0d0f, rough: 0.15, order: 0 },
+  { id: "m1",    name: "Maple 1", file: "models/maple-5mm-layer1.json", color: 0xd8b88a, rough: 0.8, order: 1, inkEdgeR: 130 },
+  { id: "m2",    name: "Maple 2", file: "models/maple-5mm-layer2.json", color: 0xcfae7e, rough: 0.8, order: 2, inkEdgeR: 130 },
+  { id: "m3",    name: "Maple 3 (wire notches)", file: "models/maple-5mm-layer3.json", color: 0xd8b88a, rough: 0.8, order: 3, inkEdgeR: 130 },
+  { id: "m4",    name: "Maple 4 (LED)", file: "models/maple-5mm-layer4.json", color: 0xcfae7e, rough: 0.8, order: 4 },
+  { id: "m5",    name: "Maple 5 (LED)", file: "models/maple-5mm-layer5.json", color: 0xd8b88a, rough: 0.8, order: 5 },
+  { id: "covbtn", name: "Button cover", file: "models/acrylic-3mm-cover-buttons.json", color: 0x0d0d0f, rough: 0.12, order: 2.5 },
+  { id: "covusb", name: "USB cover", file: "models/acrylic-3mm-cover-usb.json", color: 0x0d0d0f, rough: 0.12, order: 2.5 },
+  { id: "board", name: "Protoboard + buttons", file: "models/protoboard-reference.json", color: 0x2c6e49, rough: 0.5, order: 1.5 },
+  { id: "blocks", name: "Insert blocks (glued)", file: "models/insert-blocks-reference.json", color: 0xa97c45, rough: 0.8, order: 1 },
+  { id: "holder", name: "18650 holder", file: "models/battery-holder-reference.json", color: 0x3a3f46, rough: 0.6, order: 0.5 },
+  { id: "cstrip", name: "C LED strip", file: "models/led-c-strip-reference.json", color: 0x5ff3ff, rough: 0.4, order: 5, led: true },
+  { id: "strip", name: "Outer LED strip", file: "models/led-outer-strip-reference.json", color: 0x5ff3ff, rough: 0.4, order: 4.5, led: true },
+  { id: "white", name: "White acrylic 10 mm", file: "models/acrylic-10mm-white-outer-ring.json", color: 0xf2f4f5, rough: 0.35, order: 4.5, white: true },
+  { id: "face",  name: "Black acrylic face 3 mm", file: "models/acrylic-3mm-black-face.json", color: 0x0d0d0f, rough: 0.12, order: 6 },
+  { id: "c",     name: "White C 3 mm", file: "models/acrylic-3mm-white-c.json", color: 0xf2f4f5, rough: 0.35, order: 6.5, white: true },
+];
+
+const stage = document.getElementById("stage");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.localClippingEnabled = true;
+renderer.outputEncoding = THREE.sRGBEncoding;
+stage.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b0f14);
+const camera = new THREE.PerspectiveCamera(35, 1, 1, 5000);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xdfe8f0, 0x1a2230, 0.7));
+const key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(200, 400, 250); scene.add(key);
+const rim = new THREE.DirectionalLight(0x9fdcff, 0.35); rim.position.set(-300, 150, -200); scene.add(rim);
+
+const disc = new THREE.Group();
+disc.rotation.x = -Math.PI / 2;   // model is Z-up
+scene.add(disc);
+
+const halfClip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+let clip = halfClip;
+const meshes = {};
+let glowOn = true, sectionOn = false;
+
+// World axes: model x -> x, model z (thickness) -> y, model y (12 o'clock) -> -z.
+// Bay angles are clockwise from 12 o'clock seen from the front.
+const dirW = a => [Math.sin(a * Math.PI / 180), -Math.cos(a * Math.PI / 180)];
+function around(a, r, y) { const [x, z] = dirW(a); return [x * r, y, z * r]; }
+const TOP = ["face", "c", "m5", "m4", "cstrip"];   // lifted off to see inside
+const VIEWS = [
+  { id: "overview", label: "Whole disc", pos: [260, 230, 330], target: [0, 0, 0], hide: [],
+    note: "The full stack: black back, five maple layers, white ring, black face with the white C." },
+  { id: "button-bay", label: "Button bay, open", pos: around(75, 210, 170), target: around(60, 70, 8), hide: TOP,
+    note: "2 o'clock, top layers hidden. Protoboard stands in slots in layers 1 and 4; switches poke through the cover. Glued insert blocks sit behind the cover tabs." },
+  { id: "buttons-hole", label: "Buttons from hand hole", pos: around(240, 25, 70), target: around(60, 62, 12), hide: [],
+    note: "What your fingers find: the button cover in the hand-hole wall, two M4 screws in the lower tabs." },
+  { id: "usb-bay", label: "USB bay, open", pos: around(285, 210, 170), target: around(300, 70, 8), hide: TOP,
+    note: "10 o'clock, top layers hidden. Charger and ESP32-C3 lie flat behind the cover with their USB-C ports facing it." },
+  { id: "usb-hole", label: "USB cover from hand hole", pos: around(120, 25, 70), target: around(300, 62, 12), hide: [],
+    note: "Take out the two M4 screws and the cover comes away into the hand hole to reach both USB-C ports." },
+  { id: "battery", label: "Battery, open", pos: around(205, 230, 150), target: around(180, 81, 6), hide: TOP,
+    note: "6 o'clock, top layers hidden. The 80 x 21 x 22 holder sits in a socket in layers 1-3 and a pocket in layer 4." },
+  { id: "battery-section", label: "Battery, cut through", pos: [230, 25, 120], target: [0, 9, 81], hide: [], clip: [-1, 0, 0, 0],
+    note: "Cut across the holder. Its bottom sits in the back window (flush outside), its top is 1 mm under layer 5, so the C strip above stays clear." },
+  { id: "battery-back", label: "Battery from the back", pos: [40, -260, 170], target: [0, 0, 60], hide: [],
+    note: "The back. The holder fills the window at 6 o'clock; with its open side facing out, the cell swaps from here." },
+];
+
+let tween = null;
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function flyTo(pos, target) {
+  const p0 = camera.position.clone(), t0 = controls.target.clone();
+  const p1 = new THREE.Vector3(...pos), t1 = new THREE.Vector3(...target);
+  if (reduceMotion) { camera.position.copy(p1); controls.target.copy(t1); controls.update(); return; }
+  tween = { p0, t0, p1, t1, start: performance.now(), dur: 700 };
+}
+function stepTween(now) {
+  if (!tween) return;
+  let k = Math.min(1, (now - tween.start) / tween.dur); k = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+  camera.position.lerpVectors(tween.p0, tween.p1, k); controls.target.lerpVectors(tween.t0, tween.t1, k);
+  if (k >= 1) tween = null;
+}
+function setVisible(id, on) {
+  const box = document.getElementById(`show-${id}`); if (box) box.checked = on;
+  if (meshes[id]) meshes[id].visible = on;
+}
+function showView(id) {
+  const v = VIEWS.find(x => x.id === id) || VIEWS[0];
+  for (const p of PARTS) setVisible(p.id, !v.hide.includes(p.id));
+  document.getElementById("explode").value = 0; applyExplode();
+  sectionOn = !!v.clip; clip = v.clip ? new THREE.Plane(new THREE.Vector3(...v.clip.slice(0, 3)), v.clip[3]) : halfClip;
+  document.getElementById("section").setAttribute("aria-pressed", sectionOn);
+  applyLook(); flyTo(v.pos, v.target);
+  document.querySelectorAll("#views button").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === v.id));
+  document.getElementById("viewnote").textContent = v.note;
+}
+const viewsBox = document.getElementById("views");
+for (const v of VIEWS) {
+  const b = document.createElement("button");
+  b.textContent = v.label; b.dataset.view = v.id; b.setAttribute("aria-pressed", "false");
+  b.addEventListener("click", () => { location.hash = v.id; showView(v.id); });
+  viewsBox.appendChild(b);
+}
+addEventListener("hashchange", () => showView(location.hash.slice(1)));
+
+function setView() { showView("overview"); }
+
+function applyLook() {
+  for (const p of PARTS) {
+    const m = meshes[p.id]; if (!m) continue;
+    for (const mat of [].concat(m.material)) {
+      if (p.led) { mat.emissive.setHex(glowOn ? 0x5ff3ff : 0x000000); mat.emissiveIntensity = glowOn ? 1.4 : 0; mat.color.setHex(glowOn ? 0x5ff3ff : 0x30363c); }
+      if (p.white) { mat.emissive.setHex(glowOn ? 0x56e4f2 : 0x000000); mat.emissiveIntensity = glowOn ? 0.55 : 0; }
+      mat.clippingPlanes = sectionOn ? [clip] : [];
+      mat.needsUpdate = true;
+    }
+  }
+}
+
+function applyExplode() {
+  const gap = +document.getElementById("explode").value;
+  for (const p of PARTS) if (meshes[p.id]) meshes[p.id].position.z = p.order * gap;
+}
+
+const partsBox = document.getElementById("parts");
+for (const p of PARTS) {
+  const lab = document.createElement("label");
+  lab.className = "chip";
+  lab.innerHTML = `<input type="checkbox" id="show-${p.id}" checked><span class="sw" style="background:#${p.color.toString(16).padStart(6, "0")}"></span>${p.name}`;
+  lab.querySelector("input").addEventListener("change", e => { if (meshes[p.id]) meshes[p.id].visible = e.target.checked; });
+  partsBox.appendChild(lab);
+}
+
+Promise.all(PARTS.map(p => fetch(p.file).then(r => { if (!r.ok) throw new Error(p.file); return r.json(); }).then(d => {
+  const g = new THREE.BufferGeometry();
+  let pos = d.positions, inked = 0;
+  if (p.inkEdgeR) {
+    // sanded outer edge, colored with black acrylic pen: vertical triangles on the outer radius go last, in their own group
+    const wood = [], edge = [];
+    for (let i = 0; i < pos.length; i += 9) {
+      const t = pos.slice(i, i + 9);
+      const vertical = Math.abs(t[2] - t[5]) > 0.01 || Math.abs(t[2] - t[8]) > 0.01;
+      const onRim = [0, 3, 6].every(k => Math.hypot(t[k], t[k + 1]) > p.inkEdgeR - 0.5);
+      (vertical && onRim ? edge : wood).push(...t);
+    }
+    pos = wood.concat(edge); inked = edge.length / 3;
+  }
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.computeVertexNormals();
+  const mat = new THREE.MeshStandardMaterial({ color: p.color, roughness: p.rough, metalness: 0, side: THREE.DoubleSide });
+  if (p.white) { mat.transparent = true; mat.opacity = 0.93; }
+  let mats = mat;
+  if (inked) {
+    const n = pos.length / 3;
+    g.addGroup(0, n - inked, 0); g.addGroup(n - inked, inked, 1);
+    mats = [mat, new THREE.MeshStandardMaterial({ color: 0x111113, roughness: 1, metalness: 0, side: THREE.DoubleSide })];
+  }
+  const mesh = new THREE.Mesh(g, mats);
+  meshes[p.id] = mesh; disc.add(mesh);
+}))).then(() => {
+  document.getElementById("status").hidden = true;
+  applyLook(); applyExplode();
+  showView(location.hash.slice(1) || "overview");
+}).catch(() => { document.getElementById("status").textContent = "A part file failed to load. Reload the page to try again."; });
+
+document.getElementById("explode").addEventListener("input", applyExplode);
+document.getElementById("glow").addEventListener("click", e => { glowOn = !glowOn; e.currentTarget.setAttribute("aria-pressed", glowOn); e.currentTarget.textContent = glowOn ? "LEDs on" : "LEDs off"; applyLook(); });
+document.getElementById("section").addEventListener("click", e => { sectionOn = !sectionOn; clip = halfClip; e.currentTarget.setAttribute("aria-pressed", sectionOn); applyLook(); });
+document.getElementById("reset").addEventListener("click", setView);
+
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+resize();
+(function loop(now) { stepTween(now || performance.now()); controls.update(); renderer.render(scene, camera); requestAnimationFrame(loop); })();
+</script>
