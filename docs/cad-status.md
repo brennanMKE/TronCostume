@@ -1,5 +1,13 @@
 # Disc CAD status
 
+> **v2 is the current design.** It uses the three-bridge frame, with every component on a removable back.
+> - **Source:** [`cad/v2/disc_v2.py`](../cad/v2/disc_v2.py).
+> - **Cut files:** in `cad/v2/`.
+> - **3D board:** https://claude.ai/artifact/Qe896wZ9Xz1TX8eNGLvTXA, with its source in `cad/v2/viewer/`.
+> - **Electronics pod dimensions:** [`cad/v2/electronics-pod.md`](../cad/v2/electronics-pod.md).
+>
+> Everything below describes v1 (bays and a lid/base split), which is shelved.
+
 Where the disc's CAD stands as of 30 October 2026, so the build can be picked up in a new session. The deadline is Halloween, 31 October.
 
 This replaces the older plan in [disc-build.md](disc-build.md) and [frame.md](frame.md), and the numbers in `cad/params.md` and `cad/out/`. Treat those as superseded.
