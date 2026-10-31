@@ -27,15 +27,16 @@ All mm. Angles are clockwise from 12 o'clock, seen from the front. Outside diame
 
 ### Layer details
 
-- **Layer 1**: the bays, plus the battery socket, the insert-block sockets and a 1.5 mm slot for the bottom edge of the button protoboard.
+- **Layer 1**: the bays, plus the battery socket, the insert-block sockets and a 1.5 mm slot for the bottom edge of the button protoboard, and the six 4.5 mm screw-tip relief holes.
 - **Layer 2**: same as layer 1 without the board slot, plus a half wire slot through the 12 o'clock rib.
 - **Layer 3**: a full wire notch through the 8 o'clock rib, and the other half wire slot at 12 o'clock. The two half slots overlap 6 mm so wires drop between them while the rib stays whole in each layer.
 - **Layer 4**:
   - Three bridges across the C channel at 0°, 120° and 240°.
   - The battery pocket.
-  - The 1.5 mm slot for the protoboard's top edge.
+  - The 2.0 mm slot for the protoboard's top edge, loose so the lid drops over it.
   - It cuts as **two pieces**: the small piece behind the board slot, about 600 mm², glues under layer 5.
 - **Layer 5**: one bridge, at 12 o'clock, inside the C's gap.
+- **Lid screws**: layers 2–3 have 6.5 mm insert pilots where layer 1 has the relief holes. Layers 4–5 and the face have 4.5 mm clearance holes in the same six places. See [Lid and base](#lid-and-base).
 
 ### LEDs
 
@@ -60,7 +61,7 @@ There are two covers, both 3 mm black acrylic standing in the hand-hole wall, se
 - **Inserts**: they go in glued blocks you make yourself, **12 × 12 × 15 mm**, sitting in sockets in layers 1–3. An insert 8 mm across and 10 mm long is assumed. Measure yours.
 - **Buttons**:
   - 4 holes 4 mm across, 15.24 mm apart, 10 mm up.
-  - The protoboard is 80 × 20 × 1.6. It stands on the back acrylic in the 1.5 mm slots in layers 1 and 4, a light press fit.
+  - The protoboard is 80 × 20 × 1.6. It stands on the back acrylic in the 1.5 mm slot in layer 1 (a light press fit) and the looser 2.0 mm slot in layer 4.
   - At 6.5 mm total switch height the tip is flush with the cover's front; 7 mm switches stick out 0.5 mm.
 - **USB cover**: no button holes. The charger and ESP32-C3 lie flat behind it with their USB-C ports facing it.
 
@@ -98,24 +99,25 @@ There are two covers, both 3 mm black acrylic standing in the hand-hole wall, se
    1. Run `python3 -I cad/viewer/stl_to_json.py <stl basename> ...`.
    2. Republish `cad/viewer/index.html` to the board's URL, with the changed `models/*.json` files.
 
-## Proposed next: open it up for service
+## Lid and base
 
-You need to reach the components and swap the battery once the wood is glued. The plan, not yet modeled:
+The disc opens for service: lift the lid and every bay is open from the top, so you can reach the components and swap the battery after gluing. Modeled in `cad/disc.py`. The board has a **Lift lid** slider and views for the lifted lid, a section through a screw, and the connector.
 
-- **Lid**: the face, white C, white ring and maple layers 4–5, with both LED strips stuck on. Glued and cemented into one piece.
-- **Base**: the back and maple layers 1–3, holding the battery, charger, ESP32, protoboard and insert blocks. Glued into one piece.
-- **Screws**: 6 × M4 through the face at the bridges (0°, 120°, 240°), at R72 and R103. They thread into inserts in the base's ribs. Length about M4 × 25.
-- **LED connection**: one 3-pin connector (5 V, ground, data) between lid and base. The C strip feeds the outer strip.
-- **Opening it**: lift the lid and every bay is open from the top. The bay covers stay with the base, and the protoboard stays in its layer 1 slot.
-- **Checked against the current model**:
-  - **Base**: an insert 8 mm across and 10 mm long, set into the base from its top, lands fully in solid wood at all six spots (R72 and R103 at 0°, 120° and 240°). It clears the bay notches, the insert-block sockets and the wire slots.
-  - **Lid**: a 4.5 mm screw hole at R72 is in the inner wood (R60–R80), and one at R103 is in the wood between the channels (R96–R107). Neither crosses the C channel or the white C.
-
-To model the split, add to `cad/disc.py`:
-1. 4.5 mm clearance holes through the face and layers 4–5.
-2. Insert holes, sized to the measured insert, in layers 1–3.
-3. A countersink note on the face, or button-head screws.
-4. A reference connector in a bay.
+- **Lid**: the face, white C, white ring and maple layers 4–5, with both LED strips stuck on. Glued and cemented into one piece. The ring hangs from the face's 4 mm cement land. `disc-lid.step`.
+- **Base**: the back and maple layers 1–3, holding the battery, charger, ESP32, protoboard, insert blocks and bay covers. Glued into one piece. `disc-base.step`.
+- **Screws**: 6 × M4 × 25 button head (ISO 7380), at R72 and R103 on the 0°, 120° and 240° ribs.
+  - The heads sit on the face, so no countersink. Head 7.6 across, clear of the white C.
+  - Clearance holes 4.5 mm through the face and layers 4–5.
+- **Inserts**: an insert 8 mm across and 10 mm long, in layers 2–3 (z 5–15). Their laser-cut 6.5 mm pilot holes line up when the base is glued; thread the inserts in from the top afterwards. **6.5 is a guess for a screw-in wood insert. Set `INSERT_HOLE_D` to the maker's hole size.**
+  - Layer 1 has a 4.5 mm relief hole: the screw reaches z 3, 2 mm past the insert, and the back closes the hole.
+  - Each insert's 8 mm outline was checked: it's solid wood all round at all six spots.
+- **Protoboard**: it still stands in the layer 1 slot (1.5 mm, a press fit). The layer 4 slot is now 2.0 mm, centered on the board, so the lid drops back over the board's top edge without forcing it.
+- **Bay covers**: they stay with the base. Their tops rise to z 24.75 into the lid's open notches, so the lid lifts straight off over them.
+- **Battery**: the holder's top 4 mm sits in the lid's layer 4 pocket, which helps line the lid up.
+- **LED connector**: one 3-pin connector (5 V, ground, data), modeled as a 30 × 8 × 10 block in the bay at 340°, R108, 2 mm above the back. It clears the USB bay frame by 2.9 mm.
+  - Both strip leads drop into the base without any cut: the C channel is open from below, and so is the gap under the outer strip (z 15–17.5, R107–R110).
+  - The C strip feeds the outer strip with a jumper under layer 4, which stays with the lid.
+- **New reference files**: `lid-screws-reference.stl`, `lid-inserts-reference.stl`, `led-connector-reference.stl`.
 
 ## Open questions
 
@@ -123,8 +125,8 @@ Measure these before the final cut:
 
 1. **The real thickness of the maple**: it's "about 5".
 2. **The xTool model.** Diode lasers struggle with 10 mm white acrylic. If it can't cut the ring, stack thinner white sheet or have it cut elsewhere.
-3. **The M4 insert's hole size**, and its outside size and length.
-4. **Countersunk or button-head M4 screws** for the face. A flush head leaves only about 0.7 mm of the 3 mm face, and it has to be countersunk by hand.
+3. **The M4 insert's hole size**, and its outside size and length. Set `INSERT_HOLE_D`, `INSERT_D` and `INSERT_L`. An insert longer than 10 mm needs a deeper hole into layer 1.
+4. **The LED connector's real size.** The 30 × 8 × 10 block is a placeholder.
 5. **The battery**: keep the window (31 mm thick), or add a sixth maple layer (36 mm) so the holder screws down on a solid back.
 6. **The battery holder's real size**: its length including the end tabs, its height (23 mm is the most that fits), and the size of its screw hole.
 7. **The tactile switches' total height.**
@@ -132,8 +134,8 @@ Measure these before the final cut:
 
 ## Build order for 31 October
 
-1. Finish the lid split in CAD.
-2. Test-cut the kerf, insert hole, C inlay and board slot.
+1. ~~Finish the lid split in CAD.~~ Done 30 October.
+2. Test-cut the kerf, insert pilot hole, C inlay and board slot.
 3. Cut all parts.
 4. Glue the base and lid, and let them dry overnight.
 5. Electronics: both strips, the connector, the protoboard, the charger, the ESP32 and the battery. The firmware is already in `src/main.cpp`.

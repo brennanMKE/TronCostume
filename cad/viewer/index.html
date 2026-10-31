@@ -37,6 +37,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--glow); outl
 <div id="stage"><div id="hint">drag to orbit · scroll or pinch to zoom · mm</div><div id="status">Loading parts…</div></div>
 <div class="controls">
   <div class="group" id="parts" aria-label="Parts"><span class="label">Parts</span></div>
+  <div class="group"><span class="label">Lift lid</span><input id="lift" type="range" min="0" max="80" value="0" aria-label="Lift the lid off the base"></div>
   <div class="group"><span class="label">Explode</span><input id="explode" type="range" min="0" max="30" value="0" aria-label="Explode layers"></div>
   <div class="group"><button id="glow" aria-pressed="true">LEDs on</button><button id="section" aria-pressed="false">Cut in half</button><button id="reset">Reset view</button></div>
 </div>
@@ -54,18 +55,21 @@ const PARTS = [
   { id: "m1",    name: "Maple 1", file: "models/maple-5mm-layer1.json", color: 0xd8b88a, rough: 0.8, order: 1, inkEdgeR: 130 },
   { id: "m2",    name: "Maple 2", file: "models/maple-5mm-layer2.json", color: 0xcfae7e, rough: 0.8, order: 2, inkEdgeR: 130 },
   { id: "m3",    name: "Maple 3 (wire notches)", file: "models/maple-5mm-layer3.json", color: 0xd8b88a, rough: 0.8, order: 3, inkEdgeR: 130 },
-  { id: "m4",    name: "Maple 4 (LED)", file: "models/maple-5mm-layer4.json", color: 0xcfae7e, rough: 0.8, order: 4 },
-  { id: "m5",    name: "Maple 5 (LED)", file: "models/maple-5mm-layer5.json", color: 0xd8b88a, rough: 0.8, order: 5 },
+  { id: "m4",    name: "Maple 4 (LED)", file: "models/maple-5mm-layer4.json", color: 0xcfae7e, rough: 0.8, order: 4, lid: true },
+  { id: "m5",    name: "Maple 5 (LED)", file: "models/maple-5mm-layer5.json", color: 0xd8b88a, rough: 0.8, order: 5, lid: true },
   { id: "covbtn", name: "Button cover", file: "models/acrylic-3mm-cover-buttons.json", color: 0x0d0d0f, rough: 0.12, order: 2.5 },
   { id: "covusb", name: "USB cover", file: "models/acrylic-3mm-cover-usb.json", color: 0x0d0d0f, rough: 0.12, order: 2.5 },
   { id: "board", name: "Protoboard + buttons", file: "models/protoboard-reference.json", color: 0x2c6e49, rough: 0.5, order: 1.5 },
   { id: "blocks", name: "Insert blocks (glued)", file: "models/insert-blocks-reference.json", color: 0xa97c45, rough: 0.8, order: 1 },
   { id: "holder", name: "18650 holder", file: "models/battery-holder-reference.json", color: 0x3a3f46, rough: 0.6, order: 0.5 },
-  { id: "cstrip", name: "C LED strip", file: "models/led-c-strip-reference.json", color: 0x5ff3ff, rough: 0.4, order: 5, led: true },
-  { id: "strip", name: "Outer LED strip", file: "models/led-outer-strip-reference.json", color: 0x5ff3ff, rough: 0.4, order: 4.5, led: true },
-  { id: "white", name: "White acrylic 10 mm", file: "models/acrylic-10mm-white-outer-ring.json", color: 0xf2f4f5, rough: 0.35, order: 4.5, white: true },
-  { id: "face",  name: "Black acrylic face 3 mm", file: "models/acrylic-3mm-black-face.json", color: 0x0d0d0f, rough: 0.12, order: 6 },
-  { id: "c",     name: "White C 3 mm", file: "models/acrylic-3mm-white-c.json", color: 0xf2f4f5, rough: 0.35, order: 6.5, white: true },
+  { id: "cstrip", name: "C LED strip", file: "models/led-c-strip-reference.json", color: 0x5ff3ff, rough: 0.4, order: 5, led: true, lid: true },
+  { id: "strip", name: "Outer LED strip", file: "models/led-outer-strip-reference.json", color: 0x5ff3ff, rough: 0.4, order: 4.5, led: true, lid: true },
+  { id: "white", name: "White acrylic 10 mm", file: "models/acrylic-10mm-white-outer-ring.json", color: 0xf2f4f5, rough: 0.35, order: 4.5, white: true, lid: true },
+  { id: "face",  name: "Black acrylic face 3 mm", file: "models/acrylic-3mm-black-face.json", color: 0x0d0d0f, rough: 0.12, order: 6, lid: true },
+  { id: "screws", name: "Lid screws M4 x 25", file: "models/lid-screws-reference.json", color: 0x9aa3ab, rough: 0.3, order: 7, lid: true },
+  { id: "inserts", name: "Lid inserts (base)", file: "models/lid-inserts-reference.json", color: 0xc9a54a, rough: 0.35, order: 2.5 },
+  { id: "conn", name: "LED connector", file: "models/led-connector-reference.json", color: 0xe8e2d0, rough: 0.6, order: 1 },
+  { id: "c",     name: "White C 3 mm", file: "models/acrylic-3mm-white-c.json", color: 0xf2f4f5, rough: 0.35, order: 6.5, white: true, lid: true },
 ];
 
 const stage = document.getElementById("stage");
@@ -98,10 +102,16 @@ let glowOn = true, sectionOn = false;
 // Bay angles are clockwise from 12 o'clock seen from the front.
 const dirW = a => [Math.sin(a * Math.PI / 180), -Math.cos(a * Math.PI / 180)];
 function around(a, r, y) { const [x, z] = dirW(a); return [x * r, y, z * r]; }
-const TOP = ["face", "c", "m5", "m4", "cstrip"];   // lifted off to see inside
+const TOP = ["face", "c", "m5", "m4", "cstrip", "screws"];   // lifted off to see inside
 const VIEWS = [
   { id: "overview", label: "Whole disc", pos: [260, 230, 330], target: [0, 0, 0], hide: [],
-    note: "The full stack: black back, five maple layers, white ring, black face with the white C." },
+    note: "The full stack: black back, five maple layers, white ring, black face with the white C. Six M4 button heads hold the lid to the base." },
+  { id: "lid-off", label: "Lid lifted", pos: [300, 290, 330], target: [0, 30, 0], hide: [], lift: 70,
+    note: "Lid: face, white C, white ring and maple 4-5 with both LED strips. Base: back and maple 1-3 with the battery, boards, covers and six inserts. Lift the lid and every bay is open from the top." },
+  { id: "screw-section", label: "Lid screw, cut through", pos: [190, 40, -40], target: [0, 13, -88], hide: [], clip: [-1, 0, 0, 0],
+    note: "Cut through the 12 o'clock screws (R72 and R103). Clearance holes in the face and maple 4-5; the insert sits in maple 2-3; maple 1 has a relief hole for the screw tip, closed by the back." },
+  { id: "connector", label: "LED connector", pos: around(345, 215, 150), target: around(340, 100, 6), hide: TOP,
+    note: "11 o'clock bay, lid hidden. The 3-pin LED connector (5 V, ground, data) joins the lid's strips to the base. The strip leads drop down through the open C channel and the gap below the outer strip." },
   { id: "button-bay", label: "Button bay, open", pos: around(75, 210, 170), target: around(60, 70, 8), hide: TOP,
     note: "2 o'clock, top layers hidden. Protoboard stands in slots in layers 1 and 4; switches poke through the cover. Glued insert blocks sit behind the cover tabs." },
   { id: "buttons-hole", label: "Buttons from hand hole", pos: around(240, 25, 70), target: around(60, 62, 12), hide: [],
@@ -139,7 +149,7 @@ function setVisible(id, on) {
 function showView(id) {
   const v = VIEWS.find(x => x.id === id) || VIEWS[0];
   for (const p of PARTS) setVisible(p.id, !v.hide.includes(p.id));
-  document.getElementById("explode").value = 0; applyExplode();
+  document.getElementById("explode").value = 0; document.getElementById("lift").value = v.lift || 0; applyExplode();
   sectionOn = !!v.clip; clip = v.clip ? new THREE.Plane(new THREE.Vector3(...v.clip.slice(0, 3)), v.clip[3]) : halfClip;
   document.getElementById("section").setAttribute("aria-pressed", sectionOn);
   applyLook(); flyTo(v.pos, v.target);
@@ -171,7 +181,8 @@ function applyLook() {
 
 function applyExplode() {
   const gap = +document.getElementById("explode").value;
-  for (const p of PARTS) if (meshes[p.id]) meshes[p.id].position.z = p.order * gap;
+  const lift = +document.getElementById("lift").value;
+  for (const p of PARTS) if (meshes[p.id]) meshes[p.id].position.z = p.order * gap + (p.lid ? lift : 0);
 }
 
 const partsBox = document.getElementById("parts");
@@ -216,6 +227,7 @@ Promise.all(PARTS.map(p => fetch(p.file).then(r => { if (!r.ok) throw new Error(
 }).catch(() => { document.getElementById("status").textContent = "A part file failed to load. Reload the page to try again."; });
 
 document.getElementById("explode").addEventListener("input", applyExplode);
+document.getElementById("lift").addEventListener("input", applyExplode);
 document.getElementById("glow").addEventListener("click", e => { glowOn = !glowOn; e.currentTarget.setAttribute("aria-pressed", glowOn); e.currentTarget.textContent = glowOn ? "LEDs on" : "LEDs off"; applyLook(); });
 document.getElementById("section").addEventListener("click", e => { sectionOn = !sectionOn; clip = halfClip; e.currentTarget.setAttribute("aria-pressed", sectionOn); applyLook(); });
 document.getElementById("reset").addEventListener("click", setView);

@@ -53,6 +53,15 @@ BLK_T0, BLK_T1 = 44.5, 56.5
 SCREW_X, SCREW_Z = 50.5, 7.5
 FRAME_T0, FRAME_T1 = BOARD_L/2 + 1.5, 62.0
 
+# --- lid/base split: lid = face, white C, white ring, layers 4-5; base = back, layers 1-3 ---
+LID_SCREW_R = (72.0, 103.0)        # at the rib/bridge angles: clear of the C, the channel and the bay cuts
+LID_SCREW_L = 25.0                 # M4 x 25 button head (ISO 7380); countersunk would leave 0.7 of the face
+HEAD_D, HEAD_H, SHANK_D = 7.6, 2.2, 4.0
+INSERT_HOLE_D = 6.5                # pilot for a screw-in wood insert, INSERT_D x INSERT_L - measure
+SLOT4_W = 2.0                      # lid side of the board slot: loose, so the lid drops back over the board
+CONN_A, CONN_R = 340, 108.0        # 3-pin LED connector, in the bay below the strips; clears the USB bay frame
+CONN_L, CONN_W, CONN_H = 30.0, 8.0, 10.0
+
 cover_back = COVER_IN + ACRYLIC_T
 BOARD_Y = cover_back + SW_BODY
 BTN_Z = BOARD_H/2
@@ -130,7 +139,7 @@ frames_l = lrect(30, 80, FRAME_T0, FRAME_T1) + lrect(30, 80, -FRAME_T1, -FRAME_T
 pockets_l = lrect(cover_back + CLR, BLK_Y1, BLK_T0, BLK_T1) + lrect(cover_back + CLR, BLK_Y1, -BLK_T1, -BLK_T0)
 cav_l = lrect(cover_back, 80, -FRAME_T0, FRAME_T0)
 slot1_l = lrect(BOARD_Y, BOARD_Y + SLOT_W, -(BOARD_L/2 + 0.5), BOARD_L/2 + 0.5)
-slot4_l = lrect(BOARD_Y, BOARD_Y + SLOT_W, -41.0, 41.0)   # breaks into the C channel; piece behind it is a glue-in
+slot4_l = lrect(BOARD_Y + (BOARD_T - SLOT4_W)/2, BOARD_Y + (BOARD_T + SLOT4_W)/2, -41.0, 41.0)   # breaks into the C channel; piece behind it is a glue-in
 sill_l = lrect(cover_back + CLR, 75, -FRAME_T0, FRAME_T0)
 
 
@@ -151,8 +160,24 @@ def top_layer(sk, slot):
     return sk
 
 
-S = [low_layer(L1_base, True), low_layer(L2_base, False), low_layer(L3_base, False),
-     top_layer(L4_base, True), top_layer(L5_base, False)]
+screw_locs = [rot(a) * Pos(r, 0) for a in RIB_ANGLES for r in LID_SCREW_R]
+
+
+def at_screws(d):
+    sk = screw_locs[0] * Circle(d/2)
+    for loc in screw_locs[1:]:
+        sk += loc * Circle(d/2)
+    return sk
+
+
+# lid screws: clearance through layers 4-5, inserts in layers 2-3, screw-tip relief in layer 1
+z_head = 5*PLY_T + ACRYLIC_T
+assert 3*PLY_T - INSERT_L >= PLY_T and PLY_T > z_head - LID_SCREW_L >= 0
+S = [low_layer(L1_base, True) - at_screws(SCREW_D),
+     low_layer(L2_base, False) - at_screws(INSERT_HOLE_D),
+     low_layer(L3_base, False) - at_screws(INSERT_HOLE_D),
+     top_layer(L4_base, True) - at_screws(SCREW_D),
+     top_layer(L5_base, False) - at_screws(SCREW_D)]
 maple = [Pos(0, 0, i*PLY_T) * extrude(s, PLY_T) for i, s in enumerate(S)]
 
 back_sk = annulus - window_sk
@@ -166,7 +191,7 @@ gap = make_face(Polyline((0, 0),
                          (100*math.sin(math.radians(C_GAP_DEG/2)), 100*math.cos(math.radians(C_GAP_DEG/2))),
                          (-100*math.sin(math.radians(C_GAP_DEG/2)), 100*math.cos(math.radians(C_GAP_DEG/2))), close=True))
 c_sk = (Circle(C_OUT_R) - Circle(C_IN_R)) - gap
-face_sk = Circle(FACE_OUT_R) - Circle(INNER_D/2) - c_sk
+face_sk = Circle(FACE_OUT_R) - Circle(INNER_D/2) - c_sk - at_screws(SCREW_D)
 z_face = z_strip + WHITE_T
 face = Pos(0, 0, z_face) * extrude(face_sk, ACRYLIC_T)
 white_c = Pos(0, 0, z_face) * extrude(c_sk, ACRYLIC_T)
@@ -204,7 +229,15 @@ switches = [rot(a) * lbox(cover_back, BOARD_Y, (i - 1.5)*BTN_PITCH - 3, (i - 1.5
 blocks = [rot(b) * lbox(cover_back + CLR, BLK_Y1, s*BLK_T0 if s > 0 else -BLK_T1, BLK_T1 if s > 0 else -BLK_T0, 0, 3*PLY_T)
           for b in BAYS.values() for s in (1, -1)]
 
+screws = [loc * (Pos(0, 0, z_head) * extrude(Circle(HEAD_D/2), HEAD_H)
+                 + Pos(0, 0, z_head - LID_SCREW_L) * extrude(Circle(SHANK_D/2), LID_SCREW_L)) for loc in screw_locs]
+inserts = [loc * Pos(0, 0, 3*PLY_T - INSERT_L) * extrude(Circle(INSERT_D/2) - Circle(SHANK_D/2), INSERT_L) for loc in screw_locs]
+connector = rot(CONN_A) * lbox(CONN_R - CONN_W/2, CONN_R + CONN_W/2, -CONN_L/2, CONN_L/2, 2, 2 + CONN_H)
+
 assembly = Compound(children=[back, *maple, white_ring, face, white_c, cov_btn, cov_usb])
+# plain compounds: children= would re-parent the parts out of the assembly
+lid = Compound([*maple[3:], white_ring, face, white_c])
+base = Compound([back, *maple[:3], cov_btn, cov_usb])
 
 # names match the files in cad/
 for i, (sk, sol) in enumerate(zip(S, maple), 1):
@@ -218,6 +251,8 @@ for name, shape in [("back_acrylic_outline", back_sk), ("back_acrylic", back),
                     ("cover_usb_outline", cov_usb_sk), ("cover_usb", cov_usb),
                     ("battery_holder", holder), ("led_outer_strip", led_strip), ("led_c_strip", c_strip),
                     ("protoboard_ref", Compound(children=[board, *switches])),
-                    ("insert_blocks_ref", Compound(children=blocks))]:
+                    ("insert_blocks_ref", Compound(children=blocks)),
+                    ("lid_screws_ref", Compound(children=screws)), ("lid_inserts_ref", Compound(children=inserts)),
+                    ("led_connector_ref", connector), ("lid", lid), ("base", base)]:
     show(shape, name)
 result = assembly
