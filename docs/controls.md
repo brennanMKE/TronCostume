@@ -61,7 +61,7 @@ Each color button has a **primary** and a **secondary** color:
 - Any color button tapped while off also turns the costume back on, in that color.
 - The **inner C** is always on while the costume is on, in a solid color. Only the **outer ring** has on/off and effects. See [disc-build.md](disc-build.md).
 - The ring's on/off and effect are the disc's own. The cloak only follows the color.
-- When the ring comes on (by tap, or with the costume), it sweeps around in about 0.4 s.
+- When the ring comes on (by tap, or with the costume), all of it lights at once.
 
 ## Timing
 

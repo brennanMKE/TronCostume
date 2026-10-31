@@ -31,7 +31,7 @@ Based on the replica in `references/TRONDISC.COM ｜ Review by DA ｜ Tron Ident
 | State | Inner C | Outer ring |
 |---|---|---|
 | On your back (docked) | Solid, current color | Off |
-| Pulled off the back | Solid, current color | Ignites: a sweep around from 12 o'clock in about 0.4 s, then steady, flicker or motion (black button) |
+| Pulled off the back | Solid, current color | Lights all at once, then steady, flicker or motion (black button) |
 | Off (hold 3 s) | Off | Off |
 
 Outer-ring effects, all in the current color:
@@ -383,7 +383,7 @@ That's heavy for something worn on the back and thrown around. Options:
 
 - **Two LED segments** (built): the C (always on, solid) and the outer ring (on/off and effects). Still to do: keep the ring off while docked.
 - **Dock sensor**: digital Hall sensor input on **GPIO 3**, a deep-sleep wake pin (GPIO 0-5) that's still free. It was going to be used for battery sensing; that's deferred.
-- **Outer ring effects**: ignition sweep, rotation and flicker, disc only. The cloak keeps following the color.
+- **Outer ring effects**: rotation and flicker, disc only. The cloak keeps following the color.
 - The four-button gestures and outer ring effects are built ([controls.md](controls.md)). `MAIN_LEDS` (C) and `RING_LEDS` (outer ring) are in `include/config.h`; set them to the counts of the strips you buy.
 
 ## Measure Before Cutting

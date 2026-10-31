@@ -68,7 +68,6 @@
 #define FRAME_MS       20      // disc redraw rate for the outer ring effects (50 fps)
 
 // Outer ring effects (disc)
-#define RING_IGNITE_MS      400   // sweep around when the ring comes on
 #define RING_MOTION_MS      1000  // motion effect: one turn of the bright head
 #define RING_MOTION_FLOOR   50    // motion effect: base level behind the tail (0-255)
 
