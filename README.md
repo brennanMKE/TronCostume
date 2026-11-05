@@ -7,7 +7,7 @@ Each disc has four buttons: **black, white, blue, green**. Six colors come in pa
 - **Tap** white, blue or green: your disc and cloak change to that color.
 - **Double tap**: the paired color (yellow, red, orange).
 - **Hold 1 s**, or **tap then hold 1 s** (both costumes planned): the same, for both costumes at once.
-- **Black**: tap turns the outer ring on or off, a double tap gives an erratic flicker, a triple tap gives motion. Hold 3 s turns your costume off.
+- **Black**: tap turns the outer ring on or off (or ends an effect), a double tap gives an erratic flicker, a triple tap gives motion. Hold 3 s turns your costume off.
 
 See [docs/controls.md](docs/controls.md) for the full controls.
 

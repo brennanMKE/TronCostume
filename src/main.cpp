@@ -182,14 +182,13 @@ static void send(DiscMsg& m) {
 }
 
 // ---- Drawing ----
-// The first MAIN_LEDS are the solid part: the disc's inner C, or the cloak's
-// strip. On the disc the next RING_LEDS are the outer ring, which can be off
-// and has effects.
+// MAIN_LEDS are the solid part: the disc's inner C, or the cloak's strip.
+// On the disc RING_LEDS are the outer ring, which can be off and has effects.
+// The ring follows the main part, except on the bench strip (RING_FIRST).
 enum RingMode : uint8_t { RING_SOLID, RING_FLICKER, RING_MOTION };
 static const char* kRingNames[] = { "solid", "flicker", "motion" };
 static bool     ringOn = true;
 static uint8_t  ringMode = RING_SOLID;
-static uint32_t ringLitMs = 0;   // start of the ignition sweep
 
 #if RING_LEDS > 0
 // Erratic flicker: the whole ring holds a level for a random time, mostly
@@ -206,14 +205,11 @@ static uint8_t ringFlickerLevel(uint32_t now) {
 }
 
 static void drawRing(uint32_t now) {
-  CRGB* ring = leds + MAIN_LEDS;
+  CRGB* ring = leds + RING_START;
   if (!ringOn || currentColor == COLOR_OFF) {
     fill_solid(ring, RING_LEDS, CRGB::Black);
     return;
   }
-  // Ignition: the ring lights around from its first LED.
-  uint32_t since = now - ringLitMs;
-  uint16_t lit = since >= RING_IGNITE_MS ? RING_LEDS : (uint32_t)RING_LEDS * since / RING_IGNITE_MS;
   uint8_t flicker = ringMode == RING_FLICKER ? ringFlickerLevel(now) : 255;
   // Motion: a bright head travels round once per RING_MOTION_MS with a
   // fading tail, over a dim base.
@@ -227,7 +223,7 @@ static void drawRing(uint32_t now) {
     } else if (ringMode == RING_FLICKER) {
       level = random8() < 6 ? flicker / 4 : flicker;
     }
-    CRGB c = i < lit ? ledColors[currentColor] : CRGB::Black;
+    CRGB c = ledColors[currentColor];
     c.nscale8_video(level);
     ring[i] = c;
   }
@@ -235,7 +231,7 @@ static void drawRing(uint32_t now) {
 #endif
 
 static void render() {
-  fill_solid(leds, MAIN_LEDS, ledColors[currentColor]);
+  fill_solid(leds + MAIN_START, MAIN_LEDS, ledColors[currentColor]);
 #if RING_LEDS > 0
   drawRing(millis());
 #endif
@@ -274,7 +270,6 @@ static void runSave() {
 
 static void applyColor(uint8_t color, const char* why) {
   if (color == currentColor) return;
-  if (currentColor == COLOR_OFF) ringLitMs = millis();  // coming on: ignite the ring
   currentColor = color;
 #if DEVICE_ROLE == ROLE_DISC
   colorChangedMs = millis();
@@ -386,7 +381,6 @@ static uint32_t holdMs(uint8_t b, uint8_t taps) {
 }
 
 static void ringSet(bool on, uint8_t mode) {
-  if (on && !ringOn) ringLitMs = millis();
   ringOn = on;
   ringMode = mode;
   Serial.printf("Outer ring %s (%s)\n", on ? "on" : "off", kRingNames[mode]);
@@ -647,7 +641,6 @@ void setup() {
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setMaxPowerInVoltsAndMilliamps(5, LED_MAX_MA);
   FastLED.setBrightness(LED_BRIGHTNESS);
-  ringLitMs = millis();
   render();
 
   rxQueue = xQueueCreate(16, sizeof(RxPacket));
